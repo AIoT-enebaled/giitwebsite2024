@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import StudentRegistrationForm from './StudentRegistrationForm';
 import ParentRegistrationForm from './ParentRegistrationForm';
 import CourseCatalog from './CourseCatalog';
@@ -72,11 +71,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
       className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/70 backdrop-blur-sm"
       onClick={onClose}
     >
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.9 }}
-        className="relative bg-dark-light rounded-xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto"
+      <div
+        className="relative bg-dark-light rounded-xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto opacity-0 scale-90 animate-[fadeInScale_0.3s_ease-out_forwards]"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -130,66 +126,64 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </button>
         </div>
 
-        <AnimatePresence>
-          {showModal && (
+        {showModal && (
+          <div 
+            className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/70 backdrop-blur-sm"
+            onClick={closeModal}
+          >
             <div 
-              className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/70 backdrop-blur-sm"
-              onClick={closeModal}
+              className="relative bg-dark-light rounded-xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto opacity-0 scale-90 animate-[fadeInScale_0.3s_ease-out_forwards]"
+              onClick={stopPropagation}
             >
-              <div 
-                className="relative bg-dark-light rounded-xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto"
-                onClick={stopPropagation}
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-200 transition-colors duration-300"
               >
-                <button
-                  onClick={closeModal}
-                  className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-200 transition-colors duration-300"
-                >
-                  <X className="h-6 w-6" />
-                </button>
+                <X className="h-6 w-6" />
+              </button>
 
-                <h2 className="text-2xl font-bold gradient-text mb-6">{title} Registration</h2>
-                
-                {!registrationType ? (
-                  <div className="space-y-4">
-                    <button
-                      className="w-full btn-primary"
-                      onClick={() => setRegistrationType('student')}
-                    >
-                      Register as Student
-                    </button>
-                    <button
-                      className="w-full btn-outline"
-                      onClick={() => setRegistrationType('parent')}
-                    >
-                      Register Child (Parent Registration)
-                    </button>
-                  </div>
-                ) : registrationType === 'student' ? (
-                  <StudentRegistrationForm courseTitle={title} price={price} courses={[title]} onClose={() => setRegistrationType(null)} />
-                ) : (
-                  <ParentRegistrationForm courseTitle={title} price={price} />
-                )}
-
-                {registrationType && (
+              <h2 className="text-2xl font-bold gradient-text mb-6">{title} Registration</h2>
+              
+              {!registrationType ? (
+                <div className="space-y-4">
                   <button
-                    className="mt-4 text-gray-400 hover:text-gray-300 transition-colors duration-300"
-                    onClick={() => setRegistrationType(null)}
+                    className="w-full btn-primary"
+                    onClick={() => setRegistrationType('student')}
                   >
-                    ← Back to registration options
+                    Register as Student
                   </button>
-                )}
-              </div>
-            </div>
-          )}
+                  <button
+                    className="w-full btn-outline"
+                    onClick={() => setRegistrationType('parent')}
+                  >
+                    Register Child (Parent Registration)
+                  </button>
+                </div>
+              ) : registrationType === 'student' ? (
+                <StudentRegistrationForm courseTitle={title} price={price} courses={[title]} onClose={() => setRegistrationType(null)} />
+              ) : (
+                <ParentRegistrationForm courseTitle={title} price={price} />
+              )}
 
-          {showCatalog && courseDetails && (
-            <CourseCatalog
-              {...courseDetails}
-              onClose={closeCatalog}
-            />
-          )}
-        </AnimatePresence>
-      </motion.div>
+              {registrationType && (
+                <button
+                  className="mt-4 text-gray-400 hover:text-gray-300 transition-colors duration-300"
+                  onClick={() => setRegistrationType(null)}
+                >
+                  ← Back to registration options
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+
+        {showCatalog && courseDetails && (
+          <CourseCatalog
+            {...courseDetails}
+            onClose={closeCatalog}
+          />
+        )}
+      </div>
     </div>
   );
 };
