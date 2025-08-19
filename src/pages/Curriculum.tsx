@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { BookOpen, Code, Brain, Palette, Users, Target, Clock, Trophy, CheckCircle, Star } from 'lucide-react';
 import FloatingLogo from '../components/FloatingLogo';
 import TypewriterEffect from '../components/TypewriterEffect';

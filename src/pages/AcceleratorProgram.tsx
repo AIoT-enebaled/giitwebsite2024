@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { courseCatalogs, courseCategories, courseLevels, courseTypes } from '../data/courseDetails';
 import { Filter, Search, Star, Clock, Users, BookOpen, Zap, Award, Target } from 'lucide-react';
 import FloatingLogo from '../components/FloatingLogo';
