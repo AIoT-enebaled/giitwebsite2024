@@ -28,7 +28,7 @@ const StudentImageScroll: React.FC<StudentImageScrollProps> = ({
 
   return (
     <div className="relative overflow-hidden w-full py-8">
-      <motion.div
+      <div
         className="flex gap-6"
         animate={{
           x: direction === 'left' ? '-50%' : '0%',
@@ -43,7 +43,7 @@ const StudentImageScroll: React.FC<StudentImageScrollProps> = ({
         }}
       >
         {duplicatedImages.map((image, index) => (
-          <motion.div
+          <div
             key={index}
             className="flex-shrink-0 relative group"
             initial={{
@@ -74,10 +74,10 @@ const StudentImageScroll: React.FC<StudentImageScrollProps> = ({
               }
             }}
           >
-            <motion.div
+            <div
               className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-xl border-2 border-indigo-500/20 group-hover:border-indigo-400/50 transition-all duration-300 relative"
             >
-              <motion.img
+              <img
                 src={image}
                 alt={`GiiT Student ${index + 1}`}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
@@ -89,15 +89,15 @@ const StudentImageScroll: React.FC<StudentImageScrollProps> = ({
 
               {/* Gentle overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </motion.div>
+            </div>
 
             {/* Simple floating badge */}
             <div className="absolute -top-2 -right-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-xs px-2 py-1 rounded-full font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               GiiT Student
             </div>
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
       
       {/* Gradient overlays */}
       <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-[#020817] to-transparent z-10 pointer-events-none" />

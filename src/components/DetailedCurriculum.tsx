@@ -477,7 +477,7 @@ const DetailedCurriculum: React.FC<DetailedCurriculumProps> = ({ courseId, onClo
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm overflow-y-auto">
       <div className="min-h-screen p-4">
-        <motion.div
+        <div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
@@ -671,7 +671,7 @@ const DetailedCurriculum: React.FC<DetailedCurriculumProps> = ({ courseId, onClo
               </div>
             )}
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
