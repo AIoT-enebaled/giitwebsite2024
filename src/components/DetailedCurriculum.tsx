@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Download, X, Code, BarChart3, Brain, Zap, Clock, Users, Award, Target } from 'lucide-react';
 import { courseCatalogs } from '../data/courseDetails';
 import html2canvas from 'html2canvas';
