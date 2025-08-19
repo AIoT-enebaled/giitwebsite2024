@@ -30,7 +30,7 @@ const Contact = () => {
   };
 
   return (
-    <motion.div 
+    <div 
       className="min-h-screen bg-[#020817] pb-8 relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -45,25 +45,25 @@ const Contact = () => {
         {/* Hero Section */}
         <section className="relative py-12 md:py-20">
           <div className="container mx-auto px-4">
-            <motion.div 
+            <div 
               className="text-center mb-12"
               initial="hidden"
               animate="visible"
               variants={containerVariants}
             >
-              <motion.div 
+              <div 
                 className="flex justify-center mb-6"
                 variants={itemVariants}
               >
                 <FloatingLogo size="medium" showText={false} showTypewriter={false} />
-              </motion.div>
-              <motion.h1 
+              </div>
+              <h1 
                 className="text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent"
                 variants={itemVariants}
               >
                 Contact Us
-              </motion.h1>
-              <motion.div 
+              </h1>
+              <div 
                 className="text-xl text-gray-300"
                 variants={itemVariants}
               >
@@ -75,10 +75,10 @@ const Contact = () => {
                     delay: 75,
                   }}
                 />
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
-            <motion.div 
+            <div 
               className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
               initial="hidden"
               whileInView="visible"
@@ -86,23 +86,23 @@ const Contact = () => {
               variants={containerVariants}
             >
               {/* Contact Information */}
-              <motion.div className="space-y-8" variants={itemVariants}>
-                <motion.div 
+              <div className="space-y-8" variants={itemVariants}>
+                <div 
                   className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-xl backdrop-blur-sm border border-indigo-500/20"
                   whileHover={{ scale: 1.02, borderColor: "rgba(99, 102, 241, 0.4)" }}
                   transition={{ duration: 0.3 }}
                 >
                   <h2 className="text-2xl font-semibold mb-6 text-gray-100">Get in Touch</h2>
                   <div className="space-y-4">
-                    <motion.div 
+                    <div 
                       className="flex items-center space-x-4 text-gray-300"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
                     >
                       <Mail className="text-indigo-400" size={24} />
                       <span>geniusinstitute2024@gmail.com</span>
-                    </motion.div>
-                    <motion.div 
+                    </div>
+                    <div 
                       className="flex items-center space-x-4 text-gray-300"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
@@ -112,8 +112,8 @@ const Contact = () => {
                         <span>+256 745 695 576</span>
                         <span>+256 752 067 815</span>
                       </div>
-                    </motion.div>
-                    <motion.div 
+                    </div>
+                    <div 
                       className="flex items-center space-x-4 text-gray-300"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
@@ -123,8 +123,8 @@ const Contact = () => {
                         <div>123 Technology Street</div>
                         <div>Kampala, Uganda</div>
                       </div>
-                    </motion.div>
-                    <motion.div 
+                    </div>
+                    <div 
                       className="flex items-center space-x-4 text-gray-300"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
@@ -135,14 +135,14 @@ const Contact = () => {
                         <div>Saturday: 9:00 AM - 1:00 PM</div>
                         <div>Sunday: Closed</div>
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
 
               {/* Contact Form */}
-              <motion.div variants={itemVariants}>
-                <motion.div 
+              <div variants={itemVariants}>
+                <div 
                   className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-xl backdrop-blur-sm border border-indigo-500/20"
                   whileHover={{ scale: 1.02, borderColor: "rgba(99, 102, 241, 0.4)" }}
                   transition={{ duration: 0.3 }}
@@ -150,7 +150,7 @@ const Contact = () => {
                   <h2 className="text-2xl font-semibold mb-6 text-gray-100">Send us a Message</h2>
                   <form className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <motion.div
+                      <div
                         whileFocus={{ scale: 1.02 }}
                         transition={{ duration: 0.2 }}
                       >
@@ -159,8 +159,8 @@ const Contact = () => {
                           placeholder="Your Name"
                           className="w-full px-4 py-2 rounded-lg bg-black/50 border border-indigo-500/20 text-gray-300 focus:outline-none focus:border-indigo-500 transition-colors duration-300"
                         />
-                      </motion.div>
-                      <motion.div
+                      </div>
+                      <div
                         whileFocus={{ scale: 1.02 }}
                         transition={{ duration: 0.2 }}
                       >
@@ -169,9 +169,9 @@ const Contact = () => {
                           placeholder="Your Email"
                           className="w-full px-4 py-2 rounded-lg bg-black/50 border border-indigo-500/20 text-gray-300 focus:outline-none focus:border-indigo-500 transition-colors duration-300"
                         />
-                      </motion.div>
+                      </div>
                     </div>
-                    <motion.div
+                    <div
                       whileFocus={{ scale: 1.02 }}
                       transition={{ duration: 0.2 }}
                     >
@@ -180,8 +180,8 @@ const Contact = () => {
                         rows={4}
                         className="w-full px-4 py-2 rounded-lg bg-black/50 border border-indigo-500/20 text-gray-300 focus:outline-none focus:border-indigo-500 transition-colors duration-300"
                       ></textarea>
-                    </motion.div>
-                    <motion.button
+                    </div>
+                    <button
                       type="submit"
                       className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2"
                       whileHover={{ scale: 1.02 }}
@@ -189,15 +189,15 @@ const Contact = () => {
                     >
                       <span>Send Message</span>
                       <Send size={20} />
-                    </motion.button>
+                    </button>
                   </form>
-                </motion.div>
-              </motion.div>
-            </motion.div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

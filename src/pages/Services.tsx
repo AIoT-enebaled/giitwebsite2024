@@ -202,7 +202,7 @@ const Services = () => {
 
             {/* Course Catalog Section */}
             <div className="container mx-auto px-4 py-8">
-              <motion.div
+              <div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -221,7 +221,7 @@ const Services = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     {filteredCourses.map((course, index) => (
                       <AnimatedSection key={course.id} delay={index * 0.1}>
-                        <motion.div
+                        <div
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
@@ -293,12 +293,12 @@ const Services = () => {
                             </div>
                             </div>
                           </div>
-                        </motion.div>
+                        </div>
                       </AnimatedSection>
                     ))}
                   </div>
                 )}
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>

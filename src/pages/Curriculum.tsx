@@ -78,7 +78,7 @@ const Curriculum = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-purple-900/20 to-pink-900/20">
           {/* Animated dots */}
           {[...Array(20)].map((_, i) => (
-            <motion.div
+            <div
               key={i}
               className="absolute w-2 h-2 bg-indigo-400/40 rounded-full"
               style={{
@@ -102,7 +102,7 @@ const Curriculum = () => {
       <div className="relative pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -121,11 +121,11 @@ const Curriculum = () => {
               A comprehensive, age-appropriate curriculum designed to build strong foundations in 
               computer science, programming, and 21st-century digital skills.
             </p>
-          </motion.div>
+          </div>
 
           {/* Course Categories */}
           {Object.entries(groupedCourses).map(([categoryName, courses], categoryIndex) => (
-            <motion.div
+            <div
               key={categoryName}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -141,7 +141,7 @@ const Curriculum = () => {
               {/* Course Cards Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {courses.map((course, index) => (
-                  <motion.div
+                  <div
                     key={course.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -196,23 +196,23 @@ const Curriculum = () => {
                         <p className="text-gray-400 text-sm">{course.prerequisites.join(', ')}</p>
                       </div>
 
-                      <motion.button
+                      <button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={() => handleViewCurriculum(course.id)}
                         className={`w-full py-3 px-4 rounded-xl font-semibold text-white bg-gradient-to-r ${getCategoryColor(categoryIndex)} hover:shadow-lg transition-all duration-300`}
                       >
                         View Full Curriculum →
-                      </motion.button>
+                      </button>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
 
           {/* Learning Philosophy */}
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -236,10 +236,10 @@ const Curriculum = () => {
                 <p className="text-gray-300">Use skills to solve real-world problems and challenges</p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Learning Paths */}
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -248,7 +248,7 @@ const Curriculum = () => {
             <h2 className="text-3xl font-bold text-center text-indigo-400 mb-12">Learning Paths</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {learningPaths.map((path, index) => (
-                <motion.div
+                <div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -277,13 +277,13 @@ const Curriculum = () => {
                       ))}
                     </ul>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Call to Action */}
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
@@ -293,14 +293,14 @@ const Curriculum = () => {
             <p className="text-xl text-indigo-100 mb-6">
               Join thousands of students who have transformed their futures with GiiT
             </p>
-            <motion.button
+            <button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-white text-indigo-600 font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Explore Our Courses
-            </motion.button>
-          </motion.div>
+            </button>
+          </div>
         </div>
       </div>
 

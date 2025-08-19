@@ -21,7 +21,7 @@ const Blog = () => {
         <div class="space-y-6">
           <p class="text-lg text-gray-300">We're beyond excited to announce that Genius Institute of Information Technology (GiiT) has been crowned Junior Category Winner at the Uganda Website Projects Competition 2025, held at the National ICT Innovation Hub in Nakawa! 🎉</p>
 
-          <p class="text-gray-300">Our standout project, <strong class="text-indigo-400">SkillBridge Uganda</strong>, beat strong competition from Olive School and Mbuya Parents Primary School, proving that with creativity, teamwork, and the right mentorship, young Ugandans can solve real national challenges — and win big doing it! 🥇✨</p>
+          <p class="text-gray-300">Our standout project, <strong class="text-indigo-400">SkillBridge Uganda</strong>, beat strong competition from Olive School and Mbuya Parents Primary School, proving that with creativity, teamwork, and the right mentorship, young Ugandans can solve real national challenges — and win big doing it! 🥇���</p>
 
           <div class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 p-6 rounded-xl border border-indigo-500/20">
             <h3 class="text-xl font-bold text-indigo-400 mb-3">🚀 About the Winning Project</h3>
@@ -142,7 +142,7 @@ const Blog = () => {
             {/* Blog Posts Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
               {blogPosts.map((post, index) => (
-                <motion.div
+                <div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -203,7 +203,7 @@ const Blog = () => {
                       <ArrowRight size={14} />
                     </button>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -213,7 +213,7 @@ const Blog = () => {
       {/* Blog Post Modal */}
       {showFullPost && selectedPost && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <motion.div
+          <div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
@@ -261,7 +261,7 @@ const Blog = () => {
                 </div>
               )}
             </div>
-          </motion.div>
+          </div>
         </div>
       )}
     </div>

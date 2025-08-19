@@ -73,7 +73,7 @@ const About = () => {
   ];
 
   return (
-    <motion.div
+    <div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -85,23 +85,23 @@ const About = () => {
         <NeuralNetwork />
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
           <div className="text-center max-w-4xl mx-auto px-4">
-            <motion.div
+            <div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
               className="flex justify-center mb-6"
             >
               <FloatingLogo size="medium" showText={false} showTypewriter={false} />
-            </motion.div>
-            <motion.h1
+            </div>
+            <h1
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent"
             >
               About GiiT
-            </motion.h1>
-            <motion.div
+            </h1>
+            <div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -120,7 +120,7 @@ const About = () => {
                   deleteSpeed: 30,
                 }}
               />
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
@@ -128,14 +128,14 @@ const About = () => {
       {/* Mission & Vision Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <motion.div
+          <div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             className="grid md:grid-cols-2 gap-8"
           >
-            <motion.div 
+            <div 
               variants={itemVariants}
               className="bg-gradient-to-br from-indigo-900/50 to-purple-900/50 p-8 rounded-2xl backdrop-blur-sm border border-indigo-500/20"
             >
@@ -145,9 +145,9 @@ const About = () => {
               <p className="text-gray-300 leading-relaxed">
                 To provide high-quality technology education that empowers individuals to succeed in the digital age through practical skills, innovative teaching methods, and industry-relevant curriculum.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div 
+            <div 
               variants={itemVariants}
               className="bg-gradient-to-br from-indigo-900/50 to-purple-900/50 p-8 rounded-2xl backdrop-blur-sm border border-indigo-500/20"
             >
@@ -157,15 +157,15 @@ const About = () => {
               <p className="text-gray-300 leading-relaxed">
                 To be the leading technology education institute in East Africa, recognized for excellence in teaching, innovation, and producing skilled professionals who drive technological advancement.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Values Section */}
       <section className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4">
-          <motion.h2
+          <h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -173,9 +173,9 @@ const About = () => {
             className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent"
           >
             Our Core Values
-          </motion.h2>
+          </h2>
           
-          <motion.div
+          <div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -183,7 +183,7 @@ const About = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
             {values.map((value, _index) => (
-              <motion.div
+              <div
                 key={value.title}
                 variants={itemVariants}
                 className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-xl backdrop-blur-sm border border-indigo-500/20
@@ -198,16 +198,16 @@ const About = () => {
                 <p className="text-gray-400 text-center">
                   {value.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Learning Formats Section */}
       <section className="py-20 bg-gradient-to-b from-indigo-900/20 to-purple-900/20 relative z-10">
         <div className="max-w-7xl mx-auto px-4">
-          <motion.h2
+          <h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -215,9 +215,9 @@ const About = () => {
             className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent"
           >
             Learning Formats
-          </motion.h2>
+          </h2>
 
-          <motion.div
+          <div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -225,7 +225,7 @@ const About = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
             {classFormats.map((format, _index) => (
-              <motion.div
+              <div
                 key={format.title}
                 variants={itemVariants}
                 className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-xl backdrop-blur-sm border border-indigo-500/20
@@ -240,16 +240,16 @@ const About = () => {
                 <p className="text-gray-400 text-center">
                   {format.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-b from-indigo-900/20 to-purple-900/20 relative z-10">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -261,7 +261,7 @@ const About = () => {
             <p className="text-gray-300 mb-8 text-lg">
               Join us and transform your passion for technology into expertise.
             </p>
-            <motion.button
+            <button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500
@@ -269,11 +269,11 @@ const About = () => {
                        shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)]"
             >
               Get Started Today
-            </motion.button>
-          </motion.div>
+            </button>
+          </div>
         </div>
       </section>
-    </motion.div>
+    </div>
   );
 };
 
