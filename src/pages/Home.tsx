@@ -70,7 +70,7 @@ const Home = () => {
           </div>
 
           <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <motion.div
+            <div
               initial={{ opacity: 0, y: 30 }}
               animate={{
                 opacity: 1,
@@ -87,7 +87,7 @@ const Home = () => {
                   <FloatingLogo size="large" showText={false} showTypewriter={false} />
                 </div>
 
-                <motion.h1
+                <h1
                   className="text-5xl lg:text-6xl font-bold mb-6 gradient-text flex items-center justify-center gap-2"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -105,9 +105,9 @@ const Home = () => {
                       deleteSpeed: 30,
                     }}
                   />
-                </motion.h1>
+                </h1>
 
-                <motion.div
+                <div
                   className="text-3xl lg:text-4xl font-semibold mb-8 text-gray-200 flex items-center justify-center gap-2"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -128,9 +128,9 @@ const Home = () => {
                       pauseFor: 3000,
                     } as any}
                   />
-                </motion.div>
+                </div>
 
-                <motion.p
+                <p
                   className="text-gray-400 max-w-3xl mx-auto text-xl leading-relaxed mb-12"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -138,16 +138,16 @@ const Home = () => {
                 >
                   Transform your passion into expertise with our cutting-edge technology courses and personalized learning paths.
                   Join us on a journey of innovation and excellence in technology education.
-                </motion.p>
+                </p>
               </div>
 
-              <motion.div
+              <div
                 className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
-                <motion.div
+                <div
                   whileHover={{
                     scale: 1.05,
                     transition: { duration: 0.2 }
@@ -157,9 +157,9 @@ const Home = () => {
                   <Link to="/services" className="btn-primary inline-block">
                     Explore Our Courses
                   </Link>
-                </motion.div>
+                </div>
 
-                <motion.button
+                <button
                   onClick={() => setShowRegistrationModal(true)}
                   className="btn-outline"
                   whileHover={{
@@ -169,11 +169,11 @@ const Home = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   Get Started
-                </motion.button>
-              </motion.div>
-            </motion.div>
+                </button>
+              </div>
+            </div>
 
-            <motion.div
+            <div
               initial={{ opacity: 0, y: 50, rotateX: 30 }}
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
               transition={{ duration: 1.5, delay: 0.8, ease: "easeOut", type: "spring" }}
@@ -181,7 +181,7 @@ const Home = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 {classFormats.map((format, index) => (
-                  <motion.div
+                  <div
                     key={index}
                     className="card p-6 backdrop-blur-sm relative overflow-hidden group"
                     initial={{
@@ -216,7 +216,7 @@ const Home = () => {
                     }}
                   >
                     {/* Crazy background effects */}
-                    <motion.div
+                    <div
                       className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100"
                       animate={{
                         background: [
@@ -233,7 +233,7 @@ const Home = () => {
                       }}
                     />
 
-                    <motion.div
+                    <div
                       className="text-indigo-400 mb-4 flex justify-center relative z-10"
                       animate={{
                         y: [0, -5, 0],
@@ -254,9 +254,9 @@ const Home = () => {
                       }}
                     >
                       {format.icon}
-                    </motion.div>
+                    </div>
 
-                    <motion.h3
+                    <h3
                       className="text-xl font-semibold text-gray-100 mb-2 relative z-10"
                       animate={{
                         opacity: [0.8, 1, 0.8],
@@ -274,9 +274,9 @@ const Home = () => {
                       }}
                     >
                       {format.title}
-                    </motion.h3>
+                    </h3>
 
-                    <motion.p
+                    <p
                       className="text-gray-400 relative z-10"
                       animate={{
                         y: [0, 2, 0],
@@ -289,11 +289,11 @@ const Home = () => {
                       }}
                     >
                       {format.description}
-                    </motion.p>
+                    </p>
 
                     {/* Floating particles on hover */}
                     {[...Array(3)].map((_, i) => (
-                      <motion.div
+                      <div
                         key={i}
                         className="absolute w-2 h-2 bg-indigo-400 rounded-full opacity-0 group-hover:opacity-100"
                         style={{
@@ -313,10 +313,10 @@ const Home = () => {
                         }}
                       />
                     ))}
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -335,7 +335,7 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {features.map((feature, index) => (
                 <AnimatedSection key={index} delay={index * 0.2}>
-                  <motion.div
+                  <div
                     className="card p-6 backdrop-blur-sm relative overflow-hidden group"
                     initial={{
                       opacity: 0,
@@ -380,7 +380,7 @@ const Home = () => {
                     }}
                   >
                     {/* Crazy morphing background */}
-                    <motion.div
+                    <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100"
                       animate={{
                         background: [
@@ -397,7 +397,7 @@ const Home = () => {
                       }}
                     />
 
-                    <motion.div
+                    <div
                       className="text-indigo-400 mb-4 relative z-10"
                       animate={{
                         rotate: [0, 360],
@@ -416,9 +416,9 @@ const Home = () => {
                       }}
                     >
                       {feature.icon}
-                    </motion.div>
+                    </div>
 
-                    <motion.h3
+                    <h3
                       className="text-xl font-semibold text-gray-100 mb-2 relative z-10"
                       animate={{
                         color: [
@@ -441,9 +441,9 @@ const Home = () => {
                       }}
                     >
                       {feature.title}
-                    </motion.h3>
+                    </h3>
 
-                    <motion.p
+                    <p
                       className="text-gray-400 relative z-10"
                       animate={{
                         opacity: [0.7, 1, 0.7],
@@ -456,11 +456,11 @@ const Home = () => {
                       }}
                     >
                       {feature.description}
-                    </motion.p>
+                    </p>
 
                     {/* Orbiting particles */}
                     {[...Array(4)].map((_, i) => (
-                      <motion.div
+                      <div
                         key={i}
                         className="absolute w-1 h-1 bg-indigo-400 rounded-full opacity-0 group-hover:opacity-100"
                         style={{
@@ -483,7 +483,7 @@ const Home = () => {
                     ))}
 
                     {/* Lightning effect on hover */}
-                    <motion.div
+                    <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none"
                       animate={{
                         background: [
@@ -498,7 +498,7 @@ const Home = () => {
                         repeatType: "reverse"
                       }}
                     />
-                  </motion.div>
+                  </div>
                 </AnimatedSection>
               ))}
             </div>
@@ -531,7 +531,7 @@ const Home = () => {
         <section className="py-20 relative overflow-hidden">
           {/* Explosive background effects */}
           {[...Array(10)].map((_, i) => (
-            <motion.div
+            <div
               key={i}
               className="absolute rounded-full"
               style={{
@@ -563,7 +563,7 @@ const Home = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <AnimatedSection>
-                <motion.div
+                <div
                   className="card p-8 text-center backdrop-blur-sm relative overflow-hidden group"
                   initial={{
                     opacity: 0,
@@ -598,7 +598,7 @@ const Home = () => {
                   }}
                 >
                   {/* Explosive burst effect */}
-                  <motion.div
+                  <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100"
                     animate={{
                       background: [
@@ -614,7 +614,7 @@ const Home = () => {
                     }}
                   />
 
-                  <motion.div
+                  <div
                     className="flex justify-center mb-4 relative z-10"
                     animate={{
                       rotate: [0, 360],
@@ -633,9 +633,9 @@ const Home = () => {
                     }}
                   >
                     <Users className="h-12 w-12 text-indigo-400" />
-                  </motion.div>
+                  </div>
 
-                  <motion.div
+                  <div
                     className="text-4xl font-bold gradient-text mb-2 relative z-10"
                     animate={{
                       scale: [1, 1.1, 1],
@@ -657,9 +657,9 @@ const Home = () => {
                     }}
                   >
                     50+
-                  </motion.div>
+                  </div>
 
-                  <motion.div
+                  <div
                     className="text-gray-400 relative z-10"
                     animate={{
                       opacity: [0.7, 1, 0.7],
@@ -671,11 +671,11 @@ const Home = () => {
                     }}
                   >
                     Students Trained
-                  </motion.div>
+                  </div>
 
                   {/* Confetti particles */}
                   {[...Array(8)].map((_, i) => (
-                    <motion.div
+                    <div
                       key={i}
                       className="absolute w-2 h-2 rounded-full opacity-0 group-hover:opacity-100"
                       style={{
@@ -697,11 +697,11 @@ const Home = () => {
                       }}
                     />
                   ))}
-                </motion.div>
+                </div>
               </AnimatedSection>
 
               <AnimatedSection delay={0.2}>
-                <motion.div
+                <div
                   className="card p-8 text-center backdrop-blur-sm relative overflow-hidden group"
                   initial={{
                     opacity: 0,
@@ -736,7 +736,7 @@ const Home = () => {
                     y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }
                   }}
                 >
-                  <motion.div
+                  <div
                     className="flex justify-center mb-4 relative z-10"
                     animate={{
                       rotate: [0, -360],
@@ -755,9 +755,9 @@ const Home = () => {
                     }}
                   >
                     <BookOpen className="h-12 w-12 text-indigo-400" />
-                  </motion.div>
+                  </div>
 
-                  <motion.div
+                  <div
                     className="text-4xl font-bold gradient-text mb-2 relative z-10"
                     animate={{
                       scale: [1, 1.1, 1],
@@ -776,14 +776,14 @@ const Home = () => {
                     }}
                   >
                     5+
-                  </motion.div>
+                  </div>
 
                   <div className="text-gray-400 relative z-10">Expert Instructors</div>
-                </motion.div>
+                </div>
               </AnimatedSection>
 
               <AnimatedSection delay={0.4}>
-                <motion.div
+                <div
                   className="card p-8 text-center backdrop-blur-sm relative overflow-hidden group"
                   initial={{
                     opacity: 0,
@@ -818,7 +818,7 @@ const Home = () => {
                     y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }
                   }}
                 >
-                  <motion.div
+                  <div
                     className="flex justify-center mb-4 relative z-10"
                     animate={{
                       rotate: [0, 360],
@@ -837,9 +837,9 @@ const Home = () => {
                     }}
                   >
                     <Trophy className="h-12 w-12 text-indigo-400" />
-                  </motion.div>
+                  </div>
 
-                  <motion.div
+                  <div
                     className="text-4xl font-bold gradient-text mb-2 relative z-10"
                     animate={{
                       scale: [1, 1.2, 1],
@@ -858,13 +858,13 @@ const Home = () => {
                     }}
                   >
                     95%
-                  </motion.div>
+                  </div>
 
                   <div className="text-gray-400 relative z-10">Success Rate</div>
 
                   {/* Victory sparkles */}
                   {[...Array(12)].map((_, i) => (
-                    <motion.div
+                    <div
                       key={i}
                       className="absolute opacity-0 group-hover:opacity-100"
                       style={{
@@ -884,9 +884,9 @@ const Home = () => {
                       }}
                     >
                       ⭐
-                    </motion.div>
+                    </div>
                   ))}
-                </motion.div>
+                </div>
               </AnimatedSection>
             </div>
           </div>
