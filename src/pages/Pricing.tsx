@@ -236,7 +236,7 @@ const Pricing = () => {
       <div className="relative pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -262,10 +262,10 @@ const Pricing = () => {
               At GiiT, we believe quality computer science education should be accessible to every Ugandan family. 
               Choose the investment plan that works best for your family's needs and budget.
             </p>
-          </motion.div>
+          </div>
 
           {/* Special Offers Banner */}
-          <motion.div
+          <div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -290,10 +290,10 @@ const Pricing = () => {
                 <span className="text-sm">Referral Rewards Program</span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Long-Term Partnership Discount */}
-          <motion.div
+          <div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -339,12 +339,12 @@ const Pricing = () => {
                 💡 <strong>Contact us to discuss your family's long-term technology education plan!</strong>
               </p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Pricing Cards */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {pricingTiers.map((tier, index) => (
-              <motion.div
+              <div
                 key={tier.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -394,7 +394,7 @@ const Pricing = () => {
                     <Info className="h-4 w-4" />
                     View Details
                   </button>
-                  <motion.button
+                  <button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleContactForEnrollment}
@@ -405,14 +405,14 @@ const Pricing = () => {
                     }`}
                   >
                     Contact for Enrollment
-                  </motion.button>
+                  </button>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Payment Methods */}
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -465,10 +465,10 @@ const Pricing = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* ROI Section */}
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -496,14 +496,14 @@ const Pricing = () => {
               Your investment in GiiT education pays for itself within months of your child's first tech job. 
               <strong className="text-indigo-400"> We're not just teaching coding—we're building Uganda's next generation of technology leaders.</strong>
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* Details Modal */}
       {showDetails && selectedTier && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <motion.div
+          <div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
@@ -593,16 +593,16 @@ const Pricing = () => {
             </div>
 
             <div className="mt-8 text-center">
-              <motion.button
+              <button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleContactForEnrollment}
                 className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 px-8 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-300"
               >
                 Contact Us for Enrollment
-              </motion.button>
+              </button>
             </div>
-          </motion.div>
+          </div>
         </div>
       )}
 

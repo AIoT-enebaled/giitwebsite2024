@@ -61,7 +61,7 @@ const AcceleratorProgram = () => {
       <div className="relative pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -95,10 +95,10 @@ const AcceleratorProgram = () => {
               2-week format for just <span className="text-yellow-400 font-bold">UGX 150,000</span>. 
               Perfect for fast learners and those who want quick results!
             </p>
-          </motion.div>
+          </div>
 
           {/* Program Benefits */}
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -127,10 +127,10 @@ const AcceleratorProgram = () => {
                 <p className="text-gray-300 text-sm">Same quality education at UGX 150,000 for any course</p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Filter Section */}
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -204,12 +204,12 @@ const AcceleratorProgram = () => {
                 Showing {filteredCourses.length} of {acceleratorCourses.length} accelerator courses
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Course Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredCourses.map((course, index) => (
-              <motion.div
+              <div
                 key={course.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -280,16 +280,16 @@ const AcceleratorProgram = () => {
                     </div>
                   </div>
 
-                  <motion.button
+                  <button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleEnroll(course)}
                     className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-2 px-4 rounded-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-all duration-300"
                   >
                     Enroll Now - UGX 150k
-                  </motion.button>
+                  </button>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -307,7 +307,7 @@ const AcceleratorProgram = () => {
           )}
 
           {/* Call to Action */}
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
@@ -318,24 +318,24 @@ const AcceleratorProgram = () => {
               Choose any course and complete it in just 2 weeks for only UGX 150,000!
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <motion.a
+              <a
                 href="tel:+256752067815"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-orange-600 font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 inline-block"
               >
                 Contact Us: +256752-067-815
-              </motion.a>
-              <motion.button
+              </a>
+              <button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowRegistrationModal(true)}
                 className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white hover:text-orange-600 transition-all duration-300"
               >
                 Register Now
-              </motion.button>
+              </button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
