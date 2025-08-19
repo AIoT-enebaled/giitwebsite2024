@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Code, Brain, Layout, BookOpen, Users, Trophy, Monitor, UserPlus, Group, Globe } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import { Link } from 'react-router-dom';

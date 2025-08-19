@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Users, Award, Target, BookOpen, Globe, UserPlus, Monitor, Group } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
 import NeuralNetwork from '../components/NeuralNetwork';

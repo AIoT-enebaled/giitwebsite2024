@@ -1,5 +1,4 @@
 import AnimatedSection from '../components/AnimatedSection';
-import { motion } from 'framer-motion';
 import Typewriter from 'typewriter-effect';
 import NeuralNetwork from '../components/NeuralNetwork';
 import { useState } from 'react';
