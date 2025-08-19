@@ -55,14 +55,10 @@ const Navbar = () => {
                 }`}>
                   {link.name}
                 </span>
-                <motion.div
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 origin-left"
-                  initial={{ scaleX: 0 }}
-                  animate={{ 
-                    scaleX: location.pathname === link.path ? 1 : 0 
-                  }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.2 }}
+                <div
+                  className={`absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 transition-transform duration-200 origin-left ${
+                    location.pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                  }`}
                 />
               </Link>
             ))}
@@ -74,60 +70,50 @@ const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-400 hover:text-indigo-300 transition-colors duration-300"
             >
-              <motion.div
-                initial={false}
-                animate={{ rotate: isOpen ? 90 : 0 }}
-                transition={{ duration: 0.2 }}
-              >
+              <div className={`transition-transform duration-200 ${isOpen ? 'rotate-90' : 'rotate-0'}`}>
                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </motion.div>
+              </div>
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Navigation Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden overflow-hidden"
-          >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-[#020817]">
-              {navLinks.map((link) => (
-                <motion.div
-                  key={link.path}
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.2 }}
+      {isOpen && (
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-200 ${
+            isOpen ? 'opacity-100 max-h-96' : 'opacity-0 max-h-0'
+          }`}
+        >
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-[#020817]">
+            {navLinks.map((link, index) => (
+              <div
+                key={link.path}
+                className={`transition-all duration-200 delay-[${index * 50}ms] ${
+                  isOpen ? 'translate-x-0 opacity-100' : '-translate-x-5 opacity-0'
+                }`}
+              >
+                <Link
+                  to={link.path}
+                  className={`block px-3 py-2 rounded-md text-base font-medium relative group ${
+                    location.pathname === link.path
+                      ? 'text-white bg-gray-900'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                  }`}
+                  onClick={() => setIsOpen(false)}
                 >
-                  <Link
-                    to={link.path}
-                    className={`block px-3 py-2 rounded-md text-base font-medium relative group ${
-                      location.pathname === link.path
-                        ? 'text-white bg-gray-900'
-                        : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                  {link.name}
+                  <div
+                    className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-200 ${
+                      location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
                     }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.name}
-                    <motion.div
-                      className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500"
-                      initial={{ width: '0%' }}
-                      animate={{ width: location.pathname === link.path ? '100%' : '0%' }}
-                      whileHover={{ width: '100%' }}
-                      transition={{ duration: 0.2 }}
-                    />
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
