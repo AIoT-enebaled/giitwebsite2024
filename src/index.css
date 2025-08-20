@@ -3,9 +3,45 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
   body {
     @apply bg-dark text-gray-100 overflow-x-hidden;
     background-image: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
+    /* Performance optimizations */
+    will-change: scroll-position;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Optimize animated elements */
+  .animate-float,
+  .animate-pulse,
+  .animate-spin,
+  .animate-bounce {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Optimize blur elements */
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg {
+    will-change: auto;
+    transform: translateZ(0);
   }
 }
 
