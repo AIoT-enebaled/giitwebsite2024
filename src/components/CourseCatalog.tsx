@@ -180,17 +180,10 @@ const CourseCatalog: React.FC<CourseCatalogProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="course-catalog-container">
-          <div className="typewriter-container">
-            <TypewriterEffect 
-              texts={[
-                `Welcome to ${title} Course`,
-                `Discover ${title} Learning`,
-                `Transform Your Skills with ${title}`
-              ]} 
-              speed={100} 
-              delay={2000} 
-              className="typewriter-title"
-            />
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-indigo-400 mb-4">
+              Welcome to {title} Course
+            </h2>
           </div>
           {showRegistrationForm && (
             <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 bg-black/80 backdrop-blur-sm">
