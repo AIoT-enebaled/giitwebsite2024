@@ -10,113 +10,21 @@
   }
 
   html {
-    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
 
   body {
     @apply bg-dark text-gray-100 overflow-x-hidden;
     background-image: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
-    /* Performance optimizations */
-    will-change: scroll-position;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-  }
-
-  /* Optimize animated elements */
-  .animate-float,
-  .animate-pulse,
-  .animate-spin,
-  .animate-bounce {
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-
-  /* Optimize blur elements */
-  .backdrop-blur-sm,
-  .backdrop-blur-md,
-  .backdrop-blur-lg {
-    will-change: auto;
-    transform: translateZ(0);
-  }
-
-  /* Reduce motion for users who prefer it */
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-
-  /* Optimize scroll performance */
-  .overflow-y-auto,
-  .overflow-y-scroll {
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-  }
-
-  /* Optimize heavy elements */
-  .filter,
-  .blur-sm,
-  .blur-md,
-  .blur-lg,
-  .blur-xl,
-  .blur-2xl,
-  .blur-3xl {
-    will-change: auto;
-    transform: translateZ(0);
-  }
-
-  /* Reduce repaints on scroll */
-  .fixed,
-  .sticky {
-    will-change: auto;
-    transform: translateZ(0);
-    backface-visibility: hidden;
   }
 }
 
 @layer components {
   .btn-primary {
     @apply bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600
-           text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300
-           shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)];
-  }
-
-  @keyframes fadeInScale {
-    0% {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+           text-white font-semibold py-3 px-8 rounded-xl;
   }
 
   .typewriter-container {
@@ -131,36 +39,19 @@
 
   .btn-outline {
     @apply border-2 border-indigo-500 text-indigo-400 hover:bg-indigo-500 hover:text-white 
-           font-semibold py-3 px-8 rounded-xl transition-all duration-300
-           shadow-[0_0_20px_rgba(99,102,241,0.1)] hover:shadow-[0_0_30px_rgba(99,102,241,0.3)];
+           font-semibold py-3 px-8 rounded-xl;
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 animate-gradient;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400;
   }
 
   .card {
-    @apply bg-dark-card backdrop-blur-sm rounded-xl border border-purple-500/10
-           shadow-[0_0_30px_rgba(168,85,247,0.1)] hover:shadow-[0_0_40px_rgba(168,85,247,0.2)]
-           transition-all duration-300;
+    @apply bg-dark-card backdrop-blur-sm rounded-xl border border-purple-500/10;
   }
 
   .glass-effect {
     @apply bg-dark-card backdrop-blur-sm border border-purple-500/10;
-  }
-
-  .glow-effect {
-    @apply relative;
-  }
-
-  .glow-effect::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 
-           blur-xl opacity-0 transition-opacity duration-300;
-  }
-
-  .glow-effect:hover::before {
-    @apply opacity-100;
   }
 }
 
