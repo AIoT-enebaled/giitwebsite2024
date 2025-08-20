@@ -1,7 +1,6 @@
 import { Code, Brain, Layout, BookOpen, Users, Trophy, Monitor, UserPlus, Group, Globe } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 import { Link } from 'react-router-dom';
-import Typewriter from 'typewriter-effect';
 import NeuralNetwork from '../components/NeuralNetwork';
 import FloatingLogo from '../components/FloatingLogo';
 import StudentImageScroll from '../components/StudentImageScroll';
