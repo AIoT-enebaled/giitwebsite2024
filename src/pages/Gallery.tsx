@@ -75,35 +75,14 @@ const Gallery = () => {
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
               <TypewriterEffect
                 texts={[
-                  'Explore our visual collection showcasing students, facilities, and achievements',
-                  'Discover the vibrant community and cutting-edge technology at GiiT',
-                  'See how we are transforming lives through technology education'
+                  'Meet our incredible students and their achievements',
+                  'Discover the brilliant minds shaping the future of technology',
+                  'Celebrating our students success stories and innovations'
                 ]}
                 speed={50}
                 delay={4000}
               />
             </p>
-          </div>
-        </section>
-
-        {/* Category Filter */}
-        <section className="px-4 sm:px-6 lg:px-8 mb-12">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              {categories.map(category => (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 ${
-                    activeCategory === category
-                      ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg'
-                      : 'bg-dark-light text-gray-300 hover:bg-indigo-500/20 hover:text-white'
-                  }`}
-                >
-                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                </button>
-              ))}
-            </div>
           </div>
         </section>
 
