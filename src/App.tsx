@@ -18,6 +18,7 @@ function App() {
   return (
     <HashRouter>
       <div className="flex flex-col min-h-screen bg-[#020817]">
+        <PerformanceOptimizer />
         <Navbar />
         <main className="flex-grow">
           <Routes>
