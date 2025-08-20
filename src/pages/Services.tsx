@@ -1,4 +1,5 @@
 import AnimatedSection from '../components/AnimatedSection';
+import Typewriter from 'typewriter-effect';
 import NeuralNetwork from '../components/NeuralNetwork';
 import { useState } from 'react';
 import { courseCatalogs, courseCategories, courseLevels, courseTypes } from '../data/courseDetails';
