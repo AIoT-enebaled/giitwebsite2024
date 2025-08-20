@@ -17,7 +17,6 @@ import {
   Smartphone
 } from 'lucide-react';
 import FloatingLogo from '../components/FloatingLogo';
-import TypewriterEffect from '../components/TypewriterEffect';
 import NeuralNetwork from '../components/NeuralNetwork';
 import PaymentMethodsModal from '../components/PaymentMethodsModal';
 import ElegantAnimatedBackground from '../components/CrazyAnimatedBackground';

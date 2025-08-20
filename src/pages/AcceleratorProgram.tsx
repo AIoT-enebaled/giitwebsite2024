@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { courseCatalogs, courseCategories, courseLevels, courseTypes } from '../data/courseDetails';
 import { Filter, Search, Star, Clock, Users, BookOpen, Zap, Award, Target } from 'lucide-react';
 import FloatingLogo from '../components/FloatingLogo';
-import TypewriterEffect from '../components/TypewriterEffect';
 import NeuralNetwork from '../components/NeuralNetwork';
 import RegistrationModal from '../components/RegistrationModal';
 import ElegantAnimatedBackground from '../components/CrazyAnimatedBackground';
