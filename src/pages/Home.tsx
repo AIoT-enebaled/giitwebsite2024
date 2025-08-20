@@ -76,12 +76,37 @@ const Home = () => {
                   <FloatingLogo size="large" showText={false} showTypewriter={false} />
                 </div>
 
-                <h1 className="text-5xl lg:text-6xl font-bold mb-6 gradient-text">
-                  Welcome to Genius Institute of IT
+                <h1 className="text-5xl lg:text-6xl font-bold mb-6 gradient-text flex items-center justify-center gap-2">
+                  <span>Welcome to</span>
+                  <Typewriter
+                    options={{
+                      strings: ['Genius Institute of IT', 'the Future of Learning', 'Innovation Hub', 'Tech Excellence'],
+                      autoStart: true,
+                      loop: true,
+                      wrapperClassName: "gradient-text",
+                      cursorClassName: "text-indigo-400",
+                      delay: 75,
+                      deleteSpeed: 30,
+                    }}
+                  />
                 </h1>
 
-                <div className="text-3xl lg:text-4xl font-semibold mb-8 text-gray-200">
-                  Learn. Grow. Succeed.
+                <div className="text-3xl lg:text-4xl font-semibold mb-8 text-gray-200 flex items-center justify-center gap-2">
+                  <Typewriter
+                    options={{
+                      strings: [
+                        'Learn. Grow. Succeed.',
+                        'Discover Your Potential',
+                        'Shape Your Future',
+                        'Master Technology'
+                      ],
+                      autoStart: true,
+                      loop: true,
+                      delay: 100,
+                      deleteSpeed: 30,
+                      pauseFor: 3000,
+                    }}
+                  />
                 </div>
 
                 <p className="text-gray-400 max-w-3xl mx-auto text-xl leading-relaxed mb-12">
