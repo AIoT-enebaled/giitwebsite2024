@@ -80,7 +80,20 @@ const Services = () => {
                   Our Courses & Services
                 </h1>
                 <div className="text-xl text-gray-300">
-                  Transform Your Skills
+                  <Typewriter
+                    options={{
+                      strings: [
+                        'Transform Your Skills',
+                        'Build Your Future',
+                        'Learn from Experts',
+                        'Master Technology',
+                        'Create Amazing Projects'
+                      ],
+                      autoStart: true,
+                      loop: true,
+                      delay: 50,
+                    }}
+                  />
                 </div>
                 <p className="text-lg text-gray-400 mt-4 max-w-3xl mx-auto">
                   Discover our comprehensive range of technology courses designed to prepare students for the digital future. 
