@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import EmailTemplates from './pages/EmailTemplates';
 import Footer from './components/Footer';
 import ChatBot from './components/ChatBot';
+import PerformanceOptimizer from './components/PerformanceOptimizer';
 
 function App() {
   return (
