@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface TypewriterEffectProps {
   texts?: string[];
@@ -11,12 +11,50 @@ interface TypewriterEffectProps {
 const TypewriterEffect: React.FC<TypewriterEffectProps> = ({ 
   texts = [], 
   text = '', 
+  speed = 50, 
+  delay = 2000, 
   className = '' 
 }) => {
-  // Just display the first text or the text prop without any animation
-  const displayText = texts.length > 0 ? texts[0] : text;
+  const [displayText, setDisplayText] = useState('');
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(true);
 
-  return <span className={`${className} inline-block`}>{displayText}</span>;
+  useEffect(() => {
+    const textToType = texts.length > 0 ? texts[currentTextIndex] : text;
+    let i = 0;
+    setDisplayText('');
+    setIsTyping(true);
+
+    const typingEffect = setInterval(() => {
+      if (i < textToType.length) {
+        setDisplayText(prevText => prevText + textToType.charAt(i));
+        i++;
+      } else {
+        clearInterval(typingEffect);
+        setIsTyping(false);
+
+        // If multiple texts, cycle to next text after delay
+        if (texts.length > 1) {
+          setTimeout(() => {
+            setCurrentTextIndex((prevIndex) => 
+              (prevIndex + 1) % texts.length
+            );
+          }, delay);
+        }
+      }
+    }, speed);
+
+    return () => {
+      clearInterval(typingEffect);
+    };
+  }, [text, texts, speed, delay, currentTextIndex]);
+
+  return (
+    <span className={`${className} inline-block whitespace-nowrap`} style={{ minWidth: 'max-content', width: 'max-content' }}>
+      {displayText}
+      {isTyping && <span className="animate-pulse">|</span>}
+    </span>
+  );
 };
 
 export default TypewriterEffect;
