@@ -4,7 +4,6 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ParentRegistrationForm from './ParentRegistrationForm';
 import StudentRegistrationForm from './StudentRegistrationForm';
-import TypewriterEffect from './TypewriterEffect';
 
 interface CourseObjective {
   title: string;
