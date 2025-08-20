@@ -38,18 +38,50 @@ const FloatingLogo: React.FC<FloatingLogoProps> = ({
 
   return (
     <div className={`flex items-center space-x-3 ${className}`}>
-      <div className="relative">
+      <div className="relative animate-float hover:scale-110 transition-transform duration-300">
         <img
           src="https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F2ad69148086148c288ff98a1e4c8b79f?format=webp&width=800"
           alt="GiiT Logo"
-          className={`${getSizeClasses()} drop-shadow-lg`}
+          className={`${getSizeClasses()} drop-shadow-lg hover:scale-105 hover:brightness-110 transition-all duration-300`}
+          style={{
+            filter: 'drop-shadow(0 0 10px rgba(99, 102, 241, 0.3))'
+          }}
+        />
+
+        {/* Gentle floating particles */}
+        {[...Array(3)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-indigo-400/60 animate-pulse"
+            style={{
+              top: `${20 + i * 30}%`,
+              right: `${10 + i * 15}%`,
+              animationDelay: `${i * 1}s`,
+            }}
+          />
+        ))}
+
+        {/* Subtle breathing ring */}
+        <div
+          className="absolute border border-indigo-400/30 rounded-full animate-pulse"
+          style={{
+            width: '120%',
+            height: '120%',
+            top: '-10%',
+            left: '-10%',
+          }}
         />
       </div>
       
       {showText && (
-        <div className="flex flex-col">
+        <div className="flex flex-col hover:scale-102 transition-transform duration-300">
           {showTypewriter ? (
-            <div className={`font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent ${getTextSize()}`}>
+            <div
+              className={`font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent ${getTextSize()} animate-gradient`}
+              style={{
+                backgroundSize: '200% 200%',
+              }}
+            >
               <TypewriterEffect
                 texts={['GiiT', 'Genius Institute', 'Innovation Hub', 'Tech Excellence']}
                 speed={120}
@@ -58,12 +90,14 @@ const FloatingLogo: React.FC<FloatingLogoProps> = ({
               />
             </div>
           ) : (
-            <span className={`font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent ${getTextSize()}`}>
+            <span
+              className={`font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent ${getTextSize()} animate-glow`}
+            >
               GiiT
             </span>
           )}
           {size === 'large' && (
-            <span className="text-xs text-gray-400 font-medium tracking-wider">
+            <span className="text-xs text-gray-400 font-medium tracking-wider opacity-0 animate-[fadeIn_0.6s_ease_0.8s_forwards]">
               Genius Institute of IT
             </span>
           )}
