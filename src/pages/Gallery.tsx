@@ -66,7 +66,7 @@ const Gallery = () => {
             
             <h1 className="text-4xl lg:text-6xl font-bold mb-6 gradient-text">
               <TypewriterEffect
-                texts={['Image Gallery', 'Our Journey', 'Visual Stories', 'GiiT Moments']}
+                texts={['Student Gallery', 'Our Stars', 'Future Leaders', 'Student Achievements']}
                 speed={100}
                 delay={3000}
               />
