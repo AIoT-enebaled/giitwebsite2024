@@ -31,6 +31,7 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/email-templates" element={<EmailTemplates />} />
           </Routes>
         </main>
