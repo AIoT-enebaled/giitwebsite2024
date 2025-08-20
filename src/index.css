@@ -10,6 +10,7 @@
   }
 
   html {
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -19,12 +20,55 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Optimize animated elements */
+  .animate-float,
+  .animate-pulse,
+  .animate-spin,
+  .animate-bounce {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
 }
 
 @layer components {
   .btn-primary {
     @apply bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600
-           text-white font-semibold py-3 px-8 rounded-xl;
+           text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300
+           shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)]
+           hover:scale-105 transform;
+  }
+
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .typewriter-container {
@@ -39,19 +83,52 @@
 
   .btn-outline {
     @apply border-2 border-indigo-500 text-indigo-400 hover:bg-indigo-500 hover:text-white 
-           font-semibold py-3 px-8 rounded-xl;
+           font-semibold py-3 px-8 rounded-xl transition-all duration-300
+           shadow-[0_0_20px_rgba(99,102,241,0.1)] hover:shadow-[0_0_30px_rgba(99,102,241,0.3)]
+           hover:scale-105 transform;
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 animate-gradient;
   }
 
   .card {
-    @apply bg-dark-card backdrop-blur-sm rounded-xl border border-purple-500/10;
+    @apply bg-dark-card backdrop-blur-sm rounded-xl border border-purple-500/10
+           shadow-[0_0_30px_rgba(168,85,247,0.1)] hover:shadow-[0_0_40px_rgba(168,85,247,0.2)]
+           transition-all duration-300 hover:scale-105 hover:border-indigo-500/40 transform;
   }
 
   .glass-effect {
     @apply bg-dark-card backdrop-blur-sm border border-purple-500/10;
+  }
+
+  .glow-effect {
+    @apply relative;
+  }
+
+  .glow-effect::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 
+           blur-xl opacity-0 transition-opacity duration-300;
+  }
+
+  .glow-effect:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Gallery specific styles */
+  .gallery-item {
+    @apply relative overflow-hidden rounded-lg group cursor-pointer transform transition-all duration-500
+           hover:scale-110 hover:z-10 hover:shadow-2xl;
+  }
+
+  .gallery-item img {
+    @apply w-full h-full object-cover transition-transform duration-700 group-hover:scale-125;
+  }
+
+  .gallery-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 
+           group-hover:opacity-100 transition-opacity duration-300;
   }
 }
 
