@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NeuralNetwork from '../components/NeuralNetwork';
 import { Calendar, User, ArrowRight, Trophy, Award, X } from 'lucide-react';
+import Typewriter from 'typewriter-effect';
 import FloatingLogo from '../components/FloatingLogo';
 import ElegantAnimatedBackground from '../components/CrazyAnimatedBackground';
 
