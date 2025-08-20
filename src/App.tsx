@@ -10,6 +10,7 @@ import Pricing from './pages/Pricing';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import EmailTemplates from './pages/EmailTemplates';
+import Gallery from './pages/Gallery';
 import Footer from './components/Footer';
 import ChatBot from './components/ChatBot';
 import PerformanceOptimizer from './components/PerformanceOptimizer';
