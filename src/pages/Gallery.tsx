@@ -171,7 +171,7 @@ const Gallery = () => {
               {filteredImages.map((image, index) => (
                 <div
                   key={image.id}
-                  className={`gallery-item ${image.featured ? 'md:col-span-2 md:row-span-2' : ''}`}
+                  className={`gallery-item group ${image.featured ? 'md:col-span-2 md:row-span-2' : ''}`}
                   onClick={() => openImage(image)}
                   style={{
                     animationDelay: `${index * 0.1}s`
