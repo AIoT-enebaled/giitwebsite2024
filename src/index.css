@@ -43,6 +43,42 @@
     will-change: auto;
     transform: translateZ(0);
   }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Optimize scroll performance */
+  .overflow-y-auto,
+  .overflow-y-scroll {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  /* Optimize heavy elements */
+  .filter,
+  .blur-sm,
+  .blur-md,
+  .blur-lg,
+  .blur-xl,
+  .blur-2xl,
+  .blur-3xl {
+    will-change: auto;
+    transform: translateZ(0);
+  }
+
+  /* Reduce repaints on scroll */
+  .fixed,
+  .sticky {
+    will-change: auto;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
 }
 
 @layer components {
