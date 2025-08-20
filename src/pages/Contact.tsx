@@ -2,6 +2,7 @@ import React from 'react';
 import AnimatedSection from '../components/AnimatedSection';
 import NeuralNetwork from '../components/NeuralNetwork';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
+import Typewriter from 'typewriter-effect';
 import FloatingLogo from '../components/FloatingLogo';
 import ElegantAnimatedBackground from '../components/CrazyAnimatedBackground';
 
