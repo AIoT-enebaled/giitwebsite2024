@@ -16,20 +16,11 @@ interface GalleryImage {
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
-  const [activeCategory, setActiveCategory] = useState('all');
 
-  // Collect all images used throughout the site
+  // Student photos only
   const galleryImages: GalleryImage[] = [
     {
       id: 1,
-      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F2ad69148086148c288ff98a1e4c8b79f?format=webp&width=800',
-      title: 'GiiT Logo',
-      description: 'Official logo of Genius Institute of Information Technology',
-      category: 'branding',
-      featured: true
-    },
-    {
-      id: 2,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F42e56409de1e49da80e923bedf388d00?format=webp&width=800',
       title: 'Kayden & Kylie - Winners',
       description: 'Website Competition Winners 2025 - SkillBridge Uganda Project',
@@ -37,68 +28,20 @@ const Gallery = () => {
       featured: true
     },
     {
-      id: 3,
+      id: 2,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Ff271f789cdd54b87abf9a350b0c4e962?format=webp&width=800',
       title: 'Kayden - Young Developer',
       description: 'Full-Stack Developer at 13 - Mastering Python, JavaScript, and AI',
       category: 'students'
     },
     {
-      id: 4,
+      id: 3,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F442f39e52ddf4e8db77061762d90508b?format=webp&width=800',
       title: 'Kylie - Creative Innovator',
       description: 'Creative Tech Innovator combining art and technology',
       category: 'students'
-    },
-    {
-      id: 5,
-      src: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      title: 'Programming Classroom',
-      description: 'Modern programming classroom with latest technology',
-      category: 'facilities'
-    },
-    {
-      id: 6,
-      src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
-      title: 'Collaborative Learning',
-      description: 'Students working together on innovative projects',
-      category: 'activities'
-    },
-    {
-      id: 7,
-      src: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2088&q=80',
-      title: 'AI & Machine Learning',
-      description: 'Advanced AI research and development lab',
-      category: 'technology'
-    },
-    {
-      id: 8,
-      src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80',
-      title: 'Web Development Studio',
-      description: 'State-of-the-art web development workspace',
-      category: 'facilities'
-    },
-    {
-      id: 9,
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      title: 'Innovation Workshop',
-      description: 'Creative space for innovation and prototyping',
-      category: 'activities'
-    },
-    {
-      id: 10,
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      title: 'Technology Excellence',
-      description: 'Cutting-edge technology and equipment',
-      category: 'technology'
     }
   ];
-
-  const categories = ['all', 'students', 'facilities', 'technology', 'activities', 'branding'];
-
-  const filteredImages = activeCategory === 'all' 
-    ? galleryImages 
-    : galleryImages.filter(img => img.category === activeCategory);
 
   const openImage = (image: GalleryImage) => {
     setSelectedImage(image);
