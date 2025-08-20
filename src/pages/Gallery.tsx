@@ -90,7 +90,7 @@ const Gallery = () => {
         <section className="px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {filteredImages.map((image, index) => (
+              {galleryImages.map((image, index) => (
                 <div
                   key={image.id}
                   className={`gallery-item group ${image.featured ? 'md:col-span-2 md:row-span-2' : ''}`}
