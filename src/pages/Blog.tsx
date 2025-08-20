@@ -127,14 +127,7 @@ const Blog = () => {
                 Blog & Articles
               </h1>
               <div className="text-xl text-gray-300">
-                <Typewriter
-                  options={{
-                    strings: ['Latest Tech News', 'Programming Insights', 'Industry Updates'],
-                    autoStart: true,
-                    loop: true,
-                    delay: 50,
-                  }}
-                />
+                Latest Tech News
               </div>
             </div>
 
