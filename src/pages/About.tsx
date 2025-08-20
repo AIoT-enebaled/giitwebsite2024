@@ -107,7 +107,19 @@ const About = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-2xl md:text-3xl text-gray-200"
             >
-              Empowering Future Tech Leaders
+              <Typewriter
+                options={{
+                  strings: [
+                    'Empowering Future Tech Leaders',
+                    'Building Tomorrow\'s Innovators',
+                    'Creating Digital Excellence'
+                  ],
+                  autoStart: true,
+                  loop: true,
+                  delay: 50,
+                  deleteSpeed: 30,
+                }}
+              />
             </div>
           </div>
         </div>
