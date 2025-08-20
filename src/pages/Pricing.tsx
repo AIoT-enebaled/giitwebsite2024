@@ -244,17 +244,7 @@ const Pricing = () => {
             <FloatingLogo size="large" showText={true} showTypewriter={false} className="justify-center mb-8" />
             <div className="typewriter-container min-h-[120px] flex items-center justify-center mb-6">
               <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent text-center">
-                <TypewriterEffect
-                  texts={[
-                    'Flexible Investment Plans',
-                    'Quality Education for All',
-                    'Your Future Starts Here',
-                    'Technology Excellence'
-                  ]}
-                  speed={80}
-                  delay={4000}
-                  className="typewriter-text"
-                />
+                Flexible Investment Plans
               </h1>
             </div>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
