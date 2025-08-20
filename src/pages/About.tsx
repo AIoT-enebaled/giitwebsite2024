@@ -1,5 +1,4 @@
 import { Users, Award, Target, BookOpen, Globe, UserPlus, Monitor, Group } from 'lucide-react';
-import Typewriter from 'typewriter-effect';
 import NeuralNetwork from '../components/NeuralNetwork';
 import FloatingLogo from '../components/FloatingLogo';
 import ElegantAnimatedBackground from '../components/CrazyAnimatedBackground';

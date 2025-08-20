@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import NeuralNetwork from '../components/NeuralNetwork';
 import { Calendar, User, ArrowRight, Trophy, Award, X } from 'lucide-react';
-import Typewriter from 'typewriter-effect';
 import FloatingLogo from '../components/FloatingLogo';
 import ElegantAnimatedBackground from '../components/CrazyAnimatedBackground';
 
@@ -21,7 +20,7 @@ const Blog = () => {
         <div class="space-y-6">
           <p class="text-lg text-gray-300">We're beyond excited to announce that Genius Institute of Information Technology (GiiT) has been crowned Junior Category Winner at the Uganda Website Projects Competition 2025, held at the National ICT Innovation Hub in Nakawa! 🎉</p>
 
-          <p class="text-gray-300">Our standout project, <strong class="text-indigo-400">SkillBridge Uganda</strong>, beat strong competition from Olive School and Mbuya Parents Primary School, proving that with creativity, teamwork, and the right mentorship, young Ugandans can solve real national challenges — and win big doing it! 🥇���</p>
+          <p class="text-gray-300">Our standout project, <strong class="text-indigo-400">SkillBridge Uganda</strong>, beat strong competition from Olive School and Mbuya Parents Primary School, proving that with creativity, teamwork, and the right mentorship, young Ugandans can solve real national challenges — and win big doing it! 🥇✨</p>
 
           <div class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 p-6 rounded-xl border border-indigo-500/20">
             <h3 class="text-xl font-bold text-indigo-400 mb-3">🚀 About the Winning Project</h3>
