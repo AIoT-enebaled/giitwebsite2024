@@ -76,17 +76,7 @@ const AcceleratorProgram = () => {
             </div>
             <div className="min-h-[80px] flex items-center justify-center mb-6 w-full overflow-visible">
               <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-300 text-center px-4 max-w-full">
-                <TypewriterEffect
-                  texts={[
-                    'Master Any Course in Just 2 Weeks!',
-                    'Intensive Learning, Maximum Results',
-                    'Fast-Track Your Tech Skills',
-                    'Accelerate Your Future'
-                  ]}
-                  speed={80}
-                  delay={4000}
-                  className="whitespace-nowrap"
-                />
+                Master Any Course in Just 2 Weeks!
               </h2>
             </div>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
