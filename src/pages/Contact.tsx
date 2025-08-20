@@ -66,14 +66,7 @@ const Contact = () => {
                 className="text-xl text-gray-300"
                 variants={itemVariants}
               >
-                <Typewriter
-                  options={{
-                    strings: ['Get in Touch', 'Start Your Journey', 'Join Our Community'],
-                    autoStart: true,
-                    loop: true,
-                    delay: 75,
-                  }}
-                />
+                Get in Touch
               </div>
             </div>
 
