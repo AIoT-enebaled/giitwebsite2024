@@ -39,12 +39,8 @@ const Contact = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               {/* Contact Information */}
-              <div className="space-y-8" variants={itemVariants}>
-                <div 
-                  className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-xl backdrop-blur-sm border border-indigo-500/20"
-                  whileHover={{ scale: 1.02, borderColor: "rgba(99, 102, 241, 0.4)" }}
-                  transition={{ duration: 0.3 }}
-                >
+              <div className="space-y-8">
+                <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-xl backdrop-blur-sm border border-indigo-500/20 hover:scale-[1.02] hover:border-indigo-400/40 transition-all duration-300">
                   <h2 className="text-2xl font-semibold mb-6 text-gray-100">Get in Touch</h2>
                   <div className="space-y-4">
                     <div 
