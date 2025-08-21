@@ -43,41 +43,25 @@ const Contact = () => {
                 <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-6 rounded-xl backdrop-blur-sm border border-indigo-500/20 hover:scale-[1.02] hover:border-indigo-400/40 transition-all duration-300">
                   <h2 className="text-2xl font-semibold mb-6 text-gray-100">Get in Touch</h2>
                   <div className="space-y-4">
-                    <div 
-                      className="flex items-center space-x-4 text-gray-300"
-                      whileHover={{ x: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <div className="flex items-center space-x-4 text-gray-300 hover:translate-x-1 transition-transform duration-200">
                       <Mail className="text-indigo-400" size={24} />
                       <span>geniusinstitute2024@gmail.com</span>
                     </div>
-                    <div 
-                      className="flex items-center space-x-4 text-gray-300"
-                      whileHover={{ x: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <div className="flex items-center space-x-4 text-gray-300 hover:translate-x-1 transition-transform duration-200">
                       <Phone className="text-indigo-400" size={24} />
                       <div className="flex flex-col">
                         <span>+256 745 695 576</span>
                         <span>+256 752 067 815</span>
                       </div>
                     </div>
-                    <div 
-                      className="flex items-center space-x-4 text-gray-300"
-                      whileHover={{ x: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <div className="flex items-center space-x-4 text-gray-300 hover:translate-x-1 transition-transform duration-200">
                       <MapPin className="text-indigo-400" size={24} />
                       <div>
                         <div>123 Technology Street</div>
                         <div>Kampala, Uganda</div>
                       </div>
                     </div>
-                    <div 
-                      className="flex items-center space-x-4 text-gray-300"
-                      whileHover={{ x: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <div className="flex items-center space-x-4 text-gray-300 hover:translate-x-1 transition-transform duration-200">
                       <Clock className="text-indigo-400" size={24} />
                       <div>
                         <div>Monday - Friday: 8:00 AM - 6:00 PM</div>
