@@ -79,35 +79,26 @@ const Contact = () => {
                   <h2 className="text-2xl font-semibold mb-6 text-gray-100">Send us a Message</h2>
                   <form className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div
-                        whileFocus={{ scale: 1.02 }}
-                        transition={{ duration: 0.2 }}
-                      >
+                      <div>
                         <input
                           type="text"
                           placeholder="Your Name"
-                          className="w-full px-4 py-2 rounded-lg bg-black/50 border border-indigo-500/20 text-gray-300 focus:outline-none focus:border-indigo-500 transition-colors duration-300"
+                          className="w-full px-4 py-2 rounded-lg bg-black/50 border border-indigo-500/20 text-gray-300 focus:outline-none focus:border-indigo-500 focus:scale-[1.02] transition-all duration-300"
                         />
                       </div>
-                      <div
-                        whileFocus={{ scale: 1.02 }}
-                        transition={{ duration: 0.2 }}
-                      >
+                      <div>
                         <input
                           type="email"
                           placeholder="Your Email"
-                          className="w-full px-4 py-2 rounded-lg bg-black/50 border border-indigo-500/20 text-gray-300 focus:outline-none focus:border-indigo-500 transition-colors duration-300"
+                          className="w-full px-4 py-2 rounded-lg bg-black/50 border border-indigo-500/20 text-gray-300 focus:outline-none focus:border-indigo-500 focus:scale-[1.02] transition-all duration-300"
                         />
                       </div>
                     </div>
-                    <div
-                      whileFocus={{ scale: 1.02 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <div>
                       <textarea
                         placeholder="Your Message"
                         rows={4}
-                        className="w-full px-4 py-2 rounded-lg bg-black/50 border border-indigo-500/20 text-gray-300 focus:outline-none focus:border-indigo-500 transition-colors duration-300"
+                        className="w-full px-4 py-2 rounded-lg bg-black/50 border border-indigo-500/20 text-gray-300 focus:outline-none focus:border-indigo-500 focus:scale-[1.02] transition-all duration-300"
                       ></textarea>
                     </div>
                     <button
