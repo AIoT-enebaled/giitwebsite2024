@@ -7,35 +7,8 @@ import FloatingLogo from '../components/FloatingLogo';
 import ElegantAnimatedBackground from '../components/CrazyAnimatedBackground';
 
 const Contact = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
-
   return (
-    <div 
-      className="min-h-screen bg-[#020817] pb-8 relative"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
-    >
+    <div className="min-h-screen bg-[#020817] pb-8 relative">
       {/* Neural Network Background */}
       <NeuralNetwork />
       <ElegantAnimatedBackground />
