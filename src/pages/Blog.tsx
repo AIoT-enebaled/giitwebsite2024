@@ -144,15 +144,12 @@ const Blog = () => {
               {blogPosts.map((post, index) => (
                 <div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`bg-gradient-to-br from-indigo-900/30 to-purple-900/30 rounded-xl backdrop-blur-sm border overflow-hidden group cursor-pointer hover:scale-[1.02] transition-all duration-300 flex flex-col ${
+                  className={`bg-gradient-to-br from-indigo-900/30 to-purple-900/30 rounded-xl backdrop-blur-sm border overflow-hidden group cursor-pointer hover:scale-[1.02] transition-all duration-300 flex flex-col opacity-0 animate-[fadeInUp_0.6s_ease-out_forwards] ${
                     post.featured
                       ? 'border-yellow-500/50 ring-2 ring-yellow-500/20 md:col-span-2 lg:col-span-2'
                       : 'border-indigo-500/20'
                   }`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
                   onClick={() => handleViewPost(post)}
                 >
                   <div className={`relative overflow-hidden ${post.featured ? 'h-56 md:h-64' : 'h-48'}`}>
@@ -213,12 +210,7 @@ const Blog = () => {
       {/* Blog Post Modal */}
       {showFullPost && selectedPost && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="bg-dark-light rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-gray-700"
-          >
+          <div className="bg-dark-light rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-gray-700 opacity-0 scale-90 animate-[fadeInScale_0.3s_ease-out_forwards]">
             <div className="relative">
               <img
                 src={selectedPost.image}
