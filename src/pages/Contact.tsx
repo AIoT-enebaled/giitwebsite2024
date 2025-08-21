@@ -37,13 +37,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={containerVariants}
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               {/* Contact Information */}
               <div className="space-y-8" variants={itemVariants}>
                 <div 
