@@ -18,28 +18,14 @@ const Contact = () => {
         {/* Hero Section */}
         <section className="relative py-12 md:py-20">
           <div className="container mx-auto px-4">
-            <div 
-              className="text-center mb-12"
-              initial="hidden"
-              animate="visible"
-              variants={containerVariants}
-            >
-              <div 
-                className="flex justify-center mb-6"
-                variants={itemVariants}
-              >
+            <div className="text-center mb-12">
+              <div className="flex justify-center mb-6">
                 <FloatingLogo size="medium" showText={false} showTypewriter={false} />
               </div>
-              <h1 
-                className="text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent"
-                variants={itemVariants}
-              >
+              <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
                 Contact Us
               </h1>
-              <div 
-                className="text-xl text-gray-300"
-                variants={itemVariants}
-              >
+              <div className="text-xl text-gray-300">
                 <Typewriter
                   options={{
                     strings: ['Get in Touch', 'Start Your Journey', 'Join Our Community'],
