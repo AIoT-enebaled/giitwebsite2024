@@ -236,12 +236,7 @@ const Pricing = () => {
       <div className="relative pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <FloatingLogo size="large" showText={true} showTypewriter={false} className="justify-center mb-8" />
             <div className="typewriter-container min-h-[120px] flex items-center justify-center mb-6">
               <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent text-center">
@@ -265,12 +260,7 @@ const Pricing = () => {
           </div>
 
           {/* Special Offers Banner */}
-          <div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-6 text-center"
-          >
+          <div className="mb-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-6 text-center">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Star className="h-6 w-6 text-yellow-400" />
               <h3 className="text-2xl font-bold text-white">Special Family Offer</h3>
@@ -293,12 +283,7 @@ const Pricing = () => {
           </div>
 
           {/* Long-Term Partnership Discount */}
-          <div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 text-center"
-          >
+          <div className="mb-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 text-center">
             <div className="flex items-center justify-center gap-2 mb-4">
               <Users className="h-8 w-8 text-green-200" />
               <h3 className="text-3xl font-bold text-white">Long-Term Partnership Discount</h3>
@@ -346,9 +331,6 @@ const Pricing = () => {
             {pricingTiers.map((tier, index) => (
               <div
                 key={tier.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 * index }}
                 className={`relative bg-dark-light rounded-2xl p-6 border hover:border-indigo-400 transition-all duration-300 ${
                   tier.popular ? 'border-indigo-500 ring-2 ring-indigo-500/20' : 'border-gray-700'
                 }`}
@@ -395,10 +377,8 @@ const Pricing = () => {
                     View Details
                   </button>
                   <button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
                     onClick={handleContactForEnrollment}
-                    className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
+                    className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 ${
                       tier.popular
                         ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600'
                         : 'bg-indigo-600 hover:bg-indigo-700 text-white'
@@ -412,12 +392,7 @@ const Pricing = () => {
           </div>
 
           {/* Payment Methods */}
-          <div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-dark-light rounded-2xl p-8 border border-gray-700 mb-16"
-          >
+          <div className="bg-dark-light rounded-2xl p-8 border border-gray-700 mb-16">
             <h2 className="text-3xl font-bold text-center text-indigo-400 mb-8">Payment Methods & Contact</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
@@ -468,12 +443,7 @@ const Pricing = () => {
           </div>
 
           {/* ROI Section */}
-          <div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-center bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-2xl p-8 border border-indigo-500/20"
-          >
+          <div className="text-center bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-2xl p-8 border border-indigo-500/20">
             <h2 className="text-3xl font-bold text-indigo-400 mb-6">Investment in Uganda's Future</h2>
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <div className="text-center">
@@ -503,12 +473,7 @@ const Pricing = () => {
       {/* Details Modal */}
       {showDetails && selectedTier && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="bg-dark-light rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-gray-700"
-          >
+          <div className="bg-dark-light rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-gray-700 opacity-0 scale-90 animate-[fadeInScale_0.3s_ease-out_forwards]">
             <div className="flex justify-between items-start mb-6">
               <div>
                 <h2 className="text-3xl font-bold text-indigo-400 mb-2">{selectedTier.name}</h2>
@@ -594,10 +559,8 @@ const Pricing = () => {
 
             <div className="mt-8 text-center">
               <button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
                 onClick={handleContactForEnrollment}
-                className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 px-8 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-300"
+                className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 px-8 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 hover:scale-105"
               >
                 Contact Us for Enrollment
               </button>
