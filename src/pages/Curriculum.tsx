@@ -76,25 +76,24 @@ const Curriculum = () => {
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-purple-900/20 to-pink-900/20">
           {/* Animated dots */}
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-2 h-2 bg-indigo-400/40 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -20, 0],
-                opacity: [0.4, 1, 0.4],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
+          {[...Array(20)].map((_, i) => {
+            const duration = 3 + Math.random() * 2;
+            const delay = Math.random() * 2;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            return (
+              <div
+                key={i}
+                className="absolute w-2 h-2 bg-indigo-400/40 rounded-full"
+                style={{
+                  left: `${left}%`,
+                  top: `${top}%`,
+                  animation: `floatY ${duration}s ease-in-out ${delay}s infinite`,
+                  opacity: 0.8
+                }}
+              />
+            );
+          })}
         </div>
       </div>
 
