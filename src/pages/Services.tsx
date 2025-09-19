@@ -202,11 +202,7 @@ const Services = () => {
 
             {/* Course Catalog Section */}
             <div className="container mx-auto px-4 py-8">
-              <div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
+              <div className="opacity-0 translate-y-12 animate-[fadeInUp_0.6s_ease-out_forwards]">
                 {filteredCourses.length === 0 ? (
                   <div className="text-center py-16">
                     <div className="text-gray-400 text-xl mb-4">No courses found matching your criteria</div>
@@ -222,11 +218,8 @@ const Services = () => {
                     {filteredCourses.map((course, index) => (
                       <AnimatedSection key={course.id} delay={index * 0.1}>
                         <div
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.5, delay: index * 0.05 }}
-                          className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 rounded-xl backdrop-blur-sm border border-indigo-500/20 overflow-hidden group hover:border-indigo-400/40 transition-all duration-300"
+                          className="opacity-0 translate-y-5 animate-[fadeInUp_0.5s_ease-out_forwards] bg-gradient-to-br from-indigo-900/30 to-purple-900/30 rounded-xl backdrop-blur-sm border border-indigo-500/20 overflow-hidden group hover:border-indigo-400/40 transition-all duration-300"
+                          style={{ animationDelay: `${index * 0.05}s` }}
                         >
                           <div className="relative h-64 overflow-hidden">
                             <img
