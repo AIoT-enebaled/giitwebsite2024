@@ -101,12 +101,7 @@ const Curriculum = () => {
       <div className="relative pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]">
             <div className="flex justify-center mb-8">
               <FloatingLogo size="large" showText={true} showTypewriter={false} className="justify-center" />
             </div>
@@ -124,13 +119,7 @@ const Curriculum = () => {
 
           {/* Course Categories */}
           {Object.entries(groupedCourses).map(([categoryName, courses], categoryIndex) => (
-            <div
-              key={categoryName}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 * categoryIndex }}
-              className="mb-16"
-            >
+            <div key={categoryName} className="mb-16 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: `${0.2 * categoryIndex}s` }} >
               {/* Category Header */}
               <div className="text-center mb-12">
                 <h2 className="text-4xl font-bold text-white mb-4">{categoryName}</h2>
@@ -140,13 +129,7 @@ const Curriculum = () => {
               {/* Course Cards Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {courses.map((course, index) => (
-                  <div
-                    key={course.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 * index }}
-                    className="bg-dark-light rounded-2xl overflow-hidden border border-gray-700 hover:border-indigo-500 transition-all duration-300 group"
-                  >
+                  <div key={course.id} className="bg-dark-light rounded-2xl overflow-hidden border border-gray-700 hover:border-indigo-500 transition-all duration-300 group opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: `${0.1 * index}s` }} >
                     {/* Card Header */}
                     <div className={`h-32 bg-gradient-to-r ${getCategoryColor(categoryIndex)} relative overflow-hidden`}>
                       <div className="absolute inset-0 bg-black/20"></div>
@@ -196,10 +179,8 @@ const Curriculum = () => {
                       </div>
 
                       <button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
                         onClick={() => handleViewCurriculum(course.id)}
-                        className={`w-full py-3 px-4 rounded-xl font-semibold text-white bg-gradient-to-r ${getCategoryColor(categoryIndex)} hover:shadow-lg transition-all duration-300`}
+                        className={`transform transition-transform duration-200 hover:scale-105 active:scale-95 w-full py-3 px-4 rounded-xl font-semibold text-white bg-gradient-to-r ${getCategoryColor(categoryIndex)} hover:shadow-lg transition-all duration-300`}
                       >
                         View Full Curriculum →
                       </button>
@@ -211,12 +192,7 @@ const Curriculum = () => {
           ))}
 
           {/* Learning Philosophy */}
-          <div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mb-16 bg-gradient-to-r from-dark-light to-dark-lighter rounded-2xl p-8 border border-gray-700"
-          >
+          <div className="mb-16 bg-gradient-to-r from-dark-light to-dark-lighter rounded-2xl p-8 border border-gray-700 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: '0.4s' }}>
             <h2 className="text-3xl font-bold text-indigo-400 mb-6 text-center">Our Learning Philosophy</h2>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center">
@@ -238,22 +214,11 @@ const Curriculum = () => {
           </div>
 
           {/* Learning Paths */}
-          <div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mb-16"
-          >
+          <div className="mb-16 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: '0.6s' }}>
             <h2 className="text-3xl font-bold text-center text-indigo-400 mb-12">Learning Paths</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {learningPaths.map((path, index) => (
-                <div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                  className="bg-dark-light rounded-xl p-6 border border-gray-700 hover:border-indigo-500 transition-all duration-300"
-                >
+                <div key={index} className="bg-dark-light rounded-xl p-6 border border-gray-700 hover:border-indigo-500 transition-all duration-300 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: `${0.1 * index}s` }} >
                   <div className="flex items-center mb-4">
                     <div className={`p-3 rounded-full ${path.color} mr-4`}>
                       <path.icon className="h-6 w-6 text-white" />
@@ -282,21 +247,12 @@ const Curriculum = () => {
           </div>
 
           {/* Call to Action */}
-          <div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-center bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8"
-          >
+          <div className="text-center bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: '0.8s' }}>
             <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Journey?</h2>
             <p className="text-xl text-indigo-100 mb-6">
               Join thousands of students who have transformed their futures with GiiT
             </p>
-            <button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-indigo-600 font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-            >
+            <button className="transform transition-transform duration-200 hover:scale-105 active:scale-95 bg-white text-indigo-600 font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
               Explore Our Courses
             </button>
           </div>
