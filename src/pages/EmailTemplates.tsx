@@ -46,12 +46,7 @@ const EmailTemplates = () => {
         </div>
 
         {/* Template Preview */}
-        <div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white rounded-lg shadow-xl overflow-hidden"
-        >
+        <div className="bg-white rounded-lg shadow-xl overflow-hidden opacity-0 translate-y-5 animate-[fadeInUp_0.5s_ease-out_forwards]">
           {activeTemplate === 'test' ? (
             <TestEmailComponent />
           ) : activeTemplate === 'student' ? (
