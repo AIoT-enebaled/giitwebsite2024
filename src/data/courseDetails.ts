@@ -597,6 +597,44 @@ export const courseCatalogs: CourseCatalog[] = [
     parentInfo: 'Mobile app development is a rapidly growing field with excellent career prospects.'
   },
 
+  {
+    id: 'story-telling-for-kids',
+    title: 'Story Telling for Kids',
+    category: courseCategories.DESIGN_THINKING,
+    level: courseLevels.BEGINNER,
+    courseType: courseTypes.MINI,
+    description: 'Build confidence, creativity, and communication through engaging storytelling activities for children.',
+    price: { ugx: 400000, usd: 108 },
+    duration: '2 months',
+    ageGroup: 'Ages 6-12',
+    image: 'https://images.pexels.com/photos/256468/pexels-photo-256468.jpeg',
+    objectives: [
+      { title: 'Creative Expression', description: 'Express ideas and emotions clearly through stories' },
+      { title: 'Narrative Structure', description: 'Understand story elements: beginning, middle, climax, and end' },
+      { title: 'Public Speaking', description: 'Develop confident voice projection and presentation skills' },
+      { title: 'Digital Storytelling', description: 'Use simple digital tools to create and share stories' }
+    ],
+    prerequisites: ['Basic reading and writing skills', 'Willingness to share and learn'],
+    curriculum: [
+      'Introduction: What makes a great story?',
+      'Elements of a story: Characters, setting, and plot',
+      'Building characters and creating worlds',
+      'Plot development and sequencing events',
+      'Storyboarding: Planning your story visually',
+      'Voice, expression, and body language in storytelling',
+      'Digital storytelling: Using Scratch and simple tools',
+      'Final showcase: Present your story to the class'
+    ],
+    classPeriods: [
+      'Monday & Wednesday: 10:00 AM - 12:00 PM',
+      'Tuesday & Thursday: 3:00 PM - 5:00 PM',
+      'Saturday: 9:00 AM - 1:00 PM'
+    ],
+    tools: ['Paper & Markers', 'Storyboarding Templates', 'Scratch (for storytelling)', 'Audio Recording Tools'],
+    benefits: ['Builds confidence and communication', 'Boosts creativity and imagination', 'Enhances reading and writing skills'],
+    parentInfo: 'Storytelling helps children develop communication, creativity, empathy, and confidence. This course nurtures essential language and presentation skills in a fun, supportive environment.'
+  },
+
   // Comprehensive Courses (3 months, UGX 1,500,000)
   {
     id: 'python-comprehensive',
