@@ -477,12 +477,7 @@ const DetailedCurriculum: React.FC<DetailedCurriculumProps> = ({ courseId, onClo
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm overflow-y-auto">
       <div className="min-h-screen p-4">
-        <div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          className="max-w-7xl mx-auto bg-gradient-to-b from-dark to-dark-light rounded-2xl overflow-hidden"
-        >
+        <div className="max-w-7xl mx-auto bg-gradient-to-b from-dark to-dark-light rounded-2xl overflow-hidden opacity-0 scale-95 animate-[fadeInScale_0.3s_ease-out_forwards]">
           {/* Header */}
           <div className="bg-gradient-to-r from-indigo-900/50 to-purple-900/50 border-b border-gray-700">
             {/* Program Tabs */}
