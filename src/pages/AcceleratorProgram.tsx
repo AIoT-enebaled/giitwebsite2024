@@ -61,12 +61,7 @@ const AcceleratorProgram = () => {
       <div className="relative pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]">
             <FloatingLogo size="large" showText={true} showTypewriter={false} className="justify-center mb-8" />
             <div className="flex items-center justify-center gap-3 mb-6">
               <Zap className="h-8 w-8 text-yellow-400" />
@@ -98,12 +93,7 @@ const AcceleratorProgram = () => {
           </div>
 
           {/* Program Benefits */}
-          <div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-12 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 rounded-2xl p-8 border border-yellow-500/30"
-          >
+          <div className="mb-12 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 rounded-2xl p-8 border border-yellow-500/30 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: '0.2s' }} >
             <h3 className="text-3xl font-bold text-center text-yellow-400 mb-8">Why Choose Accelerator Program?</h3>
             <div className="grid md:grid-cols-4 gap-6">
               <div className="text-center">
@@ -130,12 +120,7 @@ const AcceleratorProgram = () => {
           </div>
 
           {/* Filter Section */}
-          <div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-12"
-          >
+          <div className="mb-12 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: '0.3s' }} >
             <div className="bg-dark-light rounded-xl p-6 border border-gray-700">
               <div className="flex flex-wrap items-center gap-4 mb-6">
                 <div className="flex items-center gap-2">
@@ -209,13 +194,7 @@ const AcceleratorProgram = () => {
           {/* Course Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredCourses.map((course, index) => (
-              <div
-                key={course.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.05 * index }}
-                className="bg-dark-light rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 group"
-              >
+              <div key={course.id} className="bg-dark-light rounded-xl overflow-hidden border border-gray-700 hover:border-yellow-500/50 transition-all duration-300 group opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: `${0.05 * index}s` }} >
                 {/* Course Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -281,10 +260,8 @@ const AcceleratorProgram = () => {
                   </div>
 
                   <button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
                     onClick={() => handleEnroll(course)}
-                    className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-2 px-4 rounded-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-all duration-300"
+                    className="transform transition-transform duration-200 hover:scale-105 active:scale-95 w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-2 px-4 rounded-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-all duration-300"
                   >
                     Enroll Now - UGX 150k
                   </button>
@@ -307,12 +284,7 @@ const AcceleratorProgram = () => {
           )}
 
           {/* Call to Action */}
-          <div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-center mt-16 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-2xl p-8"
-          >
+          <div className="text-center mt-16 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-2xl p-8 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: '0.8s' }} >
             <h2 className="text-3xl font-bold text-white mb-4">Ready to Accelerate Your Learning?</h2>
             <p className="text-xl text-yellow-100 mb-6">
               Choose any course and complete it in just 2 weeks for only UGX 150,000!
@@ -320,17 +292,13 @@ const AcceleratorProgram = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="tel:+256752067815"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-orange-600 font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 inline-block"
+                className="transform transition-transform duration-200 hover:scale-105 active:scale-95 bg-white text-orange-600 font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 inline-block"
               >
                 Contact Us: +256752-067-815
               </a>
               <button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 onClick={() => setShowRegistrationModal(true)}
-                className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white hover:text-orange-600 transition-all duration-300"
+                className="transform transition-transform duration-200 hover:scale-105 active:scale-95 bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white hover:text-orange-600 transition-all duration-300"
               >
                 Register Now
               </button>
