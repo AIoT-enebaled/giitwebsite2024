@@ -28,7 +28,7 @@ const StudentImageScroll: React.FC<StudentImageScrollProps> = ({
 
   return (
     <div className="relative overflow-hidden w-full py-8">
-      <div className="flex gap-6" style={{ width: '200%' }} >
+      <div className="flex gap-6" style={{ width: '200%', animation: `${direction === 'left' ? 'marqueeLeft' : 'marqueeRight'} ${speed}s linear infinite` }} >
         {duplicatedImages.map((image, index) => (
           <div key={index} className="flex-shrink-0 relative group">
             <div
