@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Download, X, Code, BarChart3, Brain, Zap, Clock, Users, Award, Target } from 'lucide-react';
-import { courseCatalogs } from '../data/courseDetails';
+import { courseCatalogs, courseCategories } from '../data/courseDetails';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -9,429 +9,379 @@ interface DetailedCurriculumProps {
   onClose: () => void;
 }
 
+type Course = typeof courseCatalogs[number];
+type IconComponent = React.ComponentType<{ className?: string }>;
+
+interface ModuleData {
+  week: string;
+  keyTopics: string[];
+  project: string;
+  resources: string[];
+}
+
+interface PhaseData {
+  title: string;
+  weeks: string;
+  modules: ModuleData[];
+}
+
+interface CareerPath {
+  title: string;
+  description: string;
+  icon: IconComponent;
+  keySkills: string[];
+}
+
+interface PhaseTemplate {
+  title: string;
+  weeks: string;
+}
+
+interface CareerTemplate {
+  title: string;
+  description: string;
+  icon: IconComponent;
+  defaultSkills: string[];
+}
+
+const finalProjectRegex = /(final|capstone|showcase|presentation).*(project|presentation|showcase|assessment)/i;
+
+const learningHoursMap: Record<Course['courseType'], string> = {
+  Mini: '60+ Guided Learning Hours',
+  Comprehensive: '140+ Guided Learning Hours',
+  Full: '220+ Guided Learning Hours'
+};
+
+const phaseTemplatesByType: Record<Course['courseType'], PhaseTemplate[]> = {
+  Mini: [
+    { title: 'Phase 1: Discover & Foundations', weeks: 'Weeks 1-2' },
+    { title: 'Phase 2: Build & Practice', weeks: 'Weeks 3-5' },
+    { title: 'Phase 3: Create & Present', weeks: 'Weeks 6-8' }
+  ],
+  Comprehensive: [
+    { title: 'Phase 1: Core Foundations', weeks: 'Weeks 1-4' },
+    { title: 'Phase 2: Applied Projects', weeks: 'Weeks 5-8' },
+    { title: 'Phase 3: Professional Portfolio', weeks: 'Weeks 9-12' }
+  ],
+  Full: [
+    { title: 'Phase 1: Intensive Foundations', weeks: 'Weeks 1-6' },
+    { title: 'Phase 2: Advanced Specialization', weeks: 'Weeks 7-14' },
+    { title: 'Phase 3: Professional Launch', weeks: 'Weeks 15-24' }
+  ]
+};
+
+const categoryCareerTemplates: Record<string, CareerTemplate[]> = {
+  [courseCategories.FUNDAMENTALS]: [
+    {
+      title: 'Digital Literacy Champion',
+      description: 'Support learners and families with essential computer use.',
+      icon: Users,
+      defaultSkills: ['Device setup', 'Productivity tools', 'Safe browsing', 'Troubleshooting']
+    },
+    {
+      title: 'Junior IT Support Assistant',
+      description: 'Help communities solve everyday technology challenges.',
+      icon: Code,
+      defaultSkills: ['Problem diagnosis', 'Customer support', 'Documentation', 'Communication']
+    },
+    {
+      title: 'Learning Lab Facilitator',
+      description: 'Guide beginners through hands-on computer training sessions.',
+      icon: Award,
+      defaultSkills: ['Workshop facilitation', 'Instructional design', 'Patience', 'Mentorship']
+    }
+  ],
+  [courseCategories.PROGRAMMING_KIDS]: [
+    {
+      title: 'Junior Game Creator',
+      description: 'Design playful interactive games and animations.',
+      icon: Code,
+      defaultSkills: ['Scratch logic', 'Animation timing', 'Creative coding', 'Testing']
+    },
+    {
+      title: 'Interactive Story Designer',
+      description: 'Bring stories to life with characters, voice, and visuals.',
+      icon: Users,
+      defaultSkills: ['Narrative structure', 'Presentation', 'Voice control', 'Audience engagement']
+    },
+    {
+      title: 'STEM Club Mentor',
+      description: 'Lead peers through coding puzzles and challenges.',
+      icon: Award,
+      defaultSkills: ['Peer coaching', 'Problem solving', 'Team leadership', 'Confidence building']
+    }
+  ],
+  [courseCategories.WEB_DEVELOPMENT]: [
+    {
+      title: 'Junior Frontend Developer',
+      description: 'Transform designs into responsive, accessible web pages.',
+      icon: Code,
+      defaultSkills: ['Semantic HTML', 'Responsive CSS', 'Accessibility', 'Version control']
+    },
+    {
+      title: 'Web Content Designer',
+      description: 'Craft user-friendly layouts and micro-interactions.',
+      icon: Target,
+      defaultSkills: ['Layout design', 'Component thinking', 'User empathy', 'Visual polish']
+    },
+    {
+      title: 'Website Care Specialist',
+      description: 'Maintain and improve sites for small businesses or schools.',
+      icon: Users,
+      defaultSkills: ['Content updates', 'Performance tuning', 'Quality assurance', 'Client communication']
+    }
+  ],
+  [courseCategories.PROGRAMMING]: [
+    {
+      title: 'Junior Software Developer',
+      description: 'Build scripts and applications that solve real problems.',
+      icon: Code,
+      defaultSkills: ['Clean coding', 'Debugging', 'Version control', 'Testing routines']
+    },
+    {
+      title: 'Automation Explorer',
+      description: 'Automate repetitive tasks for classrooms or offices.',
+      icon: Zap,
+      defaultSkills: ['Workflow design', 'APIs', 'Task automation', 'Documentation']
+    },
+    {
+      title: 'STEM Tutor',
+      description: 'Teach programming concepts to other students and clubs.',
+      icon: Users,
+      defaultSkills: ['Concept explanation', 'Patience', 'Curriculum planning', 'Coaching']
+    }
+  ],
+  [courseCategories.AI_ML]: [
+    {
+      title: 'AI Explorer',
+      description: 'Experiment with intelligent systems and prototypes.',
+      icon: Brain,
+      defaultSkills: ['Model thinking', 'Data literacy', 'Ethical awareness', 'Prototyping']
+    },
+    {
+      title: 'Data Apprentice',
+      description: 'Prepare and analyze data for smart decision-making.',
+      icon: BarChart3,
+      defaultSkills: ['Data cleaning', 'Visualization', 'Pattern recognition', 'Insights storytelling']
+    },
+    {
+      title: 'Responsible AI Advocate',
+      description: 'Guide peers on ethical and inclusive AI use.',
+      icon: Target,
+      defaultSkills: ['Policy awareness', 'Communication', 'Critical thinking', 'Community impact']
+    }
+  ],
+  [courseCategories.PROBLEM_SOLVING]: [
+    {
+      title: 'Logic Strategist',
+      description: 'Solve complex challenges with systematic approaches.',
+      icon: Brain,
+      defaultSkills: ['Analytical reasoning', 'Pattern spotting', 'Hypothesis testing', 'Reflection']
+    },
+    {
+      title: 'Challenge Facilitator',
+      description: 'Organize puzzle clubs and collaborative problem hunts.',
+      icon: Users,
+      defaultSkills: ['Workshop facilitation', 'Team motivation', 'Feedback loops', 'Gamification']
+    },
+    {
+      title: 'Innovation Sprint Lead',
+      description: 'Guide teams to prototype and iterate rapid solutions.',
+      icon: Zap,
+      defaultSkills: ['Design sprints', 'Brainstorming', 'Iteration', 'Presentation']
+    }
+  ],
+  [courseCategories.DESIGN_THINKING]: [
+    {
+      title: 'Creative Storyteller',
+      description: 'Craft narratives that educate, inspire, and entertain.',
+      icon: Users,
+      defaultSkills: ['Narrative design', 'Character development', 'Audience engagement', 'Expression']
+    },
+    {
+      title: 'Design Thinking Facilitator',
+      description: 'Lead empathy-driven innovation workshops.',
+      icon: Target,
+      defaultSkills: ['Empathy mapping', 'Ideation methods', 'Prototype testing', 'Feedback synthesis']
+    },
+    {
+      title: 'Presentation Coach',
+      description: 'Help teams communicate ideas with clarity and confidence.',
+      icon: Award,
+      defaultSkills: ['Voice control', 'Body language', 'Storyboarding', 'Confidence building']
+    }
+  ]
+};
+
+const unique = (values: string[]): string[] =>
+  Array.from(new Set(values.map(value => value.trim()).filter(Boolean)));
+
+const sanitizeTopic = (text: string): string =>
+  text.replace(/^[•\-\d\.]+\s*/g, '').replace(/\s+/g, ' ').trim();
+
+const extractFinalProject = (topics: string[]) => {
+  let finalProject = '';
+  const filteredTopics: string[] = [];
+
+  topics.forEach(topic => {
+    if (!finalProject && finalProjectRegex.test(topic)) {
+      finalProject = topic;
+    } else {
+      filteredTopics.push(topic);
+    }
+  });
+
+  return { filteredTopics, finalProject };
+};
+
+const chunkTopics = (topics: string[], chunkCount: number): string[][] => {
+  if (chunkCount <= 0) {
+    return [];
+  }
+
+  const chunks: string[][] = [];
+  let index = 0;
+
+  for (let remaining = chunkCount; remaining > 0; remaining -= 1) {
+    const size = Math.ceil((topics.length - index) / remaining);
+    chunks.push(topics.slice(index, index + Math.max(size, 0)));
+    index += size;
+  }
+
+  return chunks;
+};
+
+const formatFinalProject = (text: string, courseTitle: string): string => {
+  const cleaned = sanitizeTopic(text);
+  const remainder = cleaned.replace(/final\s+(project|showcase|presentation|assessment)\s*:?\s*/i, '').trim();
+
+  if (!remainder) {
+    return `Final Project: Demonstrate your ${courseTitle} mastery.`;
+  }
+
+  return `Final Project: ${remainder.charAt(0).toUpperCase()}${remainder.slice(1)}`;
+};
+
+const buildProjectDescription = (
+  courseTitle: string,
+  moduleTopics: string[],
+  finalProject: string,
+  isFinalPhase: boolean
+): string => {
+  if (isFinalPhase) {
+    return finalProject ? formatFinalProject(finalProject, courseTitle) : `Final Showcase: Present your ${courseTitle} capstone to peers and mentors.`;
+  }
+
+  const focus = moduleTopics[moduleTopics.length - 1] ?? moduleTopics[0];
+
+  if (focus && /project/i.test(focus)) {
+    return focus;
+  }
+
+  const highlight = focus ?? courseTitle;
+  return `Project: Apply ${highlight.toLowerCase()} in a real-world mini challenge.`;
+};
+
+const buildModuleResources = (courseTitle: string, moduleTopics: string[], isFinalPhase: boolean): string[] => {
+  if (isFinalPhase) {
+    return [
+      'Capstone planning checklist',
+      'Presentation coaching clinic',
+      'Peer review and rehearsal sessions'
+    ];
+  }
+
+  const focus = moduleTopics[0] ?? courseTitle;
+
+  return unique([
+    `${focus} practice kit`,
+    `${courseTitle} guided workshop`,
+    'Mentor feedback and reflection journal'
+  ]);
+};
+
+const generatePhases = (course: Course): PhaseData[] => {
+  const phaseTemplates = phaseTemplatesByType[course.courseType] ?? phaseTemplatesByType.Mini;
+  const { filteredTopics, finalProject } = extractFinalProject(course.curriculum);
+  const sanitizedTopics = filteredTopics.map(sanitizeTopic).filter(Boolean);
+  const topicChunks = chunkTopics(sanitizedTopics, phaseTemplates.length);
+  const objectiveSummaries = course.objectives.map(obj => sanitizeTopic(`${obj.title}: ${obj.description}`));
+
+  return phaseTemplates.map((phase, index) => {
+    const chunk = topicChunks[index] ?? [];
+    const fallback = objectiveSummaries.slice(index * 2, index * 2 + 2);
+    const rawModuleTopics = chunk.length ? chunk : fallback;
+    const moduleTopics = rawModuleTopics.map(sanitizeTopic).filter(Boolean);
+    const isFinalPhase = index === phaseTemplates.length - 1;
+    const keyTopics = moduleTopics.length ? [...moduleTopics] : [sanitizeTopic(course.description)];
+
+    if (isFinalPhase && finalProject) {
+      keyTopics.push(formatFinalProject(finalProject, course.title));
+    }
+
+    return {
+      title: phase.title,
+      weeks: phase.weeks,
+      modules: [
+        {
+          week: `${phase.weeks} Focus`,
+          keyTopics: unique(keyTopics),
+          project: buildProjectDescription(course.title, moduleTopics, finalProject, isFinalPhase),
+          resources: buildModuleResources(course.title, moduleTopics, isFinalPhase)
+        }
+      ]
+    };
+  });
+};
+
+const generateCareerPaths = (course: Course): CareerPath[] => {
+  const templates = categoryCareerTemplates[course.category] ?? [
+    {
+      title: `${course.title} Explorer`,
+      description: `Discover how ${course.title} skills create opportunities in your community.`,
+      icon: Award,
+      defaultSkills: []
+    }
+  ];
+
+  const objectiveSkills = unique(course.objectives.map(obj => obj.title));
+
+  return templates.map(template => ({
+    title: template.title,
+    description: template.description,
+    icon: template.icon,
+    keySkills: unique([...template.defaultSkills, ...objectiveSkills]).slice(0, 4)
+  }));
+};
+
+const generateCurriculumData = (course: Course) => ({
+  duration: course.duration,
+  learningHours: learningHoursMap[course.courseType] ?? 'Guided Learning Hours',
+  phases: generatePhases(course),
+  careerPaths: generateCareerPaths(course)
+});
+
+const masteryTagMap: Record<Course['courseType'], string> = {
+  Mini: 'discovery journey',
+  Comprehensive: 'implementation roadmap',
+  Full: 'professional mastery path'
+};
+
 const DetailedCurriculum: React.FC<DetailedCurriculumProps> = ({ courseId, onClose }) => {
   const [activeTab, setActiveTab] = useState(0);
   const course = courseCatalogs.find(c => c.id === courseId);
 
   if (!course) return null;
 
-  // Generate curriculum data based on course type
-  const getCurriculumData = () => {
-    if (course.courseType === 'Full') {
-      return {
-        duration: '18 weeks',
-        learningHours: '200+ Learning Hours',
-        phases: [
-          {
-            title: 'Phase 1: Fundamentals & Programming Foundations',
-            weeks: 'Weeks 1-6',
-            modules: [
-              {
-                week: 'Week 1-2',
-                keyTopics: [
-                  'Variables, data types, and operators',
-                  'Control flow (if, else, for, while)',
-                  'Functions and reusable modules',
-                  'Basic input/output operations'
-                ],
-                project: course.title.includes('Python') ? 'Personal Expense Tracker - Build a command-line tool to log and analyze expenses' : 
-                         course.title.includes('Web') ? 'Personal Portfolio Website - Create your professional online presence' :
-                         course.title.includes('AI') ? 'AI Concept Explorer - Interactive learning application' :
-                         'Mobile App Prototype - Basic functionality implementation',
-                resources: [
-                  course.title.includes('Python') ? 'Automate the Boring Stuff with Python' : 
-                  course.title.includes('Web') ? 'MDN Web Development Documentation' :
-                  course.title.includes('AI') ? 'MIT AI Course Materials' :
-                  'Mobile Development Best Practices',
-                  'Interactive coding exercises and tutorials'
-                ]
-              },
-              {
-                week: 'Week 3-4',
-                keyTopics: [
-                  'Data structures (lists, dictionaries, arrays)',
-                  'Advanced control structures and algorithms',
-                  'Error handling and debugging techniques',
-                  'Code organization and best practices'
-                ],
-                project: course.title.includes('Python') ? 'Data Analysis Tool - Process and visualize datasets' :
-                         course.title.includes('Web') ? 'Interactive Web Components - Dynamic user interfaces' :
-                         course.title.includes('AI') ? 'Basic ML Algorithm Implementation' :
-                         'Advanced Mobile Features Integration',
-                resources: [
-                  'Advanced programming concepts documentation',
-                  'Code review guidelines and examples'
-                ]
-              },
-              {
-                week: 'Week 5-6',
-                keyTopics: [
-                  'Object-oriented programming principles',
-                  'File handling and data persistence',
-                  'API integration basics',
-                  'Testing and quality assurance'
-                ],
-                project: course.title.includes('Python') ? 'Web Scraper Application - Automated data collection tool' :
-                         course.title.includes('Web') ? 'Full-Stack Web Application - Frontend and backend integration' :
-                         course.title.includes('AI') ? 'Neural Network from Scratch' :
-                         'Cross-Platform Mobile Application',
-                resources: [
-                  'OOP design patterns',
-                  'Testing frameworks and methodologies'
-                ]
-              }
-            ]
-          },
-          {
-            title: 'Phase 2: Advanced Development & Specialization',
-            weeks: 'Weeks 7-12',
-            modules: [
-              {
-                week: 'Week 7-9',
-                keyTopics: [
-                  'Advanced frameworks and libraries',
-                  'Database design and integration',
-                  'Authentication and security',
-                  'Performance optimization'
-                ],
-                project: course.title.includes('Python') ? 'E-commerce Platform - Full-featured online store' :
-                         course.title.includes('Web') ? 'Progressive Web Application - Modern web app with offline capabilities' :
-                         course.title.includes('AI') ? 'Computer Vision Application - Image recognition system' :
-                         'Enterprise Mobile Solution',
-                resources: [
-                  'Framework documentation and tutorials',
-                  'Security best practices guide'
-                ]
-              },
-              {
-                week: 'Week 10-12',
-                keyTopics: [
-                  'Cloud deployment and DevOps',
-                  'Microservices architecture',
-                  'Real-time features and websockets',
-                  'Monitoring and analytics'
-                ],
-                project: course.title.includes('Python') ? 'Real-time Analytics Dashboard' :
-                         course.title.includes('Web') ? 'Social Media Platform Clone' :
-                         course.title.includes('AI') ? 'Natural Language Processing System' :
-                         'IoT Mobile Application',
-                resources: [
-                  'Cloud platform documentation',
-                  'DevOps tools and practices'
-                ]
-              }
-            ]
-          },
-          {
-            title: 'Phase 3: Professional Development & Capstone',
-            weeks: 'Weeks 13-18',
-            modules: [
-              {
-                week: 'Week 13-15',
-                keyTopics: [
-                  'Advanced architecture patterns',
-                  'Code review and collaboration',
-                  'Open source contribution',
-                  'Technical documentation'
-                ],
-                project: 'Open Source Contribution - Contribute to real-world projects',
-                resources: [
-                  'Open source contribution guidelines',
-                  'Professional development resources'
-                ]
-              },
-              {
-                week: 'Week 16-18',
-                keyTopics: [
-                  'Capstone project development',
-                  'Industry best practices',
-                  'Portfolio optimization',
-                  'Career preparation'
-                ],
-                project: 'Capstone Project - Industry-level application demonstrating mastery',
-                resources: [
-                  'Portfolio development guide',
-                  'Interview preparation materials'
-                ]
-              }
-            ]
-          }
-        ],
-        careerPaths: [
-          {
-            title: course.title.includes('Python') ? 'Python Developer' : 
-                   course.title.includes('Web') ? 'Full Stack Developer' :
-                   course.title.includes('AI') ? 'AI Engineer' : 'Mobile Developer',
-            description: course.title.includes('Python') ? 'Build applications and services using Python' :
-                        course.title.includes('Web') ? 'Develop complete web applications' :
-                        course.title.includes('AI') ? 'Develop AI and machine learning solutions' :
-                        'Create mobile applications for multiple platforms',
-            icon: Code,
-            keySkills: course.title.includes('Python') ? ['Python', 'Django/Flask', 'APIs', 'Databases'] :
-                      course.title.includes('Web') ? ['React/Vue', 'Node.js', 'Databases', 'DevOps'] :
-                      course.title.includes('AI') ? ['TensorFlow', 'PyTorch', 'Deep Learning', 'NLP'] :
-                      ['React Native', 'Flutter', 'iOS/Android', 'Cross-platform']
-          },
-          {
-            title: course.title.includes('Python') ? 'Data Scientist' : 
-                   course.title.includes('Web') ? 'Frontend Architect' :
-                   course.title.includes('AI') ? 'ML Research Engineer' : 'Mobile Architect',
-            description: course.title.includes('Python') ? 'Analyze data and build predictive models' :
-                        course.title.includes('Web') ? 'Design and lead frontend development' :
-                        course.title.includes('AI') ? 'Research and develop cutting-edge AI' :
-                        'Design mobile application architecture',
-            icon: BarChart3,
-            keySkills: course.title.includes('Python') ? ['NumPy', 'Pandas', 'Machine Learning', 'Statistics'] :
-                      course.title.includes('Web') ? ['Architecture', 'Performance', 'UI/UX', 'Leadership'] :
-                      course.title.includes('AI') ? ['Research', 'Publications', 'Innovation', 'Mathematics'] :
-                      ['System Design', 'Performance', 'Security', 'Leadership']
-          },
-          {
-            title: course.title.includes('Python') ? 'AI Engineer' : 
-                   course.title.includes('Web') ? 'DevOps Engineer' :
-                   course.title.includes('AI') ? 'Computer Vision Specialist' : 'Mobile Product Manager',
-            description: course.title.includes('Python') ? 'Develop AI and machine learning solutions' :
-                        course.title.includes('Web') ? 'Manage deployment and infrastructure' :
-                        course.title.includes('AI') ? 'Specialize in computer vision applications' :
-                        'Lead mobile product development',
-            icon: Brain,
-            keySkills: course.title.includes('Python') ? ['TensorFlow', 'PyTorch', 'Deep Learning', 'NLP'] :
-                      course.title.includes('Web') ? ['Docker', 'Kubernetes', 'CI/CD', 'Cloud'] :
-                      course.title.includes('AI') ? ['OpenCV', 'Image Processing', 'CNN', 'Object Detection'] :
-                      ['Product Strategy', 'User Research', 'Analytics', 'Leadership']
-          },
-          {
-            title: course.title.includes('Python') ? 'Automation Specialist' : 
-                   course.title.includes('Web') ? 'Technical Lead' :
-                   course.title.includes('AI') ? 'AI Product Manager' : 'Mobile Security Specialist',
-            description: course.title.includes('Python') ? 'Create automated solutions and workflows' :
-                        course.title.includes('Web') ? 'Lead technical teams and projects' :
-                        course.title.includes('AI') ? 'Manage AI product development' :
-                        'Ensure mobile application security',
-            icon: Zap,
-            keySkills: course.title.includes('Python') ? ['Scripting', 'Web Scraping', 'Task Automation', 'Testing'] :
-                      course.title.includes('Web') ? ['Leadership', 'Architecture', 'Mentoring', 'Strategy'] :
-                      course.title.includes('AI') ? ['Product Management', 'AI Strategy', 'Market Analysis', 'Leadership'] :
-                      ['Security Frameworks', 'Penetration Testing', 'Compliance', 'Risk Assessment']
-          }
-        ]
-      };
-    } else if (course.courseType === 'Comprehensive') {
-      return {
-        duration: '12 weeks',
-        learningHours: '120+ Learning Hours',
-        phases: [
-          {
-            title: 'Phase 1: Foundation & Core Concepts',
-            weeks: 'Weeks 1-4',
-            modules: [
-              {
-                week: 'Week 1-2',
-                keyTopics: [
-                  'Introduction to core concepts',
-                  'Basic syntax and fundamentals',
-                  'Development environment setup',
-                  'First practical projects'
-                ],
-                project: 'Foundation Project - Apply basic concepts',
-                resources: [
-                  'Getting started guide',
-                  'Practice exercises'
-                ]
-              },
-              {
-                week: 'Week 3-4',
-                keyTopics: [
-                  'Intermediate concepts and patterns',
-                  'Problem-solving techniques',
-                  'Code organization',
-                  'Debugging and testing'
-                ],
-                project: 'Intermediate Application - Real-world problem solving',
-                resources: [
-                  'Best practices documentation',
-                  'Code examples library'
-                ]
-              }
-            ]
-          },
-          {
-            title: 'Phase 2: Advanced Application & Integration',
-            weeks: 'Weeks 5-8',
-            modules: [
-              {
-                week: 'Week 5-6',
-                keyTopics: [
-                  'Advanced features and frameworks',
-                  'Integration with external services',
-                  'Performance optimization',
-                  'Security considerations'
-                ],
-                project: 'Advanced Integration Project',
-                resources: [
-                  'Advanced tutorials',
-                  'Integration guides'
-                ]
-              },
-              {
-                week: 'Week 7-8',
-                keyTopics: [
-                  'Professional development practices',
-                  'Deployment and monitoring',
-                  'Collaboration tools',
-                  'Industry standards'
-                ],
-                project: 'Professional Application - Industry-standard project',
-                resources: [
-                  'Professional development resources',
-                  'Industry case studies'
-                ]
-              }
-            ]
-          },
-          {
-            title: 'Phase 3: Mastery & Portfolio Development',
-            weeks: 'Weeks 9-12',
-            modules: [
-              {
-                week: 'Week 9-10',
-                keyTopics: [
-                  'Advanced problem solving',
-                  'System design principles',
-                  'Performance optimization',
-                  'Code review practices'
-                ],
-                project: 'Complex System Implementation',
-                resources: [
-                  'System design resources',
-                  'Performance optimization guides'
-                ]
-              },
-              {
-                week: 'Week 11-12',
-                keyTopics: [
-                  'Portfolio project development',
-                  'Documentation and presentation',
-                  'Career preparation',
-                  'Continuous learning strategies'
-                ],
-                project: 'Portfolio Capstone - Comprehensive demonstration project',
-                resources: [
-                  'Portfolio development guide',
-                  'Career transition resources'
-                ]
-              }
-            ]
-          }
-        ],
-        careerPaths: [
-          {
-            title: `Junior ${course.title.split(' ')[0]} Developer`,
-            description: `Start your career in ${course.title.split(' ')[0].toLowerCase()} development`,
-            icon: Code,
-            keySkills: ['Core concepts', 'Basic frameworks', 'Problem solving', 'Team collaboration']
-          },
-          {
-            title: `${course.title.split(' ')[0]} Specialist`,
-            description: `Specialize in ${course.title.split(' ')[0].toLowerCase()} technologies`,
-            icon: Target,
-            keySkills: ['Advanced techniques', 'Best practices', 'Optimization', 'Mentoring']
-          }
-        ]
-      };
-    } else {
-      return {
-        duration: '8 weeks',
-        learningHours: '60+ Learning Hours',
-        phases: [
-          {
-            title: 'Phase 1: Introduction & Basics',
-            weeks: 'Weeks 1-3',
-            modules: [
-              {
-                week: 'Week 1',
-                keyTopics: [
-                  'Introduction to the technology',
-                  'Basic concepts and terminology',
-                  'Setting up development environment',
-                  'First hands-on exercises'
-                ],
-                project: 'Hello World Project - First practical application',
-                resources: [
-                  'Beginner tutorial series',
-                  'Setup and installation guides'
-                ]
-              },
-              {
-                week: 'Week 2-3',
-                keyTopics: [
-                  'Core features and functionality',
-                  'Basic problem-solving patterns',
-                  'Simple project development',
-                  'Testing and debugging basics'
-                ],
-                project: 'Basic Application - Apply core concepts',
-                resources: [
-                  'Practice exercises',
-                  'Code examples'
-                ]
-              }
-            ]
-          },
-          {
-            title: 'Phase 2: Application & Practice',
-            weeks: 'Weeks 4-6',
-            modules: [
-              {
-                week: 'Week 4-5',
-                keyTopics: [
-                  'Intermediate features',
-                  'Integration techniques',
-                  'Best practices',
-                  'Common patterns'
-                ],
-                project: 'Practical Application - Real-world scenario',
-                resources: [
-                  'Best practices guide',
-                  'Pattern library'
-                ]
-              },
-              {
-                week: 'Week 6',
-                keyTopics: [
-                  'Advanced basics',
-                  'Optimization techniques',
-                  'Professional practices',
-                  'Next steps planning'
-                ],
-                project: 'Showcase Project - Portfolio piece',
-                resources: [
-                  'Advanced resources',
-                  'Career guidance'
-                ]
-              }
-            ]
-          }
-        ],
-        careerPaths: [
-          {
-            title: `Entry-level ${course.title.split(' ')[0]} Role`,
-            description: `Begin your journey in ${course.title.split(' ')[0].toLowerCase()}`,
-            icon: Users,
-            keySkills: ['Basic concepts', 'Foundational skills', 'Learning mindset', 'Growth potential']
-          }
-        ]
-      };
-    }
-  };
-
-  const curriculumData = getCurriculumData();
+  const curriculumData = useMemo(() => generateCurriculumData(course), [course]);
 
   const programTabs = [
     `${course.title} Program`,
     'Career Paths',
     'Resources & Support'
   ];
+
+  const masteryLabel = masteryTagMap[course.courseType];
 
   const handleDownloadPDF = async () => {
     const element = document.getElementById('curriculum-content');
@@ -509,7 +459,7 @@ const DetailedCurriculum: React.FC<DetailedCurriculumProps> = ({ courseId, onClo
                     <h1 className="text-3xl font-bold text-white">{course.title}</h1>
                   </div>
                   <p className="text-gray-300 text-lg mb-4">
-                    Master {course.title} from Basics to Advanced {course.courseType === 'Full' ? 'Professional Level' : course.courseType === 'Comprehensive' ? 'Implementation' : 'Understanding'}
+                    Master {course.title} with our {masteryLabel} tailored to {course.level.toLowerCase()} learners.
                   </p>
                   <div className="flex gap-4">
                     <div className="flex items-center gap-2 bg-gray-800/50 px-3 py-1 rounded-full">
