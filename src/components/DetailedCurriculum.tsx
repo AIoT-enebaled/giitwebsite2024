@@ -219,6 +219,31 @@ const unique = (values: string[]): string[] =>
 const sanitizeTopic = (text: string): string =>
   text.replace(/^[•\-\d\.]+\s*/g, '').replace(/\s+/g, ' ').trim();
 
+// Expand composite topics like "Data science & ML: NumPy, Pandas, Matplotlib/Seaborn; ML with scikit-learn"
+// into granular items: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "scikit-learn", ...]
+const expandTopic = (topic: string): string[] => {
+  const cleaned = sanitizeTopic(topic);
+  const tail = cleaned.includes(':') ? cleaned.split(':').slice(1).join(':') : cleaned;
+  // First split by semicolons or commas
+  const primary = tail.split(/[;,]/);
+  // Further split segments by '/' and ' and '
+  const pieces = primary.flatMap(seg => seg
+    .split('/')
+    .flatMap(p => p.split(/\band\b/i))
+    .map(s => sanitizeTopic(s))
+    .filter(Boolean)
+  );
+
+  // If expansion produced multiple items, return them; else return the cleaned topic
+  if (pieces.length > 1) return pieces;
+  return [cleaned];
+};
+
+const expandTopics = (topics: string[], maxItems = 12): string[] => {
+  const flat = topics.flatMap(t => expandTopic(t));
+  return unique(flat).slice(0, maxItems);
+};
+
 const extractFinalProject = (topics: string[]) => {
   let finalProject = '';
   const filteredTopics: string[] = [];
@@ -313,7 +338,10 @@ const generatePhases = (course: Course): PhaseData[] => {
     const rawModuleTopics = chunk.length ? chunk : fallback;
     const moduleTopics = rawModuleTopics.map(sanitizeTopic).filter(Boolean);
     const isFinalPhase = index === phaseTemplates.length - 1;
-    const keyTopics = moduleTopics.length ? [...moduleTopics] : [sanitizeTopic(course.description)];
+
+    // Break down composite topics into granular, easy-to-read items
+    const granularTopics = moduleTopics.length ? expandTopics(moduleTopics) : [];
+    const keyTopics = granularTopics.length ? granularTopics : [sanitizeTopic(course.description)];
 
     if (isFinalPhase && finalProject) {
       keyTopics.push(formatFinalProject(finalProject, course.title));
@@ -327,7 +355,7 @@ const generatePhases = (course: Course): PhaseData[] => {
           week: `${phase.weeks} Focus`,
           keyTopics: unique(keyTopics),
           project: buildProjectDescription(course.title, moduleTopics, finalProject, isFinalPhase),
-          resources: buildModuleResources(course.title, moduleTopics, isFinalPhase)
+          resources: buildModuleResources(course.title, granularTopics.length ? granularTopics : moduleTopics, isFinalPhase)
         }
       ]
     };
