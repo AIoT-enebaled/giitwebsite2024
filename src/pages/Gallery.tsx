@@ -15,7 +15,7 @@ interface GalleryImage {
 }
 
 const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const [selectedImage, setSelectedImage] = useState< GalleryImage | null>(null);
 
   // Student photos with achievements
   const galleryImages: GalleryImage[] = [
