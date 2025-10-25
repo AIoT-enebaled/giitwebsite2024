@@ -112,11 +112,12 @@ const Gallery = () => {
               <FloatingLogo size="large" showText={false} showTypewriter={false} />
             </div>
             
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6 gradient-text">
+            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
               <TypewriterEffect
                 texts={['Student Gallery', 'Our Stars', 'Future Leaders', 'Student Achievements']}
                 speed={100}
                 delay={3000}
+                className="gradient-text"
               />
             </h1>
             
