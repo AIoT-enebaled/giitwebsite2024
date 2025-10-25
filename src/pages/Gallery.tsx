@@ -20,21 +20,6 @@ const Gallery = () => {
   // Student photos with achievements
   const galleryImages: GalleryImage[] = [
     {
-      id: 1,
-      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F42e56409de1e49da80e923bedf388d00?format=webp&width=800',
-      title: 'Kayden & Kylie - Competition Winners',
-      description: 'Website Competition Winners 2025 - Built SkillBridge Uganda Platform',
-      category: 'students',
-      featured: true
-    },
-    {
-      id: 2,
-      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Ff271f789cdd54b87abf9a350b0c4e962?format=webp&width=800',
-      title: 'Kayden - Full-Stack Developer',
-      description: 'Master Python, JavaScript, and AI at 13 - Building educational apps',
-      category: 'students'
-    },
-    {
       id: 3,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F442f39e52ddf4e8db77061762d90508b?format=webp&width=800',
       title: 'Kylie - Creative Tech Innovator',
