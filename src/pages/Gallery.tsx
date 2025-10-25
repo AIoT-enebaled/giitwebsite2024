@@ -22,28 +22,28 @@ const Gallery = () => {
     {
       id: 3,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F442f39e52ddf4e8db77061762d90508b?format=webp&width=800',
-      title: 'Kylie - Creative Tech Innovator',
+      title: 'Kylie Ingabire - Creative Tech Innovator',
       description: 'Combines art and technology for beautiful, functional UI/UX designs',
       category: 'students'
     },
     {
       id: 4,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F063548303c374c9089b5ff99b308aa44?format=webp&width=800',
-      title: 'Alex - Scratch Programmer',
-      description: 'Award-winning Scratch games creator - Interactive storytelling specialist',
+      title: 'Kayden Mugwaneza - Full-Stack Developer',
+      description: 'Master Python, JavaScript, and AI - Building innovative solutions',
       category: 'students'
     },
     {
       id: 5,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F958881ed13be4aad814fac28d19f32df?format=webp&width=800',
-      title: 'Jordan - Tech Presenter',
-      description: 'Outstanding presenter at tech events - Passionate about digital literacy',
+      title: 'Manzi Shammah - Tech Leader',
+      description: 'Outstanding tech presenter and digital literacy champion',
       category: 'students'
     },
     {
       id: 6,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Fd04ac144a7934abcbc062f88c8cc9f74?format=webp&width=800',
-      title: 'Maria - Web Designer',
+      title: 'Raphael Mutsinzi - Web Designer',
       description: 'Excellence in responsive web design - HTML/CSS expert creating stunning layouts',
       category: 'students'
     },
