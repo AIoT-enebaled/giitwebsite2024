@@ -154,7 +154,6 @@ const generateCurriculumPhases = (course: Course): PhaseData[] => {
 
   const phaseTemplates = phaseTemplatesByType[course.courseType] ?? phaseTemplatesByType.Mini;
 
-  // Special handling for Python Full Stack Master Program
   if (course.id === 'python-fullstack-master') {
     const { filteredTopics, finalProject } = extractFinalProject(course.curriculum);
     const sanitizedTopics = filteredTopics.map(sanitizeTopic).filter(Boolean);
@@ -201,7 +200,6 @@ const generateCurriculumPhases = (course: Course): PhaseData[] => {
     ];
   }
 
-  // Default generation for other course types
   const { filteredTopics, finalProject } = extractFinalProject(course.curriculum);
   const sanitizedTopics = filteredTopics.map(sanitizeTopic).filter(Boolean);
   const topicChunks = chunkTopics(sanitizedTopics, phaseTemplates.length);
@@ -238,3 +236,191 @@ const generateCurriculumPhases = (course: Course): PhaseData[] => {
 
 const Curriculum = () => {
   const [expandedCourse, setExpandedCourse] = useState<string | null>(null);
+
+  const groupedCourses = useMemo(() =>
+    courseCatalogs.reduce((acc, course) => {
+      if (!acc[course.category]) {
+        acc[course.category] = [];
+      }
+      acc[course.category].push(course);
+      return acc;
+    }, {} as Record<string, typeof courseCatalogs>),
+    []
+  );
+
+  const getCategoryColor = (index: number) => {
+    const colors = [
+      "from-blue-500 to-cyan-500",
+      "from-purple-500 to-indigo-500",
+      "from-green-500 to-emerald-500",
+      "from-orange-500 to-red-500",
+      "from-pink-500 to-rose-500",
+      "from-yellow-500 to-orange-500",
+      "from-teal-500 to-cyan-500"
+    ];
+    return colors[index % colors.length];
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-dark to-dark-light relative">
+      <NeuralNetwork />
+      <ElegantAnimatedBackground />
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-purple-900/20 to-pink-900/20">
+          {[...Array(20)].map((_, i) => {
+            const duration = 3 + Math.random() * 2;
+            const delay = Math.random() * 2;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            return (
+              <div
+                key={i}
+                className="absolute w-2 h-2 bg-indigo-400/40 rounded-full"
+                style={{
+                  left: `${left}%`,
+                  top: `${top}%`,
+                  animation: `floatY ${duration}s ease-in-out ${delay}s infinite`,
+                  opacity: 0.8
+                }}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="relative pt-20 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]">
+            <div className="flex justify-center mb-8">
+              <FloatingLogo size="large" showText={true} showTypewriter={false} className="justify-center" />
+            </div>
+            <div className="mb-6">
+              <span className="text-gray-400 text-lg">Genius Institute of IT</span>
+            </div>
+            <h1 className="text-6xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+              Technology Excellence
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              A comprehensive, age-appropriate curriculum designed to build strong foundations in
+              computer science, programming, and 21st-century digital skills.
+            </p>
+          </div>
+
+          {Object.entries(groupedCourses).map(([categoryName, courses], categoryIndex) => (
+            <div key={categoryName} className="mb-20 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: `${0.2 * categoryIndex}s` }}>
+              <div className="text-center mb-12">
+                <h2 className="text-4xl font-bold text-white mb-4">{categoryName}</h2>
+                <p className="text-indigo-400 text-lg">{courses.length} courses available in this category</p>
+              </div>
+
+              <div className="space-y-8">
+                {courses.map((course, courseIndex) => {
+                  const phases = generateCurriculumPhases(course);
+                  const isExpanded = expandedCourse === course.id;
+
+                  return (
+                    <div key={course.id} className="bg-dark-light rounded-2xl overflow-hidden border border-gray-700 hover:border-indigo-500 transition-all duration-300 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: `${0.1 * courseIndex}s` }}>
+                      <div className={`h-40 bg-gradient-to-r ${getCategoryColor(categoryIndex)} relative overflow-hidden cursor-pointer`} onClick={() => setExpandedCourse(isExpanded ? null : course.id)}>
+                        <div className="absolute inset-0 bg-black/20"></div>
+                        <div className="absolute inset-0 p-6 flex items-start justify-between">
+                          <div>
+                            <div className="flex items-center gap-2 mb-3">
+                              <BookOpen className="h-6 w-6 text-white" />
+                              <h3 className="text-2xl font-bold text-white line-clamp-2">{course.title}</h3>
+                            </div>
+                            <div className="flex items-center gap-2 text-white/90 text-sm">
+                              <span className="bg-white/20 px-2 py-1 rounded-full">{course.level}</span>
+                              <span className="bg-white/20 px-2 py-1 rounded-full">{course.courseType}</span>
+                            </div>
+                          </div>
+                          <div className="text-right text-white/90 text-sm">
+                            <div className="flex items-center gap-1 mb-1 justify-end">
+                              <Clock className="h-4 w-4" />
+                              <span>{course.duration}</span>
+                            </div>
+                            <div className="flex items-center gap-1 justify-end">
+                              <BookOpen className="h-4 w-4" />
+                              <span>{phases.length} Phases</span>
+                            </div>
+                            <button className="mt-3 flex items-center gap-1 ml-auto text-indigo-300">
+                              {isExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {isExpanded && (
+                        <div className="p-8 space-y-8 bg-gradient-to-b from-dark-light to-dark">
+                          {phases.map((phase, phaseIndex) => (
+                            <div key={phaseIndex} className="bg-dark rounded-xl p-6 border border-gray-700">
+                              <div className="flex items-center gap-3 mb-6">
+                                <Code className="h-6 w-6 text-blue-400" />
+                                <div>
+                                  <h3 className="text-xl font-bold text-blue-400">{phase.title}</h3>
+                                  <p className="text-gray-400 text-sm">{phase.weeks}</p>
+                                </div>
+                              </div>
+
+                              <div className="space-y-6">
+                                {phase.modules.map((module, moduleIndex) => (
+                                  <div key={moduleIndex} className="bg-gray-800/30 rounded-lg p-6">
+                                    <h4 className="text-lg font-semibold text-white mb-4">{module.week}</h4>
+
+                                    <div className="mb-4">
+                                      <h5 className="text-sm font-medium text-gray-400 mb-2">Key Topics:</h5>
+                                      <ul className="space-y-1">
+                                        {module.keyTopics.map((topic, idx) => (
+                                          <li key={idx} className="flex items-start gap-2 text-gray-300 text-sm">
+                                            <div className="w-1 h-1 bg-indigo-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                            <span>{topic}</span>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+
+                                    <div className="mb-4">
+                                      <h5 className="text-sm font-medium text-gray-400 mb-2">Project:</h5>
+                                      <p className="text-gray-300 text-sm whitespace-pre-line">{module.project}</p>
+                                    </div>
+
+                                    <div>
+                                      <h5 className="text-sm font-medium text-gray-400 mb-2">Resources:</h5>
+                                      <ul className="space-y-1">
+                                        {module.resources.map((resource, idx) => (
+                                          <li key={idx} className="flex items-center gap-2 text-gray-300 text-sm">
+                                            <div className="w-1 h-1 bg-green-400 rounded-full"></div>
+                                            <span>{resource}</span>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+
+          <div className="text-center bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 opacity-0 translate-y-5 animate-[fadeInUp_0.6s_ease-out_forwards]" style={{ animationDelay: '0.8s' }}>
+            <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Journey?</h2>
+            <p className="text-xl text-indigo-100 mb-6">
+              Join thousands of students who have transformed their futures with GiiT
+            </p>
+            <button className="transform transition-transform duration-200 hover:scale-105 active:scale-95 bg-white text-indigo-600 font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+              Explore Our Courses
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Curriculum;
