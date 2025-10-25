@@ -17,28 +17,91 @@ interface GalleryImage {
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
-  // Student photos only
+  // Student photos with achievements
   const galleryImages: GalleryImage[] = [
     {
       id: 1,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F42e56409de1e49da80e923bedf388d00?format=webp&width=800',
-      title: 'Kayden & Kylie - Winners',
-      description: 'Website Competition Winners 2025 - SkillBridge Uganda Project',
+      title: 'Kayden & Kylie - Competition Winners',
+      description: 'Website Competition Winners 2025 - Built SkillBridge Uganda Platform',
       category: 'students',
       featured: true
     },
     {
       id: 2,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Ff271f789cdd54b87abf9a350b0c4e962?format=webp&width=800',
-      title: 'Kayden - Young Developer',
-      description: 'Full-Stack Developer at 13 - Mastering Python, JavaScript, and AI',
+      title: 'Kayden - Full-Stack Developer',
+      description: 'Master Python, JavaScript, and AI at 13 - Building educational apps',
       category: 'students'
     },
     {
       id: 3,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F442f39e52ddf4e8db77061762d90508b?format=webp&width=800',
-      title: 'Kylie - Creative Innovator',
-      description: 'Creative Tech Innovator combining art and technology',
+      title: 'Kylie - Creative Tech Innovator',
+      description: 'Combines art and technology for beautiful, functional UI/UX designs',
+      category: 'students'
+    },
+    {
+      id: 4,
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F063548303c374c9089b5ff99b308aa44?format=webp&width=800',
+      title: 'Alex - Scratch Programmer',
+      description: 'Award-winning Scratch games creator - Interactive storytelling specialist',
+      category: 'students'
+    },
+    {
+      id: 5,
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F958881ed13be4aad814fac28d19f32df?format=webp&width=800',
+      title: 'Jordan - Tech Presenter',
+      description: 'Outstanding presenter at tech events - Passionate about digital literacy',
+      category: 'students'
+    },
+    {
+      id: 6,
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Fd04ac144a7934abcbc062f88c8cc9f74?format=webp&width=800',
+      title: 'Maria - Web Designer',
+      description: 'Excellence in responsive web design - HTML/CSS expert creating stunning layouts',
+      category: 'students'
+    },
+    {
+      id: 7,
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Fd4f3012bfc434f2d946f67c11c1e5b55?format=webp&width=800',
+      title: 'David - Problem Solver',
+      description: 'Champion in coding competitions - Algorithmic thinking and logic puzzles',
+      category: 'students'
+    },
+    {
+      id: 8,
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Fdb0d43140a1a4c358e62aa7d41dbcb6f?format=webp&width=800',
+      title: 'Emma - AI Enthusiast',
+      description: 'Machine learning explorer - Building intelligent apps and predictive models',
+      category: 'students'
+    },
+    {
+      id: 9,
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F125097ea7935466ca3334444071266ad?format=webp&width=800',
+      title: 'Lucas & James - Coding Partners',
+      description: 'Collaborative developers building real-world applications together',
+      category: 'students'
+    },
+    {
+      id: 10,
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F18879f3f01184dfa89ca41638e0b4809?format=webp&width=800',
+      title: 'Marcus & Peter - Project Leads',
+      description: 'Leading team projects in full-stack development and system design',
+      category: 'students'
+    },
+    {
+      id: 11,
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F1e8b224096f4478a8dab0b074d0fd1d1?format=webp&width=800',
+      title: 'Chris & Sam - Digital Creators',
+      description: 'Passionate about creating engaging digital content and multimedia projects',
+      category: 'students'
+    },
+    {
+      id: 12,
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F0fdf18657d4341edbbf56901a3bc00c1?format=webp&width=800',
+      title: 'Nathan & Oliver - IT Leaders',
+      description: 'IT support specialists and tech mentors helping peers with troubleshooting',
       category: 'students'
     }
   ];
