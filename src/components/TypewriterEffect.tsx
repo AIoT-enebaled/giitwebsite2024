@@ -50,7 +50,7 @@ const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
   }, [text, texts, speed, delay, currentTextIndex]);
 
   return (
-    <span className={`${className} inline-block whitespace-nowrap`} style={{ minWidth: 'auto', display: 'inline-block' }}>
+    <span className={`${className} inline-block whitespace-nowrap`} style={{ minWidth: 'auto', display: 'inline-block', paddingLeft: '0.05em' }}>
       {displayText}
       {isTyping && <span className="animate-pulse">|</span>}
     </span>
