@@ -28,65 +28,72 @@ const Gallery = () => {
     },
     {
       id: 4,
-      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F063548303c374c9089b5ff99b308aa44?format=webp&width=800',
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Ff271f789cdd54b87abf9a350b0c4e962?format=webp&width=800',
       title: 'Kayden Mugwaneza - Full-Stack Developer',
       description: 'Master Python, JavaScript, and AI - Building innovative solutions',
       category: 'students'
     },
     {
       id: 5,
-      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F958881ed13be4aad814fac28d19f32df?format=webp&width=800',
-      title: 'Manzi Shammah - Tech Leader',
-      description: 'Outstanding tech presenter and digital literacy champion',
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F063548303c374c9089b5ff99b308aa44?format=webp&width=800',
+      title: 'Kayden Mugwaneza - Coding Excellence',
+      description: 'Award-winning programmer creating interactive applications',
       category: 'students'
     },
     {
       id: 6,
-      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Fd04ac144a7934abcbc062f88c8cc9f74?format=webp&width=800',
-      title: 'Raphael Mutsinzi - Web Designer',
-      description: 'Excellence in responsive web design - HTML/CSS expert creating stunning layouts',
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F958881ed13be4aad814fac28d19f32df?format=webp&width=800',
+      title: 'Kayden Mugwaneza - Tech Leader',
+      description: 'Outstanding presenter at tech events and innovation champion',
       category: 'students'
     },
     {
       id: 7,
-      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Fd4f3012bfc434f2d946f67c11c1e5b55?format=webp&width=800',
-      title: 'David - Problem Solver',
-      description: 'Champion in coding competitions - Algorithmic thinking and logic puzzles',
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Fd04ac144a7934abcbc062f88c8cc9f74?format=webp&width=800',
+      title: 'Kylie Ingabire - Designer Excellence',
+      description: 'Excellence in responsive web design and stunning UI/UX',
       category: 'students'
     },
     {
       id: 8,
-      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Fdb0d43140a1a4c358e62aa7d41dbcb6f?format=webp&width=800',
-      title: 'Emma - AI Enthusiast',
-      description: 'Machine learning explorer - Building intelligent apps and predictive models',
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Fd4f3012bfc434f2d946f67c11c1e5b55?format=webp&width=800',
+      title: 'Kayden Mugwaneza - Problem Solver',
+      description: 'Champion in solving complex algorithmic challenges with innovation',
       category: 'students'
     },
     {
       id: 9,
-      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F125097ea7935466ca3334444071266ad?format=webp&width=800',
-      title: 'Lucas & James - Coding Partners',
-      description: 'Collaborative developers building real-world applications together',
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2Fdb0d43140a1a4c358e62aa7d41dbcb6f?format=webp&width=800',
+      title: 'Kylie Ingabire - AI Innovator',
+      description: 'Building intelligent applications with machine learning expertise',
       category: 'students'
     },
     {
       id: 10,
-      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F18879f3f01184dfa89ca41638e0b4809?format=webp&width=800',
-      title: 'Marcus & Peter - Project Leads',
-      description: 'Leading team projects in full-stack development and system design',
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F125097ea7935466ca3334444071266ad?format=webp&width=800',
+      title: 'Manzi Shammah & Raphael Mutsinzi - Developers',
+      description: 'Collaborative tech leaders building real-world applications',
       category: 'students'
     },
     {
       id: 11,
-      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F1e8b224096f4478a8dab0b074d0fd1d1?format=webp&width=800',
-      title: 'Chris & Sam - Digital Creators',
-      description: 'Passionate about creating engaging digital content and multimedia projects',
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F18879f3f01184dfa89ca41638e0b4809?format=webp&width=800',
+      title: 'Manzi Shammah & Raphael Mutsinzi - Project Leaders',
+      description: 'Leading innovation in full-stack development and system architecture',
       category: 'students'
     },
     {
       id: 12,
+      src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F1e8b224096f4478a8dab0b074d0fd1d1?format=webp&width=800',
+      title: 'Tech Team - Digital Creators',
+      description: 'Building engaging digital content and innovative multimedia projects',
+      category: 'students'
+    },
+    {
+      id: 13,
       src: 'https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F0fdf18657d4341edbbf56901a3bc00c1?format=webp&width=800',
-      title: 'Nathan & Oliver - IT Leaders',
-      description: 'IT support specialists and tech mentors helping peers with troubleshooting',
+      title: 'Tech Leaders - IT Specialists',
+      description: 'IT support specialists and tech mentors empowering the community',
       category: 'students'
     }
   ];
