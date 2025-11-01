@@ -99,6 +99,8 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ cours
 
       if (result.success) {
         setSuccess(true);
+        setError('');
+        console.log('✅ Registration successful - emails sent');
         setFormData({
           fullName: '',
           age: '',
@@ -111,8 +113,9 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ cours
         });
         setTimeout(() => {
           onClose();
-        }, 2000);
+        }, 2500);
       } else {
+        console.error('❌ Registration failed:', result.error);
         setError(result.error || 'Failed to submit registration');
       }
     } catch (err) {
