@@ -44,6 +44,9 @@ export const sendEnrollmentConfirmation = async (
   classType: string,
   price: { ugx: number; usd: number }
 ): Promise<boolean> => {
+  let studentEmailSent = false;
+  let adminEmailSent = false;
+
   try {
     const nextSteps = [
       '1. You will receive a welcome email with detailed course materials',
@@ -74,14 +77,18 @@ export const sendEnrollmentConfirmation = async (
       email_type: 'student_confirmation'
     };
 
-    const studentResult = await emailjs.send(
-      'service_5yvw3kl',
-      'template_9qfpbxm',
-      studentParams,
-      'oeEXDVnhS6KGxOa_e'
-    );
-
-    console.log('Student confirmation email sent:', studentResult);
+    try {
+      const studentResult = await emailjs.send(
+        'service_5yvw3kl',
+        'template_9qfpbxm',
+        studentParams,
+        'oeEXDVnhS6KGxOa_e'
+      );
+      studentEmailSent = true;
+      console.log('✓ Student confirmation email sent successfully to:', studentEmail, studentResult);
+    } catch (studentError) {
+      console.error('✗ Failed to send student confirmation email:', studentError);
+    }
 
     // Send to admin
     const adminParams = {
@@ -99,16 +106,29 @@ export const sendEnrollmentConfirmation = async (
       email_type: 'admin_notification'
     };
 
-    const adminResult = await emailjs.send(
-      'service_5yvw3kl',
-      'template_9qfpbxm',
-      adminParams,
-      'oeEXDVnhS6KGxOa_e'
-    );
+    try {
+      const adminResult = await emailjs.send(
+        'service_5yvw3kl',
+        'template_9qfpbxm',
+        adminParams,
+        'oeEXDVnhS6KGxOa_e'
+      );
+      adminEmailSent = true;
+      console.log('✓ Admin notification email sent successfully to:', ADMIN_EMAIL, adminResult);
+    } catch (adminError) {
+      console.error('✗ Failed to send admin notification email:', adminError);
+    }
 
-    console.log('Admin notification email sent:', adminResult);
-
-    return true;
+    if (studentEmailSent && adminEmailSent) {
+      console.log('✓ All emails sent successfully');
+      return true;
+    } else if (studentEmailSent || adminEmailSent) {
+      console.warn('⚠ Partial email delivery: Student=' + studentEmailSent + ', Admin=' + adminEmailSent);
+      return true; // Still consider it a success if at least one email was sent
+    } else {
+      console.error('✗ No emails were sent');
+      return false;
+    }
   } catch (error) {
     console.error('Failed to send enrollment confirmation:', error);
     return false;
