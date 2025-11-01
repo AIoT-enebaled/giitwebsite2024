@@ -285,8 +285,8 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ cours
       )}
 
       {success && (
-        <div className="text-green-500 text-sm mt-2">
-          Registration successful! Confirmation email has been sent.
+        <div className="text-green-500 text-sm mt-2 p-3 bg-green-900 bg-opacity-20 rounded">
+          ✓ Registration successful! Confirmation email has been sent to {formData.email}. Our admin team will contact you shortly with additional details.
         </div>
       )}
 
