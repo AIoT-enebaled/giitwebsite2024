@@ -79,8 +79,12 @@ const ParentRegistrationForm: React.FC<ParentRegistrationFormProps> = ({ courseT
     try {
       console.log('Submitting parent registration:', parentData.fullName);
       
+      console.log('🔄 Submitting parent registration for:', parentData.fullName);
+
       // Submit registration for each child
       for (const child of children) {
+        console.log(`📧 Processing registration for child: ${child.fullName}`);
+
         const result = await submitRegistration({
           fullName: parentData.fullName,
           email: parentData.email,
@@ -91,8 +95,10 @@ const ParentRegistrationForm: React.FC<ParentRegistrationFormProps> = ({ courseT
           childName: child.fullName,
           childAge: child.age,
           selectedCourse: courseTitle || 'Not specified',
-          selectedTime: '',  
-          additionalInfo: `Education: ${child.education}, Previous Coding Experience: ${child.previousCoding}`
+          selectedTime: '',
+          additionalInfo: `Education: ${child.education}, Previous Coding Experience: ${child.previousCoding}`,
+          classMode: parentData.classMode,
+          price: price
         });
 
         if (!result.success) {
@@ -101,6 +107,8 @@ const ParentRegistrationForm: React.FC<ParentRegistrationFormProps> = ({ courseT
       }
 
       setSuccess(true);
+      console.log('✅ All registrations completed successfully');
+
       // Reset form
       setParentData({
         fullName: '',
@@ -123,7 +131,7 @@ const ParentRegistrationForm: React.FC<ParentRegistrationFormProps> = ({ courseT
 
       setTimeout(() => {
         onClose?.();
-      }, 2000);
+      }, 2500);
     } catch (err) {
       console.error('Registration error:', err);
       setError(err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.');
