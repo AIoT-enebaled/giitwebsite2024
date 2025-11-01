@@ -159,9 +159,10 @@ const ParentRegistrationForm: React.FC<ParentRegistrationFormProps> = ({ courseT
       {success ? (
         <div className="text-center p-4">
           <div className="text-green-500 text-xl mb-2">
-            Registration Successful!
+            ✓ Registration Successful!
           </div>
-          <p className="text-gray-400">We'll contact you shortly with next steps.</p>
+          <p className="text-gray-400">Confirmation emails have been sent to {parentData.email}.</p>
+          <p className="text-gray-500 text-sm mt-2">Our admin team will contact you shortly with next steps and class details.</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6 bg-dark-light p-6 rounded-lg">
