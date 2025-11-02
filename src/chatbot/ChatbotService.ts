@@ -136,41 +136,63 @@ class ChatbotService {
   private calculateMatchScore(input: string, qa: { question: string; topic?: string }): number {
     const normalizedInput = input.toLowerCase().trim();
     const normalizedQuestion = qa.question.toLowerCase().trim();
-    
-    // Split into words and remove common words
-    const commonWords = new Set(['the', 'is', 'at', 'which', 'on', 'in', 'a', 'an', 'and', 'or', 'but', 'how', 'what', 'when', 'where', 'who']);
-    const inputWords = normalizedInput.split(/\s+/).filter(word => !commonWords.has(word));
-    const questionWords = normalizedQuestion.split(/\s+/).filter(word => !commonWords.has(word));
-    
+
+    // Check for exact word matches (high priority)
+    if (normalizedInput === normalizedQuestion) {
+      return 1.0;
+    }
+
+    // Common words to ignore
+    const commonWords = new Set(['the', 'is', 'at', 'which', 'on', 'in', 'a', 'an', 'and', 'or', 'but', 'do', 'you', 'your', 'have']);
+    const inputWords = normalizedInput.split(/\s+/).filter(word => !commonWords.has(word) && word.length > 2);
+    const questionWords = normalizedQuestion.split(/\s+/).filter(word => !commonWords.has(word) && word.length > 2);
+
+    if (inputWords.length === 0 || questionWords.length === 0) {
+      return 0;
+    }
+
     // Count matching words
-    const matchedWords = inputWords.filter(word => questionWords.includes(word)).length;
-    
-    // Calculate base score
-    const percentageMatch = matchedWords / Math.max(inputWords.length, questionWords.length);
-    
-    // Check for key phrases that indicate the same intent
-    const keyPhrases: { [_: string]: string[] } = {
-      'cost': ['price', 'how much', 'fee', 'fees'],
-      'duration': ['how long', 'length', 'time'],
-      'schedule': ['when', 'timing', 'hours'],
-      'location': ['where', 'place', 'address'],
-      'requirements': ['need', 'required', 'prerequisite']
+    const matchedWords = inputWords.filter(word =>
+      questionWords.some(qWord => qWord.includes(word) || word.includes(qWord))
+    ).length;
+
+    // Calculate base score (word matching)
+    let score = matchedWords / Math.max(inputWords.length, questionWords.length);
+
+    // Semantic matching for synonyms and related terms
+    const semanticMap: { [key: string]: string[] } = {
+      'price|cost|fee|expensive|afford|payment': ['cost', 'price', 'fee', 'fees', 'price', 'payment'],
+      'duration|how long|length|time': ['duration', 'how long', 'length', 'time', 'months'],
+      'schedule|when|timing|hours': ['schedule', 'when', 'timing', 'hours', 'time'],
+      'location|where|address|campus': ['location', 'where', 'address', 'campus', 'located'],
+      'requirements|need|required|prerequisite': ['requirements', 'need', 'required', 'prerequisite'],
+      'course|program|class|training': ['course', 'program', 'class', 'training', 'lesson'],
+      'register|enroll|signup|join': ['register', 'enroll', 'signup', 'join', 'start'],
+      'teacher|instructor|trainer|coach': ['teacher', 'instructor', 'trainer', 'coach', 'mentor'],
+      'online|remote|virtual|zoom': ['online', 'remote', 'virtual', 'zoom', 'internet'],
+      'inperson|physical|campus|classroom': ['inperson', 'physical', 'campus', 'classroom', 'classroom']
     };
 
-    let phraseBonus = 0;
-    for (const [_, phrases] of Object.entries(keyPhrases)) {
-      const inputHasPhrase = phrases.some(p => normalizedInput.includes(p));
-      const questionHasPhrase = phrases.some(p => normalizedQuestion.includes(p));
-      if (inputHasPhrase && questionHasPhrase) {
-        phraseBonus = 0.3;
-        break;
+    // Check for semantic matches
+    let semanticBonus = 0;
+    for (const [variants, terms] of Object.entries(semanticMap)) {
+      const inputHasTerm = terms.some(t => normalizedInput.includes(t));
+      const questionHasTerm = terms.some(t => normalizedQuestion.includes(t));
+      if (inputHasTerm && questionHasTerm) {
+        semanticBonus = Math.max(semanticBonus, 0.2);
       }
     }
 
-    // Add topic relevance bonus
-    const topicBonus = qa.topic?.toLowerCase().includes(normalizedInput) ? 0.2 : 0;
+    // Topic relevance bonus
+    let topicBonus = 0;
+    if (qa.topic) {
+      const inputTopicWords = inputWords.filter(w => qa.topic?.toLowerCase().includes(w) || w.includes(qa.topic?.toLowerCase() || ''));
+      if (inputTopicWords.length > 0) {
+        topicBonus = 0.1;
+      }
+    }
 
-    return Math.min(1.0, percentageMatch + phraseBonus + topicBonus);
+    return Math.min(1.0, score + semanticBonus + topicBonus);
   }
 
   private getDefaultResponse(input: string): string {
