@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ChatbotService from '../chatbot/ChatbotService';
 
 interface Message {
   content: string;
   sender: 'user' | 'bot';
+  id?: string;
+  confidence?: number;
+  matched?: boolean;
 }
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
 const ChatBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
