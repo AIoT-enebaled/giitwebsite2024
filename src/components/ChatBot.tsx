@@ -156,22 +156,52 @@ const ChatBot: React.FC = () => {
           
           <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
             <div className="flex flex-col space-y-4">
-              {messages.map((message, index) => (
+              {messages.map((message) => (
                 <div
-                  key={index}
+                  key={message.id || Math.random()}
                   className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div
-                    className={`max-w-[80%] p-3 rounded-lg ${
-                      message.sender === 'user'
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-white text-gray-800 border border-gray-200'
-                    }`}
-                  >
-                    {message.content}
+                  <div className="flex flex-col space-y-2">
+                    <div
+                      className={`max-w-[80%] p-3 rounded-lg ${
+                        message.sender === 'user'
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-white text-gray-800 border border-gray-200'
+                      }`}
+                    >
+                      {message.content}
+                    </div>
+                    {message.sender === 'bot' && message.id && (
+                      <div className="flex space-x-2 text-xs px-1">
+                        {feedbackVisible === message.id ? (
+                          <div className="flex space-x-2">
+                            <button
+                              onClick={() => handleFeedback(message.id!, 'helpful')}
+                              className="text-green-600 hover:text-green-800 font-semibold"
+                            >
+                              👍 Helpful
+                            </button>
+                            <button
+                              onClick={() => handleFeedback(message.id!, 'unhelpful')}
+                              className="text-red-600 hover:text-red-800 font-semibold"
+                            >
+                              👎 Not helpful
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => setFeedbackVisible(message.id || null)}
+                            className="text-gray-400 hover:text-gray-600 text-xs"
+                          >
+                            Feedback
+                          </button>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
+              <div ref={messagesEndRef} />
             </div>
           </div>
 
