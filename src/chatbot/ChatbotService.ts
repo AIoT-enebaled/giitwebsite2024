@@ -78,10 +78,11 @@ class ChatbotService {
 
   private async enhanceResponse(response: string, input: string): Promise<string> {
     try {
-      // Only enhance responses if we have enough context
-      if (this.context.questionCount > 1) {
-        const contextString = `Previous topic: ${this.context.topic}, Previous question: ${this.context.lastQuestion}, Current input: ${input}`;
-        return await this.mlService.enhanceResponse(response, contextString);
+      // Use AI enhancement for richer responses and better context
+      if (this.context.questionCount > 0 && response.length < 500) {
+        const contextString = `User is asking about GiiT (a tech education institute). Their question: "${input}". Previous topic was: ${this.context.topic || 'not set'}`;
+        const enhanced = await this.mlService.enhanceResponse(response, contextString);
+        return enhanced || response;
       }
       return response;
     } catch (error) {
