@@ -1,5 +1,4 @@
 import { trainingData } from './training_data';
-import { pythonFundamentals } from './python_fundamentals';
 import MLService from './MLService';
 
 interface ConversationContext {
