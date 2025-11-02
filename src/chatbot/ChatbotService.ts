@@ -173,24 +173,26 @@ class ChatbotService {
     return Math.min(1.0, percentageMatch + phraseBonus + topicBonus);
   }
 
-  private getDefaultResponse(isPythonQuestion: boolean): string {
-    if (isPythonQuestion) {
-      return "I can help you learn about Python programming. You can ask me about:\n" +
-             "- Basic concepts (variables, data types)\n" +
-             "- Lists and collections\n" +
-             "- Functions and methods\n" +
-             "- Control flow (if/else, loops)\n" +
-             "- And more!\n\n" +
-             "What specific Python topic would you like to know about?";
-    }
-    
-    return "I can help you with information about:\n" +
-           "- Our courses and programs\n" +
-           "- Class schedules and duration\n" +
-           "- Registration process\n" +
-           "- Teaching methods\n" +
-           "- And more!\n\n" +
-           "What would you like to know?";
+  private getDefaultResponse(input: string): string {
+    // Provide helpful suggestions based on common topics
+    return "I wasn't able to find a specific answer to that question, but here are some topics I can help with:\n\n" +
+           "📚 COURSES & PROGRAMS\n" +
+           "• Course details and prices\n" +
+           "• Programming courses (Python, JavaScript, etc.)\n" +
+           "• Web development programs\n" +
+           "• AI and Machine Learning\n\n" +
+           "🎓 LEARNING\n" +
+           "• Class schedules and formats\n" +
+           "• Online, in-person, or hybrid options\n" +
+           "• Certificate information\n\n" +
+           "📝 REGISTRATION\n" +
+           "• How to enroll\n" +
+           "• Payment options and discounts\n" +
+           "• Prerequisites\n\n" +
+           "📞 CONTACT\n" +
+           "• Phone: +256 745 695 576\n" +
+           "• Email: geniusinstitute2024@gmail.com\n\n" +
+           "Try asking me about a specific course or topic!";
   }
 
   private isAcknowledgment(input: string): boolean {
