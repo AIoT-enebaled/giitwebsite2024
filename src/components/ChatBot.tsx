@@ -16,7 +16,9 @@ const ChatBot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [feedbackVisible, setFeedbackVisible] = useState<string | null>(null);
   const chatbotService = ChatbotService.getInstance();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Initialize with welcome message
