@@ -36,21 +36,22 @@ class ChatbotService {
   public async getResponse(input: string): Promise<string> {
     const normalizedInput = input.toLowerCase().trim();
     this.context.questionCount++;
-    
+
     // Handle common acknowledgments with context
     if (this.isAcknowledgment(normalizedInput)) {
-      const response = this.context.pythonMode ? 
-        "Would you like to learn more about Python programming? Feel free to ask about any specific topic!" :
-        "What else would you like to know about our courses or programs?";
+      const response = "Is there anything else you'd like to know about our courses, programs, facilities, or how to get started?";
       return this.enhanceResponse(response, normalizedInput);
     }
 
     // Handle greetings with personalized touch
     if (this.isGreeting(normalizedInput)) {
-      const response = "Hello! I'm your personal learning assistant at GiiT. I can help you with:\n" +
-        "1. Learning Python programming\n" +
-        "2. Answering questions about our courses\n" +
-        "3. Providing resources and guidance\n";
+      const response = "Welcome to GiiT! 👋 I'm your learning assistant. I can help you with:\n" +
+        "• Information about our courses and programs\n" +
+        "• Details about class schedules and pricing\n" +
+        "• Learning formats (online, in-person, hybrid)\n" +
+        "• Registration and enrollment\n" +
+        "• Programming and technology topics\n\n" +
+        "What would you like to know?";
       return this.enhanceResponse(response, normalizedInput);
     }
 
@@ -62,30 +63,17 @@ class ChatbotService {
 
     // Try to find a response
     let response = '';
-    
-    // First check if it's a Python question
-    if (this.isPythonRelated(normalizedInput)) {
-      this.context.pythonMode = true;
-      response = (await this.findPythonMatch(normalizedInput)) ?? '';
-      if (response) {
-        this.context.topic = 'python';
-        this.context.lastResponse = response;
-        this.context.lastQuestion = normalizedInput;
-        return this.enhanceResponse(response, normalizedInput);
-      }
-    }
 
-    // Then check general questions
-    response = (await this.findGeneralMatch(normalizedInput)) ?? '';
+    // Search through all training data for best match
+    response = (await this.findBestMatch(normalizedInput)) ?? '';
     if (response) {
-      this.context.pythonMode = false;
       this.context.lastResponse = response;
       this.context.lastQuestion = normalizedInput;
       return this.enhanceResponse(response, normalizedInput);
     }
 
     // Default response if no conditions are met
-    return this.enhanceResponse(this.getDefaultResponse(this.isPythonRelated(normalizedInput)), normalizedInput);
+    return this.enhanceResponse(this.getDefaultResponse(normalizedInput), normalizedInput);
   }
 
   private async enhanceResponse(response: string, input: string): Promise<string> {
