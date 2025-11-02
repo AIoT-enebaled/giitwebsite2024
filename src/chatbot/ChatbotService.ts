@@ -92,92 +92,39 @@ class ChatbotService {
   }
 
   private getContextualGoodbye(): string {
-    if (this.context.pythonMode) {
-      return "Thanks for learning about Python with me! Remember to practice coding regularly. If you have more questions later, I'll be here to help!";
-    }
-    return "Thank you for your interest in GiiT! We look forward to helping you achieve your tech goals. Feel free to come back if you have any more questions!";
+    return "Thank you for your interest in GiiT! We're here to help you achieve your tech goals. Don't hesitate to reach out with any more questions - call us at +256 745 695 576 or email geniusinstitute2024@gmail.com. Good luck with your learning journey! 🚀";
   }
 
-  private findPythonMatch(input: string): string | null {
+  /**
+   * Find best match from training data using scoring algorithm
+   */
+  private async findBestMatch(input: string): Promise<string | null> {
     const normalizedInput = input.toLowerCase().trim();
-    
-    // First try exact matches from both datasets
-    const exactPythonMatch = pythonFundamentals.find(qa => 
+
+    // First try exact matches
+    const exactMatch = trainingData.find(qa =>
       normalizedInput === qa.question.toLowerCase().trim()
     );
-    
-    const exactGeneralMatch = trainingData.find(qa =>
-      normalizedInput === qa.question.toLowerCase().trim() &&
-      qa.topic.toLowerCase() === "courses"
-    );
-    
-    if (exactPythonMatch) return exactPythonMatch.answer;
-    if (exactGeneralMatch) return exactGeneralMatch.answer;
-
-    // Then try semantic matches with topic context
-    const isPythonQuestion = this.isPythonRelated(normalizedInput);
-    const isCourseQuestion = normalizedInput.includes('course') || 
-                           normalizedInput.includes('class') || 
-                           normalizedInput.includes('cost') ||
-                           normalizedInput.includes('price') ||
-                           normalizedInput.includes('fee');
-
-    // Use appropriate dataset based on context
-    const dataset = isPythonQuestion ? pythonFundamentals : 
-                   isCourseQuestion ? trainingData.filter(qa => qa.topic === "Courses") :
-                   trainingData;
-
-    // Calculate match scores
-    let bestMatch = {
-      answer: '',
-      score: 0
-    };
-
-    for (const qa of dataset) {
-      const score = this.calculateMatchScore(input, qa);
-      if (score > bestMatch.score) {
-        bestMatch = { answer: qa.answer, score: score };
-      }
+    if (exactMatch) {
+      this.context.topic = exactMatch.topic;
+      return exactMatch.answer;
     }
 
-    // Return match if confidence is high enough
-    return bestMatch.score >= 0.6 ? bestMatch.answer : null;
-  }
-
-  private findGeneralMatch(input: string): string | null {
-    const normalizedInput = input.toLowerCase().trim();
+    // Calculate scores for all Q&A pairs
     let bestMatch = {
       answer: '',
       score: 0,
       topic: ''
     };
 
-    // First try to match within the current topic
-    if (this.context.topic) {
-      for (const qa of trainingData) {
-        if (qa.topic === this.context.topic) {
-          const score = this.calculateMatchScore(normalizedInput, qa);
-          if (score > bestMatch.score) {
-            bestMatch = { answer: qa.answer, score: score, topic: qa.topic };
-          }
-        }
-      }
-      
-      // If we found a good match within the current topic, return it
-      if (bestMatch.score >= 0.6) {
-        return bestMatch.answer;
-      }
-    }
-
-    // If no good match in current topic, search all topics
     for (const qa of trainingData) {
-      const score = this.calculateMatchScore(normalizedInput, qa);
+      const score = this.calculateMatchScore(input, qa);
       if (score > bestMatch.score) {
         bestMatch = { answer: qa.answer, score: score, topic: qa.topic };
       }
     }
 
-    // Update context with the new topic if we found a match
+    // Return match if confidence is high enough
     if (bestMatch.score >= 0.5) {
       this.context.topic = bestMatch.topic;
       return bestMatch.answer;
