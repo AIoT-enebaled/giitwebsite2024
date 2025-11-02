@@ -28,6 +28,26 @@ const ChatBot: React.FC = () => {
     }]);
   }, []);
 
+  const handleFeedback = async (messageId: string, feedbackType: 'helpful' | 'unhelpful') => {
+    try {
+      await fetch(`${BACKEND_URL}/api/learn/feedback`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          conversationId: messageId,
+          feedback: feedbackType,
+          rating: feedbackType === 'helpful' ? 1 : -1,
+          userId: localStorage.getItem('userId') || 'anonymous'
+        })
+      });
+      setFeedbackVisible(null);
+    } catch (error) {
+      console.warn('Could not submit feedback:', error);
+    }
+  };
+
   const logConversationToBackend = async (userMessage: string, botResponse: string, matched: boolean, confidence: number) => {
     try {
       const response = await fetch(`${BACKEND_URL}/api/learn/log-conversation`, {
