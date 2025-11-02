@@ -28,6 +28,30 @@ const ChatBot: React.FC = () => {
     }]);
   }, []);
 
+  const logConversationToBackend = async (userMessage: string, botResponse: string, matched: boolean, confidence: number) => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/learn/log-conversation`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userMessage,
+          botResponse,
+          matched,
+          confidence,
+          userId: localStorage.getItem('userId') || 'anonymous'
+        })
+      });
+
+      if (!response.ok) {
+        console.warn('Failed to log conversation to backend');
+      }
+    } catch (error) {
+      console.warn('Could not connect to backend for logging:', error);
+    }
+  };
+
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputMessage.trim() || isLoading) return;
@@ -37,24 +61,40 @@ const ChatBot: React.FC = () => {
     setIsLoading(true);
 
     // Add user message
+    const userMessageId = `user-${Date.now()}`;
     setMessages(prev => [...prev, {
       content: userMessage,
-      sender: 'user'
+      sender: 'user',
+      id: userMessageId
     }]);
 
     try {
       const response = await chatbotService.getResponse(userMessage);
-      
+
+      // Get match details if available
+      const contextService = ChatbotService.getInstance();
+      const matched = contextService.context?.lastResponse !== '';
+      const confidence = contextService.context?.lastConfidence || 0;
+
+      const botMessageId = `bot-${Date.now()}`;
+
       // Add bot response
       setMessages(prev => [...prev, {
         content: response,
-        sender: 'bot'
+        sender: 'bot',
+        id: botMessageId,
+        matched,
+        confidence
       }]);
+
+      // Log to backend asynchronously
+      await logConversationToBackend(userMessage, response, matched, confidence);
     } catch (error) {
       console.error('Error:', error);
       setMessages(prev => [...prev, {
         content: "I'm sorry, I'm having trouble right now. Please try again in a moment.",
-        sender: 'bot'
+        sender: 'bot',
+        id: `bot-error-${Date.now()}`
       }]);
     } finally {
       setIsLoading(false);
