@@ -23,10 +23,16 @@ const ChatBot: React.FC = () => {
   useEffect(() => {
     // Initialize with welcome message
     setMessages([{
-      content: "Hi! I'm the GiiT Assistant. I can help you learn about our courses and programs. What would you like to know?",
-      sender: 'bot'
+      content: "Hi! I'm the GiiT Assistant. I can help you learn about our courses, programs, Python, AI, Critical Thinking, and more. What would you like to know?",
+      sender: 'bot',
+      id: 'welcome'
     }]);
   }, []);
+
+  useEffect(() => {
+    // Scroll to bottom when new messages arrive
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   const handleFeedback = async (messageId: string, feedbackType: 'helpful' | 'unhelpful') => {
     try {
