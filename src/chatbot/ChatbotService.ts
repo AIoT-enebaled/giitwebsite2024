@@ -196,34 +196,18 @@ class ChatbotService {
   }
 
   private isAcknowledgment(input: string): boolean {
-    const acknowledgments = ['ok', 'okay', 'thanks', 'thank you', 'great', 'good', 'alright', 'got it', 'understood'];
-    return acknowledgments.some(ack => input.includes(ack));
+    const acknowledgments = ['ok', 'okay', 'thanks', 'thank you', 'great', 'good', 'alright', 'got it', 'understood', 'perfect', 'cool', 'awesome'];
+    return acknowledgments.some(ack => input.toLowerCase().includes(ack));
   }
 
   private isGreeting(input: string): boolean {
-    const greetings = ['hi', 'hello', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening'];
-    return greetings.some(greeting => input.includes(greeting));
+    const greetings = ['hi', 'hello', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening', 'welcome', 'start', 'begin'];
+    return greetings.some(greeting => input.toLowerCase().includes(greeting));
   }
 
   private isGoodbye(input: string): boolean {
-    const goodbyes = ['bye', 'goodbye', 'see you', 'farewell', 'take care'];
-    return goodbyes.some(goodbye => input.includes(goodbye));
-  }
-
-  private isPythonRelated(input: string): boolean {
-    const pythonKeywords = ['python', 'programming', 'code', 'function', 'variable', 'loop', 'list', 'dictionary'];
-    const normalizedInput = input.toLowerCase();
-    
-    // Don't trigger Python mode for course-related questions
-    if (normalizedInput.includes('course') || 
-        normalizedInput.includes('cost') || 
-        normalizedInput.includes('price') || 
-        normalizedInput.includes('how much') || 
-        normalizedInput.includes('how long')) {
-      return false;
-    }
-    
-    return pythonKeywords.some(keyword => normalizedInput.includes(keyword));
+    const goodbyes = ['bye', 'goodbye', 'see you', 'farewell', 'take care', 'thanks', 'thank you', 'exit', 'quit'];
+    return goodbyes.some(goodbye => input.toLowerCase().includes(goodbye));
   }
 }
 
