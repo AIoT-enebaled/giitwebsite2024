@@ -351,54 +351,134 @@ const ChatBot: React.FC = () => {
           </div>
           
           <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
-            <div className="flex flex-col space-y-4">
-              {messages.map((message) => (
-                <div
-                  key={message.id || Math.random()}
-                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
-                  <div className="flex flex-col space-y-2">
-                    <div
-                      className={`max-w-[80%] p-3 rounded-lg ${
-                        message.sender === 'user'
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-white text-gray-800 border border-gray-200'
-                      }`}
-                    >
-                      {message.content}
+            {showAnalytics && userAnalytics ? (
+              <div className="space-y-4">
+                <div className="bg-white p-4 rounded-lg border border-gray-200">
+                  <h3 className="font-semibold text-gray-800 mb-3">Your Learning Analytics</h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Topics Completed:</span>
+                      <span className="font-semibold">{userAnalytics.topicsCompleted}</span>
                     </div>
-                    {message.sender === 'bot' && message.id && (
-                      <div className="flex space-x-2 text-xs px-1">
-                        {feedbackVisible === message.id ? (
-                          <div className="flex space-x-2">
-                            <button
-                              onClick={() => handleFeedback(message.id!, 'helpful')}
-                              className="text-green-600 hover:text-green-800 font-semibold"
-                            >
-                              👍 Helpful
-                            </button>
-                            <button
-                              onClick={() => handleFeedback(message.id!, 'unhelpful')}
-                              className="text-red-600 hover:text-red-800 font-semibold"
-                            >
-                              👎 Not helpful
-                            </button>
-                          </div>
-                        ) : (
-                          <button
-                            onClick={() => setFeedbackVisible(message.id || null)}
-                            className="text-gray-400 hover:text-gray-600 text-xs"
-                          >
-                            Feedback
-                          </button>
-                        )}
-                      </div>
-                    )}
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Total Learning Hours:</span>
+                      <span className="font-semibold">{userAnalytics.totalLearningHours}h</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Average Quiz Score:</span>
+                      <span className="font-semibold">{userAnalytics.averageQuizScore}%</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Learning Streak:</span>
+                      <span className="font-semibold">{userAnalytics.learningStreak} days</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Current Level:</span>
+                      <span className="font-semibold capitalize">{userAnalytics.learningLevel}</span>
+                    </div>
                   </div>
                 </div>
-              ))}
-              <div ref={messagesEndRef} />
-            </div>
+                <button
+                  onClick={() => setShowAnalytics(false)}
+                  className="w-full text-sm text-gray-600 hover:text-gray-800"
+                >
+                  ← Back to Chat
+                </button>
+              </div>
+            ) : showRecommendations ? (
+              <div className="space-y-3">
+                <h3 className="font-semibold text-gray-800">Recommended for You</h3>
+                {recommendations.length > 0 ? (
+                  recommendations.map((rec, idx) => (
+                    <div key={idx} className="bg-white p-3 rounded-lg border border-gray-200 hover:border-blue-400 transition-colors">
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <p className="font-semibold text-sm text-gray-800">{rec.topic}</p>
+                          <p className="text-xs text-gray-600">{rec.subject}</p>
+                        </div>
+                        <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">{rec.level}</span>
+                      </div>
+                      <p className="text-xs text-gray-700 mb-2">{rec.description}</p>
+                      <div className="flex justify-between items-center text-xs text-gray-600 mb-2">
+                        <span>⏱️ {rec.duration}</span>
+                        <span>💡 {rec.reason}</span>
+                      </div>
+                      <button
+                        onClick={() => {
+                          setMessages(prev => [...prev, {
+                            content: `Great choice! Let me tell you more about ${rec.topic}...`,
+                            sender: 'bot',
+                            id: `rec-${idx}`
+                          }]);
+                          setShowRecommendations(false);
+                          updateUserProgress(rec.topic, 'in_progress');
+                        }}
+                        className="w-full text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 transition-colors"
+                      >
+                        Learn More
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-600 text-sm">No recommendations yet. Start learning to get personalized suggestions!</p>
+                )}
+                <button
+                  onClick={() => setShowRecommendations(false)}
+                  className="w-full text-sm text-gray-600 hover:text-gray-800"
+                >
+                  ← Back to Chat
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col space-y-4">
+                {messages.map((message) => (
+                  <div
+                    key={message.id || Math.random()}
+                    className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div className="flex flex-col space-y-2">
+                      <div
+                        className={`max-w-[80%] p-3 rounded-lg ${
+                          message.sender === 'user'
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-white text-gray-800 border border-gray-200'
+                        }`}
+                      >
+                        {message.content}
+                      </div>
+                      {message.sender === 'bot' && message.id && (
+                        <div className="flex space-x-2 text-xs px-1">
+                          {feedbackVisible === message.id ? (
+                            <div className="flex space-x-2">
+                              <button
+                                onClick={() => handleFeedback(message.id!, 'helpful')}
+                                className="text-green-600 hover:text-green-800 font-semibold"
+                              >
+                                👍 Helpful
+                              </button>
+                              <button
+                                onClick={() => handleFeedback(message.id!, 'unhelpful')}
+                                className="text-red-600 hover:text-red-800 font-semibold"
+                              >
+                                👎 Not helpful
+                              </button>
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => setFeedbackVisible(message.id || null)}
+                              className="text-gray-400 hover:text-gray-600 text-xs"
+                            >
+                              Feedback
+                            </button>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
+            )}
           </div>
 
           <form onSubmit={sendMessage} className="p-4 border-t bg-white rounded-b-lg">
