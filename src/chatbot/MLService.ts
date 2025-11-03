@@ -113,16 +113,40 @@ class MLService {
    * Call local backend for enhanced responses
    */
   private async callLocalBackend(input: string): Promise<string> {
+    // Don't try to call localhost in production
+    const isLocalhost = this.LOCAL_BACKEND_URL.includes('localhost') ||
+                       this.LOCAL_BACKEND_URL.includes('127.0.0.1');
+
+    const isProduction = window.location.hostname !== 'localhost' &&
+                        window.location.hostname !== '127.0.0.1';
+
+    if (isLocalhost && isProduction) {
+      console.warn('Skipping localhost backend in production environment');
+      return '';
+    }
+
+    // Skip if no backend URL configured
+    if (!this.LOCAL_BACKEND_URL || this.LOCAL_BACKEND_URL === 'http://localhost:5000') {
+      return '';
+    }
+
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
+
       const response = await fetch(`${this.LOCAL_BACKEND_URL}/api/knowledge/search?query=${encodeURIComponent(input)}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
+        signal: controller.signal
       });
 
+      clearTimeout(timeoutId);
+
       if (!response.ok) {
-        throw new Error(`Backend returned ${response.status}`);
+        console.warn(`Backend returned ${response.status}`);
+        return '';
       }
 
       const data = await response.json();
@@ -133,8 +157,8 @@ class MLService {
 
       return '';
     } catch (error) {
-      console.error('Local backend error:', error);
-      throw error;
+      console.warn('Local backend error:', error);
+      return '';
     }
   }
 
