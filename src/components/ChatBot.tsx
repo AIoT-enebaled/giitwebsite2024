@@ -60,27 +60,44 @@ const ChatBot: React.FC = () => {
       const userId = localStorage.getItem('userId') || `chat-user-${Date.now()}`;
       localStorage.setItem('userId', userId);
 
-      // Create or fetch user profile
-      const profileRes = await fetch(`${BACKEND_URL}/api/recommendations/user/${userId}/profile`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId,
-          name: localStorage.getItem('userName') || 'Learning Assistant User',
-          learningLevel: 'beginner',
-          interests: ['python', 'web-development'],
-          learningStyle: 'visual'
-        })
-      });
+      // Only attempt backend connection if URL is properly configured
+      if (!BACKEND_URL || BACKEND_URL === 'http://localhost:5000') {
+        console.warn('Backend URL not configured, skipping profile initialization');
+        return;
+      }
 
-      if (profileRes.ok) {
-        const data = await profileRes.json();
-        setUserProfile(data.data);
+      // Create or fetch user profile with timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-        // Fetch initial recommendations
-        await fetchRecommendations(userId);
+      try {
+        const profileRes = await fetch(`${BACKEND_URL}/api/recommendations/user/${userId}/profile`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId,
+            name: localStorage.getItem('userName') || 'Learning Assistant User',
+            learningLevel: 'beginner',
+            interests: ['python', 'web-development'],
+            learningStyle: 'visual'
+          }),
+          signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        if (profileRes.ok) {
+          const data = await profileRes.json();
+          setUserProfile(data.data);
+
+          // Fetch initial recommendations
+          await fetchRecommendations(userId);
+        }
+      } catch (fetchError) {
+        clearTimeout(timeoutId);
+        console.warn('Backend connection failed, chat will work without recommendations:', fetchError);
       }
     } catch (error) {
       console.warn('Could not initialize user profile:', error);
