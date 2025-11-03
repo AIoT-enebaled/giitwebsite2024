@@ -24,40 +24,27 @@ class MLService {
     try {
       // Try Intern AI API first if key is configured
       if (this.INTERN_AI_API_KEY) {
-        try {
-          const internAIResponse = await this.callInternAI(input);
-          if (internAIResponse) {
-            return internAIResponse;
-          }
-        } catch (error) {
-          console.warn('Intern AI API failed:', error);
+        const internAIResponse = await this.callInternAI(input);
+        if (internAIResponse) {
+          return internAIResponse;
         }
-      } else {
-        console.warn('Intern AI API key not configured');
       }
 
       // Fallback to local backend if available
-      try {
-        const localResponse = await this.callLocalBackend(input);
-        if (localResponse) {
-          return localResponse;
-        }
-      } catch (error) {
-        console.warn('Local backend failed:', error);
+      const localResponse = await this.callLocalBackend(input);
+      if (localResponse) {
+        return localResponse;
       }
 
       // Fallback to Hugging Face if available
       if (this.FALLBACK_API_KEY) {
-        try {
-          return await this.callHuggingFace(input);
-        } catch (error) {
-          console.warn('Hugging Face API also failed:', error);
+        const huggingFaceResponse = await this.callHuggingFace(input);
+        if (huggingFaceResponse) {
+          return huggingFaceResponse;
         }
-      } else {
-        console.warn('Hugging Face API key not configured');
       }
     } catch (error) {
-      console.error('All API options exhausted:', error);
+      console.error('Error in generateResponse:', error);
     }
 
     return '';
