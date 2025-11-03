@@ -9,6 +9,24 @@ interface Message {
   matched?: boolean;
 }
 
+interface UserProfile {
+  userId: string;
+  name: string;
+  learningLevel: string;
+  interests: string[];
+  topicsCompleted: number;
+  totalLearningHours: number;
+}
+
+interface Recommendation {
+  subject: string;
+  topic: string;
+  description: string;
+  level: string;
+  duration: string;
+  reason: string;
+}
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
 const ChatBot: React.FC = () => {
@@ -17,6 +35,11 @@ const ChatBot: React.FC = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [feedbackVisible, setFeedbackVisible] = useState<string | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+  const [showRecommendations, setShowRecommendations] = useState(false);
+  const [showAnalytics, setShowAnalytics] = useState(false);
+  const [userAnalytics, setUserAnalytics] = useState<any>(null);
   const chatbotService = ChatbotService.getInstance();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +50,105 @@ const ChatBot: React.FC = () => {
       sender: 'bot',
       id: 'welcome'
     }]);
+
+    // Initialize user profile
+    initializeUserProfile();
   }, []);
+
+  const initializeUserProfile = async () => {
+    try {
+      const userId = localStorage.getItem('userId') || `chat-user-${Date.now()}`;
+      localStorage.setItem('userId', userId);
+
+      // Create or fetch user profile
+      const profileRes = await fetch(`${BACKEND_URL}/api/recommendations/user/${userId}/profile`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId,
+          name: localStorage.getItem('userName') || 'Learning Assistant User',
+          learningLevel: 'beginner',
+          interests: ['python', 'web-development'],
+          learningStyle: 'visual'
+        })
+      });
+
+      if (profileRes.ok) {
+        const data = await profileRes.json();
+        setUserProfile(data.data);
+
+        // Fetch initial recommendations
+        await fetchRecommendations(userId);
+      }
+    } catch (error) {
+      console.warn('Could not initialize user profile:', error);
+    }
+  };
+
+  const fetchRecommendations = async (userId: string) => {
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/recommendations/user/${userId}/recommendations?limit=5`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setRecommendations(data.data || []);
+      }
+    } catch (error) {
+      console.warn('Could not fetch recommendations:', error);
+    }
+  };
+
+  const fetchUserAnalytics = async (userId: string) => {
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/recommendations/user/${userId}/analytics`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setUserAnalytics(data.data);
+        setShowAnalytics(true);
+      }
+    } catch (error) {
+      console.warn('Could not fetch user analytics:', error);
+    }
+  };
+
+  const updateUserProgress = async (topicTitle: string, status: 'completed' | 'in_progress') => {
+    try {
+      const userId = localStorage.getItem('userId') || 'anonymous';
+      const res = await fetch(`${BACKEND_URL}/api/recommendations/user/${userId}/progress`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          courseId: 'general',
+          topicTitle,
+          status,
+          timeSpent: status === 'completed' ? 60 : 0,
+          quizScore: status === 'completed' ? 85 : null
+        })
+      });
+
+      if (res.ok && status === 'completed') {
+        // Refresh recommendations after completing a topic
+        await fetchRecommendations(userId);
+      }
+    } catch (error) {
+      console.warn('Could not update user progress:', error);
+    }
+  };
 
   useEffect(() => {
     // Scroll to bottom when new messages arrive
