@@ -109,7 +109,7 @@ export const trainingData = [
   {
     topic: "Registration",
     question: "How can I register for a course?",
-    answer: "You can register for a course in several ways: 1) Online through our website registration form, 2) Visit our campus in person at 123 Technology Street, Kampala, 3) Call us at +256 745 695 576 or +256 752 067 815, 4) Email us at geniusinstitute2024@gmail.com. Our team will guide you through the enrollment process and answer any questions."
+    answer: "**Registration Methods**\n\n1) **Online Registration** - Submit your details through our website registration form at your convenience.\n\n2) **Phone Registration** - Call us at **+256 745 695 576** or **+256 752 067 815** and our team will assist you.\n\n3) **Email Registration** - Send your course inquiry to **geniusinstitute2024@gmail.com** with your details.\n\n**Next Steps**\nOur team will guide you through the enrollment process and answer any questions you may have about the course."
   },
   {
     topic: "Registration",
