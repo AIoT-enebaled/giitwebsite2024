@@ -29,6 +29,28 @@ interface Recommendation {
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
+// Helper function to render markdown formatting (bold, line breaks)
+const renderMessageContent = (content: string) => {
+  return content.split('\n').map((line, lineIdx) => {
+    // Parse bold text (**text**)
+    const parts = line.split(/(\*\*[^*]+\*\*)/g);
+    return (
+      <div key={lineIdx} className="mb-1">
+        {parts.map((part, idx) => {
+          if (part.startsWith('**') && part.endsWith('**')) {
+            return (
+              <span key={idx} className="font-bold text-gray-900">
+                {part.slice(2, -2)}
+              </span>
+            );
+          }
+          return <span key={idx}>{part}</span>;
+        })}
+      </div>
+    );
+  });
+};
+
 const ChatBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
