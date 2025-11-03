@@ -68,7 +68,7 @@ class MLService {
    */
   private async callInternAI(input: string): Promise<string> {
     if (!this.INTERN_AI_API_KEY) {
-      throw new Error('Intern AI API key not configured');
+      return '';
     }
 
     try {
@@ -104,8 +104,8 @@ class MLService {
 
       return '';
     } catch (error) {
-      console.error('Intern AI API error:', error);
-      throw error;
+      console.warn('Intern AI API error:', error);
+      return '';
     }
   }
 
