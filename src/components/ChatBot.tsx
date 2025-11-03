@@ -206,6 +206,14 @@ const ChatBot: React.FC = () => {
 
   const handleFeedback = async (messageId: string, feedbackType: 'helpful' | 'unhelpful') => {
     try {
+      if (!BACKEND_URL || BACKEND_URL === 'http://localhost:5000') {
+        setFeedbackVisible(null);
+        return;
+      }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
       await fetch(`${BACKEND_URL}/api/learn/feedback`, {
         method: 'POST',
         headers: {
@@ -216,11 +224,15 @@ const ChatBot: React.FC = () => {
           feedback: feedbackType,
           rating: feedbackType === 'helpful' ? 1 : -1,
           userId: localStorage.getItem('userId') || 'anonymous'
-        })
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
       setFeedbackVisible(null);
     } catch (error) {
       console.warn('Could not submit feedback:', error);
+      setFeedbackVisible(null);
     }
   };
 
