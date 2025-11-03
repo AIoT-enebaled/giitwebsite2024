@@ -538,7 +538,7 @@ const ChatBot: React.FC = () => {
                             : 'bg-white text-gray-800 border border-gray-200'
                         }`}
                       >
-                        {message.content}
+                        {message.sender === 'user' ? message.content : renderMessageContent(message.content)}
                       </div>
                       {message.sender === 'bot' && message.id && (
                         <div className="flex space-x-2 text-xs px-1">
