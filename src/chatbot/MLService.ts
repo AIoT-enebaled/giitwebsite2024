@@ -2,10 +2,11 @@ import axios from 'axios';
 
 class MLService {
   private static instance: MLService;
-  private readonly INTERN_AI_API_KEY = 'sk-AudIMM8eZUOfUIofpOLsZPWfLjqrzaMhAwrFaiMdxryEH37L';
+  private readonly INTERN_AI_API_KEY = import.meta.env.VITE_INTERN_AI_API_KEY || '';
   private readonly INTERN_AI_API_URL = 'https://api.intern.ai/v1/chat/completions';
   private readonly FALLBACK_API_URL = 'https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill';
   private readonly FALLBACK_API_KEY = import.meta.env.VITE_HUGGING_FACE_API_KEY || '';
+  private readonly LOCAL_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
   private constructor() {}
 
@@ -17,26 +18,46 @@ class MLService {
   }
 
   /**
-   * Generate response using Intern AI API with fallback to Hugging Face
+   * Generate response using multiple fallback options
    */
   public async generateResponse(input: string): Promise<string> {
     try {
-      // Try Intern AI API first
-      const internAIResponse = await this.callInternAI(input);
-      if (internAIResponse) {
-        return internAIResponse;
+      // Try Intern AI API first if key is configured
+      if (this.INTERN_AI_API_KEY) {
+        try {
+          const internAIResponse = await this.callInternAI(input);
+          if (internAIResponse) {
+            return internAIResponse;
+          }
+        } catch (error) {
+          console.warn('Intern AI API failed:', error);
+        }
+      } else {
+        console.warn('Intern AI API key not configured');
       }
-    } catch (error) {
-      console.warn('Intern AI API failed, attempting fallback:', error);
-    }
 
-    // Fallback to Hugging Face if available
-    try {
+      // Fallback to local backend if available
+      try {
+        const localResponse = await this.callLocalBackend(input);
+        if (localResponse) {
+          return localResponse;
+        }
+      } catch (error) {
+        console.warn('Local backend failed:', error);
+      }
+
+      // Fallback to Hugging Face if available
       if (this.FALLBACK_API_KEY) {
-        return await this.callHuggingFace(input);
+        try {
+          return await this.callHuggingFace(input);
+        } catch (error) {
+          console.warn('Hugging Face API also failed:', error);
+        }
+      } else {
+        console.warn('Hugging Face API key not configured');
       }
     } catch (error) {
-      console.warn('Hugging Face API also failed:', error);
+      console.error('All API options exhausted:', error);
     }
 
     return '';
@@ -46,6 +67,10 @@ class MLService {
    * Call Intern AI API for enhanced responses
    */
   private async callInternAI(input: string): Promise<string> {
+    if (!this.INTERN_AI_API_KEY) {
+      throw new Error('Intern AI API key not configured');
+    }
+
     try {
       const response = await axios.post(
         this.INTERN_AI_API_URL,
@@ -80,6 +105,35 @@ class MLService {
       return '';
     } catch (error) {
       console.error('Intern AI API error:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Call local backend for enhanced responses
+   */
+  private async callLocalBackend(input: string): Promise<string> {
+    try {
+      const response = await fetch(`${this.LOCAL_BACKEND_URL}/api/knowledge/search?query=${encodeURIComponent(input)}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Backend returned ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.data && Array.isArray(data.data) && data.data.length > 0) {
+        const topResult = data.data[0];
+        return topResult.description || topResult.title || '';
+      }
+
+      return '';
+    } catch (error) {
+      console.error('Local backend error:', error);
       throw error;
     }
   }
