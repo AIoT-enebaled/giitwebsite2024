@@ -164,7 +164,15 @@ const ChatBot: React.FC = () => {
 
   const updateUserProgress = async (topicTitle: string, status: 'completed' | 'in_progress') => {
     try {
+      if (!BACKEND_URL || BACKEND_URL === 'http://localhost:5000') {
+        return;
+      }
+
       const userId = localStorage.getItem('userId') || 'anonymous';
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
       const res = await fetch(`${BACKEND_URL}/api/recommendations/user/${userId}/progress`, {
         method: 'POST',
         headers: {
@@ -176,8 +184,11 @@ const ChatBot: React.FC = () => {
           status,
           timeSpent: status === 'completed' ? 60 : 0,
           quizScore: status === 'completed' ? 85 : null
-        })
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (res.ok && status === 'completed') {
         // Refresh recommendations after completing a topic
