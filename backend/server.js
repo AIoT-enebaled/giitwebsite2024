@@ -180,6 +180,176 @@ app.get('/api/knowledge/learning-path', async (req, res) => {
   }
 });
 
+// ===== RECOMMENDATION ENGINE ENDPOINTS =====
+
+/**
+ * Create or update user profile
+ * POST /api/recommendations/user/profile
+ */
+app.post('/api/recommendations/user/profile', async (req, res) => {
+  try {
+    const { userId, name, email, learningLevel, interests, learningStyle } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ error: 'Missing userId' });
+    }
+
+    const profile = await recommendationEngine.createUserProfile(userId, {
+      name,
+      email,
+      learningLevel,
+      interests: interests || [],
+      learningStyle
+    });
+
+    res.json({ success: true, data: profile });
+  } catch (error) {
+    console.error('Error creating user profile:', error);
+    res.status(500).json({ error: 'Failed to create user profile' });
+  }
+});
+
+/**
+ * Get user profile
+ * GET /api/recommendations/user/:userId/profile
+ */
+app.get('/api/recommendations/user/:userId/profile', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const profile = await recommendationEngine.getUserProfile(userId);
+
+    if (!profile) {
+      return res.status(404).json({ error: 'User profile not found' });
+    }
+
+    res.json({ success: true, data: profile });
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ error: 'Failed to fetch user profile' });
+  }
+});
+
+/**
+ * Get personalized recommendations for user
+ * GET /api/recommendations/user/:userId/recommendations?limit=5
+ */
+app.get('/api/recommendations/user/:userId/recommendations', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const limit = parseInt(req.query.limit) || 5;
+
+    const recommendations = await recommendationEngine.getPersonalizedRecommendations(userId, limit);
+
+    res.json({ success: true, data: recommendations });
+  } catch (error) {
+    console.error('Error getting recommendations:', error);
+    res.status(500).json({ error: 'Failed to get recommendations' });
+  }
+});
+
+/**
+ * Update user progress on a topic
+ * POST /api/recommendations/user/:userId/progress
+ */
+app.post('/api/recommendations/user/:userId/progress', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { courseId, topicTitle, status, timeSpent, quizScore, notes } = req.body;
+
+    if (!courseId || !topicTitle) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const progress = await recommendationEngine.updateUserProgress(userId, courseId, topicTitle, {
+      status,
+      timeSpent,
+      quizScore,
+      notes
+    });
+
+    res.json({ success: true, data: progress });
+  } catch (error) {
+    console.error('Error updating user progress:', error);
+    res.status(500).json({ error: 'Failed to update user progress' });
+  }
+});
+
+/**
+ * Get user learning analytics
+ * GET /api/recommendations/user/:userId/analytics
+ */
+app.get('/api/recommendations/user/:userId/analytics', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const analytics = await recommendationEngine.getUserAnalytics(userId);
+
+    res.json({ success: true, data: analytics });
+  } catch (error) {
+    console.error('Error getting user analytics:', error);
+    res.status(500).json({ error: 'Failed to get user analytics' });
+  }
+});
+
+/**
+ * Get recommended learning path for user
+ * GET /api/recommendations/user/:userId/learning-path
+ */
+app.get('/api/recommendations/user/:userId/learning-path', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const path = await recommendationEngine.getRecommendedLearningPath(userId);
+
+    res.json({ success: true, data: path });
+  } catch (error) {
+    console.error('Error getting learning path:', error);
+    res.status(500).json({ error: 'Failed to get learning path' });
+  }
+});
+
+/**
+ * Update user interests
+ * PUT /api/recommendations/user/:userId/interests
+ */
+app.put('/api/recommendations/user/:userId/interests', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { interests } = req.body;
+
+    if (!interests || !Array.isArray(interests)) {
+      return res.status(400).json({ error: 'Invalid interests format' });
+    }
+
+    const updated = await recommendationEngine.updateUserInterests(userId, interests);
+
+    res.json({ success: true, data: updated });
+  } catch (error) {
+    console.error('Error updating interests:', error);
+    res.status(500).json({ error: 'Failed to update interests' });
+  }
+});
+
+/**
+ * Update user learning level
+ * PUT /api/recommendations/user/:userId/level
+ */
+app.put('/api/recommendations/user/:userId/level', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { level } = req.body;
+
+    if (!level) {
+      return res.status(400).json({ error: 'Missing level' });
+    }
+
+    const updated = await recommendationEngine.updateUserLearningLevel(userId, level);
+
+    res.json({ success: true, data: updated });
+  } catch (error) {
+    console.error('Error updating learning level:', error);
+    res.status(500).json({ error: 'Failed to update learning level' });
+  }
+});
+
 // ===== ADMIN ENDPOINTS =====
 
 /**
