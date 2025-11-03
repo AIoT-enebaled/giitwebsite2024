@@ -166,6 +166,10 @@ class MLService {
    * Fallback: Call Hugging Face API
    */
   private async callHuggingFace(input: string): Promise<string> {
+    if (!this.FALLBACK_API_KEY) {
+      return '';
+    }
+
     try {
       const response = await axios.post(
         this.FALLBACK_API_URL,
@@ -185,8 +189,8 @@ class MLService {
 
       return '';
     } catch (error) {
-      console.error('Hugging Face API error:', error);
-      throw error;
+      console.warn('Hugging Face API error:', error);
+      return '';
     }
   }
 
