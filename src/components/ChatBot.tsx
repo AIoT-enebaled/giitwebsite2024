@@ -134,12 +134,23 @@ const ChatBot: React.FC = () => {
 
   const fetchUserAnalytics = async (userId: string) => {
     try {
+      if (!BACKEND_URL || BACKEND_URL === 'http://localhost:5000') {
+        console.warn('Backend not configured for analytics');
+        return;
+      }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
       const res = await fetch(`${BACKEND_URL}/api/recommendations/user/${userId}/analytics`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (res.ok) {
         const data = await res.json();
