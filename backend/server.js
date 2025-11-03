@@ -6,6 +6,7 @@ import { dirname } from 'path';
 import LearningSystem from './services/LearningSystem.js';
 import GeneralKnowledge from './services/GeneralKnowledge.js';
 import PatternAnalyzer from './services/PatternAnalyzer.js';
+import RecommendationEngine from './services/RecommendationEngine.js';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(express.json());
 const learningSystem = new LearningSystem();
 const generalKnowledge = new GeneralKnowledge();
 const patternAnalyzer = new PatternAnalyzer();
+const recommendationEngine = new RecommendationEngine();
 
 // Health check
 app.get('/health', (req, res) => {
