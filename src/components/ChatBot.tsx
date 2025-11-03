@@ -238,6 +238,14 @@ const ChatBot: React.FC = () => {
 
   const logConversationToBackend = async (userMessage: string, botResponse: string, matched: boolean, confidence: number) => {
     try {
+      // Skip if backend not configured
+      if (!BACKEND_URL || BACKEND_URL === 'http://localhost:5000') {
+        return;
+      }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
+
       const response = await fetch(`${BACKEND_URL}/api/learn/log-conversation`, {
         method: 'POST',
         headers: {
@@ -249,8 +257,11 @@ const ChatBot: React.FC = () => {
           matched,
           confidence,
           userId: localStorage.getItem('userId') || 'anonymous'
-        })
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         console.warn('Failed to log conversation to backend');
