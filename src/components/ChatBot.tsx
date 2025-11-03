@@ -106,12 +106,22 @@ const ChatBot: React.FC = () => {
 
   const fetchRecommendations = async (userId: string) => {
     try {
+      if (!BACKEND_URL || BACKEND_URL === 'http://localhost:5000') {
+        return;
+      }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
       const res = await fetch(`${BACKEND_URL}/api/recommendations/user/${userId}/recommendations?limit=5`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (res.ok) {
         const data = await res.json();
