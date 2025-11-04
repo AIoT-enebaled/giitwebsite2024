@@ -274,7 +274,7 @@ export const trainingData = [
   {
     topic: "Courses",
     question: "Which course is best for kids?",
-    answer: "For young learners, we recommend: Ages 6-9: Scratch Programming or Computer Basics, Ages 8-12: AI for Kids, Coding and Puzzle-Solving, Ages 10+: Python for Beginners, HTML & CSS, or any of our intermediate courses. All kid-focused courses use fun, interactive methods to teach programming concepts."
+    answer: "For young learners, we recommend:\n\n**Ages 6-9**: Scratch Programming, Computer Basics, Coding with Mblock\n\n**Ages 8-12**: AI for Kids, Coding and Puzzle-Solving, Introduction to Robotics with Mblock, Introduction to Coding with Mblock\n\n**Ages 10+**: Python for Beginners, HTML & CSS, Introduction to AI with Mblock, or any of our intermediate courses\n\nAll kid-focused courses use fun, interactive methods with visual programming to teach concepts. Mblock courses are excellent because they combine coding with robotics and AI in an engaging way."
   },
   {
     topic: "Courses",
