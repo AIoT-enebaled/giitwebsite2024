@@ -307,6 +307,23 @@ export const trainingData = [
     answer: "Mini Courses (2 months, ~400k UGX): Focused on specific skills, high-intensity, practical projects. Good for specific knowledge or career changes. Comprehensive Programs (3-6 months, 1.5M-3.5M UGX): Deeper, broader learning covering multiple related technologies. Include more projects, mentoring, and preparation for employment. Choose mini courses for specific skills or comprehensive programs for career preparation."
   },
 
+  // ===== MBLOCK COURSES =====
+  {
+    topic: "Courses",
+    question: "What is Mblock?",
+    answer: "Mblock is a visual programming platform that combines block-based coding with robotics, AI, and IoT capabilities. It's designed for learners of all ages and allows you to:\n\n**Program Robots**: Control Arduino, Microbit, and other microcontroller boards\n**Create Games & Apps**: Build interactive projects with visual blocks\n**Learn AI/ML**: Use machine learning extensions for AI projects\n**Integrate Hardware**: Connect sensors, motors, and real-world devices\n\n**Why Mblock?**\n- Easy-to-learn visual interface\n- Combines software and hardware learning\n- Free and open-source\n- Suitable for ages 6 to adults\n- Bridge from visual to text-based programming\n- Industry support and active community\n\nGiiT offers 4 Mblock courses: Coding with Mblock, AI with Mblock, ML with Mblock, and Robotics with Mblock."
+  },
+  {
+    topic: "Courses",
+    question: "What are the benefits of learning Mblock?",
+    answer: "Learning Mblock provides multiple benefits:\n\n**Programming Skills**: Visual block-based learning makes programming accessible and fun\n\n**STEM Integration**: Combines Science, Technology, Engineering, and Math\n\n**Hardware Connection**: Understand how code controls real physical devices\n\n**Creativity**: Build games, robots, and interactive projects\n\n**Problem-solving**: Develop logical thinking through practical challenges\n\n**Career Preparation**: Modern skills for robotics and embedded systems careers\n\n**Flexibility**: Easy transition from blocks to Python code\n\n**Engagement**: Making programming tangible and interactive\n\nMblock is perfect for students who want hands-on experience with technology and hardware."
+  },
+  {
+    topic: "Courses",
+    question: "Can I do Mblock courses without prior programming experience?",
+    answer: "Yes! All our Mblock courses are beginner-friendly and require no prior programming experience:\n\n**Introduction to Coding with Mblock**: Perfect starting point for programming\n\n**Introduction to Robotics with Mblock**: Learn robotics from scratch\n\n**Introduction to AI with Mblock**: Understand AI concepts through visual blocks\n\n**Introduction to ML with Mblock**: Build machine learning projects without coding\n\nMblock's visual interface makes it easy to learn programming concepts without the complexity of text-based code. Our instructors guide you through each step."
+  },
+
   // ===== PRICING QUESTIONS =====
   {
     topic: "Pricing",
