@@ -33,7 +33,8 @@ export const courseCategories = {
   PROGRAMMING: 'Programming Languages',
   AI_ML: 'AI & Machine Learning',
   PROBLEM_SOLVING: 'Problem-Solving & Critical Thinking',
-  DESIGN_THINKING: 'Design & Creativity'
+  DESIGN_THINKING: 'Design & Creativity',
+  MBLOCK: 'Mblock & Robotics'
 } as const;
 
 export const courseLevels = {
