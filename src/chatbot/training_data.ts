@@ -177,6 +177,26 @@ export const trainingData = [
   },
   {
     topic: "Courses",
+    question: "Tell me about Introduction to Coding with Mblock course",
+    answer: "Introduction to Coding with Mblock (2 months) - Beginner | 400,000 UGX (108 USD)\n\nLearn programming fundamentals through block-based visual coding with Mblock. Perfect for ages 7-12.\n\nWhat you'll learn:\n• Programming concepts through visual Mblock interface\n• Sequence, loops, and conditional logic\n• Variables and data manipulation\n• Creating interactive programs and animations\n• Introduction to hardware integration\n\nTools: Mblock IDE, Block-based Programming, Graphics and Sound Editors\nBenefits: Strong foundation for programming, hardware awareness, creative problem-solving\nCurriculum: Mblock interface, blocks, sequencing, loops, conditionals, sprites, events\nClass times: Monday & Wednesday 10-12 PM, Tuesday & Thursday 3-5 PM, Saturday 9 AM-1 PM"
+  },
+  {
+    topic: "Courses",
+    question: "Tell me about Introduction to AI with Mblock course",
+    answer: "Introduction to AI with Mblock (2 months) - Beginner | 400,000 UGX (108 USD)\n\nExplore artificial intelligence concepts through Mblock's AI and machine learning extensions. Perfect for ages 10-14.\n\nWhat you'll learn:\n• AI concepts and real-world applications\n• Machine learning basics through visual blocks\n• Training simple AI models\n• Building AI-powered projects\n• Facial recognition and image classification basics\n\nTools: Mblock AI Extension, TensorFlow Lite, Image Recognition Tools, Mblock IDE\nBenefits: Early exposure to cutting-edge AI technology, understanding AI ethics, practical AI experience\nCurriculum: AI fundamentals, supervised learning, Mblock AI blocks, training models, practical projects\nClass times: Monday & Wednesday 11 AM-1 PM, Tuesday & Thursday 4-6 PM, Saturday 10 AM-2 PM"
+  },
+  {
+    topic: "Courses",
+    question: "Tell me about Introduction to ML with Mblock course",
+    answer: "Introduction to ML with Mblock (2 months) - Intermediate | 400,000 UGX (108 USD)\n\nLearn machine learning concepts and implementation using Mblock's ML extensions. For ages 12+.\n\nWhat you'll learn:\n• Machine learning fundamentals and algorithms\n• Supervised and unsupervised learning\n• Training and evaluating ML models\n• Using Mblock ML blocks for practical projects\n• Data preparation and model optimization\n\nTools: Mblock ML Extension, TensorFlow, Data Visualization, Mblock IDE\nBenefits: Modern ML skills, hands-on experience, preparation for advanced study\nCurriculum: ML basics, algorithms, data handling, model training, evaluation, real projects\nClass times: Monday & Wednesday 12-2 PM, Tuesday & Thursday 5-7 PM, Saturday 11 AM-3 PM"
+  },
+  {
+    topic: "Courses",
+    question: "Tell me about Introduction to Robotics with Mblock course",
+    answer: "Introduction to Robotics with Mblock (2 months) - Beginner | 400,000 UGX (108 USD)\n\nLearn robotics programming and control using Mblock. Perfect for ages 8-14.\n\nWhat you'll learn:\n• Robotics fundamentals and hardware basics\n• Programming robots with Mblock blocks\n• Sensor integration and control\n• Building and controlling robot projects\n• Problem-solving through robotics challenges\n\nTools: Mblock IDE, Arduino/Microbit Compatible Boards, Sensors, Motors, Mblock Robotics Extension\nBenefits: Hands-on STEM learning, hardware and software integration, creative engineering\nCurriculum: Robotics basics, Mblock robotics blocks, sensor programming, motor control, projects\nClass times: Monday & Wednesday 2-4 PM, Tuesday & Thursday 10 AM-12 PM, Saturday 1-5 PM"
+  },
+  {
+    topic: "Courses",
     question: "Tell me about HTML & CSS for Beginners course",
     answer: "HTML & CSS for Beginners (2 months) - Beginner | 400,000 UGX (108 USD)\n\nLearn the foundation of web development with HTML and CSS. For ages 10+.\n\nWhat you'll learn:\n• HTML structure and semantic elements\n• CSS styling and layout techniques\n• Flexbox and Grid systems\n• Mobile-friendly responsive design\n• Web accessibility basics\n\nTools: Visual Studio Code, Web Browsers, Developer Tools\nBenefits: Foundation for web development, creative expression, portfolio building\nCurriculum: HTML elements, CSS styling, layouts, media queries, forms, accessibility\nClass times: Monday & Wednesday 2-4 PM, Tuesday & Thursday 9-11 AM, Saturday 2-6 PM"
   },
