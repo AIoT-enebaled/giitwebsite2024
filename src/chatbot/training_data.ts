@@ -325,4 +325,114 @@ export const trainingData = [
     question: "What tools and software do you use?",
     answer: "GiiT uses industry-standard tools: Programming: Python, JavaScript, Visual Studio Code, PyCharm. Web Development: HTML5, CSS3, React, Node.js, Bootstrap. Data Science: Pandas, NumPy, Matplotlib, Jupyter Notebooks. Cloud: Docker, AWS, GCP, Azure. Version Control: Git and GitHub. Design: Figma, design thinking frameworks. All tools are free or have free versions students can use."
   },
+
+  // ===== GENERAL KNOWLEDGE: PYTHON =====
+  {
+    topic: "General Knowledge",
+    question: "What is Python?",
+    answer: "Python is a high-level, general-purpose programming language known for its simple and readable syntax. Created in 1989 by Guido van Rossum, Python emphasizes code readability and allows developers to write complex programs in fewer lines compared to other languages. It's used in web development, data science, artificial intelligence, automation, and more."
+  },
+  {
+    topic: "General Knowledge",
+    question: "What are the basics of Python?",
+    answer: "Python basics include:\n\n**Variables & Data Types**: Containers for storing data (strings, numbers, lists, dictionaries)\n\n**Operators**: Arithmetic (+, -, *, /), comparison (==, !=, <, >), logical (and, or, not)\n\n**Control Structures**: If statements for conditions, loops (for, while) for repetition\n\n**Functions**: Reusable blocks of code with def keyword\n\n**Indentation**: Python uses indentation to define code blocks, making it readable\n\nThese fundamentals form the foundation for all Python programming."
+  },
+  {
+    topic: "General Knowledge",
+    question: "Why is Python popular?",
+    answer: "Python is popular because of:\n\n1) **Easy to Learn**: Simple syntax makes it beginner-friendly\n2) **Versatile**: Used in web development, data science, AI, automation, and more\n3) **Large Community**: Millions of developers and abundant resources\n4) **Extensive Libraries**: Rich ecosystem (NumPy, Pandas, Django, Flask, TensorFlow)\n5) **High Demand**: Top-paying jobs and abundant opportunities\n6) **Productivity**: Write more with less code compared to other languages\n7) **Cross-platform**: Runs on Windows, Mac, Linux\n8) **Readable Code**: Clear syntax helps teams collaborate effectively"
+  },
+  {
+    topic: "General Knowledge",
+    question: "What can I do with Python?",
+    answer: "Python is used for:\n\n**Web Development**: Build web apps with Django or Flask frameworks\n**Data Science & Analysis**: Analyze large datasets with Pandas and NumPy\n**Machine Learning & AI**: Build ML models with TensorFlow, scikit-learn, PyTorch\n**Automation**: Automate repetitive tasks and workflows\n**Game Development**: Create games with Pygame\n**Scientific Computing**: Calculations and simulations with SciPy\n**Data Visualization**: Create charts and dashboards with Matplotlib\n**Finance**: Quantitative analysis and algorithmic trading\n**Cybersecurity**: Security tools and penetration testing\n**IoT**: Control smart devices and embedded systems"
+  },
+  {
+    topic: "General Knowledge",
+    question: "How long does it take to learn Python?",
+    answer: "Learning timeline depends on your goals:\n\n**Basic proficiency**: 2-3 months (40-60 hours) - Variables, loops, functions, basic projects\n**Intermediate skills**: 4-6 months (100-150 hours) - Libraries, OOP, web frameworks\n**Professional level**: 6-12 months (200+ hours) - Advanced concepts, specializations, real projects\n**Mastery**: 2+ years of continuous learning and practice\n\nAt GiiT, our Python for Beginners course (2 months) covers fundamentals. Python Full Stack Master Program (6 months) takes you to professional level with web development, data science, and cloud skills."
+  },
+  {
+    topic: "General Knowledge",
+    question: "What are Python variables?",
+    answer: "Variables are containers that store data values. In Python:\n\n**Creating variables**: name = \"Alice\" (no type declaration needed)\n\n**Common data types**:\n- String: name = \"Alice\" (text)\n- Integer: age = 25 (whole numbers)\n- Float: height = 5.8 (decimal numbers)\n- Boolean: is_active = True (True/False)\n- List: colors = [\"red\", \"blue\"] (ordered collection)\n- Dictionary: person = {\"name\": \"Alice\", \"age\": 25} (key-value pairs)\n\n**Key points**: Python automatically determines type, variable names are case-sensitive, use meaningful names for clarity."
+  },
+  {
+    topic: "General Knowledge",
+    question: "What are Python functions?",
+    answer: "Functions are reusable blocks of code that perform specific tasks:\n\n**Basic function**:\n```\ndef greet(name):\n    return \"Hello, \" + name\n\ngreet(\"Alice\")  # Returns \"Hello, Alice\"\n```\n\n**Key concepts**:\n- **Definition**: Use 'def' keyword\n- **Parameters**: Input values (name in example)\n- **Return**: Sends output back (optional)\n- **Reusability**: Write once, use multiple times\n- **Modularity**: Breaks code into manageable pieces\n\n**Benefits**: Code reuse, easier maintenance, cleaner code, easier testing, improved readability."
+  },
+
+  // ===== GENERAL KNOWLEDGE: ARTIFICIAL INTELLIGENCE =====
+  {
+    topic: "General Knowledge",
+    question: "What is Artificial Intelligence (AI)?",
+    answer: "Artificial Intelligence is the simulation of human intelligence processes by machines, particularly computers. AI systems are designed to:\n\n**Learn from data**: Improve performance through experience\n**Recognize patterns**: Identify trends in information\n**Understand language**: Process and generate human language\n**Make decisions**: Provide recommendations or solutions\n**Solve problems**: Address complex challenges automatically\n\n**Common AI applications**:\n- Virtual assistants (Siri, Alexa)\n- Recommendation systems (Netflix, YouTube)\n- Facial recognition\n- Autonomous vehicles\n- Healthcare diagnostics\n- Language translation\n- Chatbots and customer service"
+  },
+  {
+    topic: "General Knowledge",
+    question: "What is Machine Learning?",
+    answer: "Machine Learning is a subset of AI where systems learn from data without being explicitly programmed. Instead of following preset rules, ML algorithms discover patterns:\n\n**How it works**:\n1) Feed data to the algorithm\n2) Algorithm finds patterns\n3) Makes predictions or decisions\n4) Improves with more data\n\n**Types of Machine Learning**:\n- **Supervised Learning**: Learn from labeled examples (predicting house prices)\n- **Unsupervised Learning**: Find patterns in unlabeled data (customer segmentation)\n- **Reinforcement Learning**: Learn through trial and reward (game-playing AI)\n\n**Applications**: Email spam filtering, image recognition, voice assistants, fraud detection, medical diagnosis, recommendation systems."
+  },
+  {
+    topic: "General Knowledge",
+    question: "What is Deep Learning?",
+    answer: "Deep Learning is a subset of Machine Learning using neural networks with multiple layers (hence \"deep\"). Inspired by the human brain:\n\n**Key concepts**:\n- **Neural Networks**: Layers of interconnected nodes\n- **Deep Networks**: Multiple hidden layers process information\n- **Feature Learning**: Automatically learns important features from data\n\n**Advantages**:\n- Excellent for complex patterns (images, speech, text)\n- Learns from raw data\n- Powers modern AI breakthroughs\n\n**Applications**:\n- Image recognition and computer vision\n- Natural language processing (translation, chatbots)\n- Voice recognition\n- Game-playing AI (AlphaGo)\n- Autonomous vehicles\n\n**Tools**: TensorFlow, PyTorch, Keras for building deep learning models."
+  },
+  {
+    topic: "General Knowledge",
+    question: "What is the difference between AI, Machine Learning, and Deep Learning?",
+    answer: "These terms are related but represent different scopes:\n\n**AI (Broadest)**:\nAny technique enabling computers to mimic human intelligence. Includes rule-based systems, chatbots, expert systems, etc.\n\n**Machine Learning (Subset of AI)**:\nSystems that learn from data to improve performance. Uses algorithms to find patterns without explicit programming.\n\n**Deep Learning (Subset of ML)**:\nUses artificial neural networks with multiple layers. Specialized for complex patterns in images, text, and speech.\n\n**Visual hierarchy**:\n```\nAI (everything)\n├── Traditional AI (rule-based)\n├── Machine Learning\n│   ├── Simple ML algorithms\n│   └── Deep Learning (neural networks)\n```\n\n**Real examples**:\n- Chess AI (rule-based) = AI\n- Email spam filter = Machine Learning\n- Image recognition = Deep Learning"
+  },
+  {
+    topic: "General Knowledge",
+    question: "How is AI used in real life?",
+    answer: "AI is everywhere in modern life:\n\n**Communication**: Voice assistants (Siri, Alexa), translation services, chatbots\n\n**Entertainment**: Netflix recommendations, Spotify playlists, YouTube suggestions\n\n**Social Media**: Facebook facial recognition, Instagram content personalization\n\n**Finance**: Fraud detection, algorithmic trading, credit scoring\n\n**Healthcare**: Disease diagnosis, drug discovery, personalized medicine\n\n**Transportation**: Autonomous vehicles, route optimization, predictive maintenance\n\n**E-commerce**: Product recommendations, price optimization, customer service\n\n**Productivity**: Email filtering, auto-complete, image search\n\n**Security**: Facial recognition, biometric systems, threat detection\n\n**Gaming**: NPC behavior, game difficulty adjustment, realistic graphics\n\nAI is rapidly becoming essential across all industries."
+  },
+
+  // ===== GENERAL KNOWLEDGE: CRITICAL THINKING =====
+  {
+    topic: "General Knowledge",
+    question: "What is Critical Thinking?",
+    answer: "Critical thinking is the ability to analyze, evaluate, and reason through information objectively. It means:\n\n**Questioning**: Ask 'why' and 'how' rather than accepting information at face value\n**Analyzing**: Break down problems into parts to understand them better\n**Evaluating**: Judge the quality of information using reliable criteria\n**Reasoning**: Use logic to draw conclusions from evidence\n**Problem-solving**: Apply analysis to find effective solutions\n\n**Key characteristics**:\n- Evidence-based decisions\n- Considering multiple perspectives\n- Recognizing assumptions and biases\n- Logical reasoning\n- Continuous learning and adaptation\n\n**Importance in tech**:\n- Debug code effectively\n- Design better algorithms\n- Make data-driven decisions\n- Solve complex problems\n- Evaluate AI ethics and risks"
+  },
+  {
+    topic: "General Knowledge",
+    question: "What are Critical Thinking skills?",
+    answer: "Essential critical thinking skills include:\n\n**Analysis**: Break problems into smaller parts, understand relationships\n\n**Evaluation**: Judge information quality using evidence and logic\n\n**Inference**: Draw reasonable conclusions from available information\n\n**Reflection**: Examine your own thinking process and biases\n\n**Problem-solving**: Systematically approach challenges\n\n**Decision-making**: Choose best options based on evidence\n\n**Questioning**: Ask relevant questions to clarify understanding\n\n**Perspective-taking**: Consider multiple viewpoints\n\n**Pattern recognition**: Identify trends and connections\n\n**Logical reasoning**: Use cause-effect relationships properly\n\n**In programming**: Critical thinking helps debug errors, optimize code, design algorithms, evaluate solutions, and make technical decisions."
+  },
+  {
+    topic: "General Knowledge",
+    question: "How do I improve my critical thinking?",
+    answer: "Develop critical thinking with these strategies:\n\n**Ask questions**: Challenge assumptions, ask 'why' and 'how'\n\n**Read widely**: Expose yourself to different perspectives and viewpoints\n\n**Practice analyzing**: Break problems into smaller parts\n\n**Evaluate evidence**: Check sources, look for biases, verify facts\n\n**Consider alternatives**: Don't accept the first solution; explore options\n\n**Debate respectfully**: Discuss ideas with others, understand opposing views\n\n**Keep learning**: Stay curious and update your knowledge\n\n**Solve problems regularly**: Practice with puzzles, coding challenges, logic games\n\n**Reflect on decisions**: Think about why you chose something and what you learned\n\n**In tech**: Take up coding challenges (like at GiiT's Problem-Solving course), practice debugging, design your own solutions, read code written by others, participate in code reviews."
+  },
+  {
+    topic: "General Knowledge",
+    question: "Why is critical thinking important?",
+    answer: "Critical thinking is essential because:\n\n**Career success**: 82% of employers want critical thinking skills\n\n**Problem-solving**: Approach complex problems systematically\n\n**Quality decisions**: Make informed choices based on evidence\n\n**Avoiding mistakes**: Identify flawed reasoning and biases\n\n**Innovation**: Question existing methods and find improvements\n\n**Learning**: Understand deeply instead of memorizing\n\n**Communication**: Explain ideas clearly and persuasively\n\n**In programming**:\n- Debug code efficiently\n- Design better algorithms\n- Evaluate trade-offs in solutions\n- Understand security and ethics\n- Learn new technologies\n- Mentor others effectively\n\n**In daily life**: Navigate information overload, resist manipulation, make better personal decisions.\n\nAI and automation will replace routine jobs, but critical thinking remains uniquely human and highly valuable."
+  },
+  {
+    topic: "General Knowledge",
+    question: "What is Problem-Solving?",
+    answer: "Problem-solving is the process of finding solutions to difficult or complex issues:\n\n**Steps in problem-solving**:\n1. **Understand**: Clearly define the problem\n2. **Analyze**: Break into smaller parts\n3. **Generate solutions**: Brainstorm multiple approaches\n4. **Evaluate**: Compare solutions objectively\n5. **Choose**: Select best solution\n6. **Implement**: Execute the plan\n7. **Review**: Check if it worked, learn for next time\n\n**Problem-solving types**:\n- **Analytical**: Use logic and data\n- **Creative**: Think outside the box\n- **Collaborative**: Work with others\n- **Strategic**: Plan long-term approach\n\n**In programming**:\n- Debugging: Identify and fix errors\n- Algorithm design: Create efficient solutions\n- System design: Build scalable solutions\n- Optimization: Improve performance\n\nGiiT's \"Problem-Solving and Critical Thinking\" course teaches systematic problem-solving through puzzles, coding challenges, and real projects."
+  },
+
+  // ===== GENERAL KNOWLEDGE: WEB DEVELOPMENT =====
+  {
+    topic: "General Knowledge",
+    question: "What is Web Development?",
+    answer: "Web development is creating websites and web applications that run in browsers. It involves:\n\n**Frontend (Client-side)**: What users see and interact with\n- HTML: Structure of web pages\n- CSS: Styling and layout\n- JavaScript: Interactivity and dynamics\n\n**Backend (Server-side)**: Logic and data processing\n- Python, JavaScript, Java, PHP\n- Databases (MySQL, PostgreSQL, MongoDB)\n- APIs and server logic\n\n**Full-stack development**: Both frontend and backend skills\n\n**Responsibilities**:\n- User interface design\n- User experience optimization\n- Code functionality\n- Performance optimization\n- Security implementation\n- Deployment and maintenance\n\nGiiT teaches full-stack development through HTML & CSS, JavaScript, React Development, and comprehensive Full Stack programs."
+  },
+  {
+    topic: "General Knowledge",
+    question: "What is HTML and CSS?",
+    answer: "**HTML (HyperText Markup Language)**:\nProvides structure and content for web pages\n- Elements: tags like <h1>, <p>, <div>\n- Semantic HTML: meaningful tags\n- Forms for user input\n\n**CSS (Cascading Style Sheets)**:\nStyles and positions HTML elements\n- Colors, fonts, spacing\n- Layouts (Flexbox, Grid)\n- Responsive design for different devices\n- Animations and transitions\n\n**How they work together**:\n- HTML creates structure (skeleton)\n- CSS adds styling (appearance)\n- JavaScript adds interactivity\n\n**Example workflow**:\n```html\n<!-- HTML: Creates a button -->\n<button>Click me</button>\n\n<!-- CSS: Styles the button -->\nbutton { background: blue; color: white; }\n\n<!-- JavaScript: Makes it interactive -->\nbutton.onclick = () => alert('Clicked!');\n```\n\nGiiT's HTML & CSS for Beginners course teaches web foundation skills."
+  },
+
+  // ===== GENERAL KNOWLEDGE: DATA SCIENCE =====
+  {
+    topic: "General Knowledge",
+    question: "What is Data Science?",
+    answer: "Data science is extracting insights and knowledge from data to solve real-world problems. It combines:\n\n**Statistics**: Analyzing and interpreting data\n**Programming**: Implementing solutions (Python, R)\n**Domain Knowledge**: Understanding the business problem\n**Machine Learning**: Building predictive models\n\n**Data science workflow**:\n1. **Collect**: Gather relevant data\n2. **Clean**: Remove errors and inconsistencies\n3. **Explore**: Analyze patterns and distributions\n4. **Model**: Build predictive or descriptive models\n5. **Evaluate**: Test accuracy and relevance\n6. **Visualize**: Present findings clearly\n7. **Deploy**: Implement solutions\n\n**Applications**:\n- Business intelligence and forecasting\n- Healthcare diagnostics\n- Finance and risk analysis\n- Marketing personalization\n- Product recommendations\n- Scientific research\n\n**Key skills**: Python, SQL, Statistics, Data Visualization, Machine Learning\n\nGiiT's Python for Data Science course teaches data analysis and visualization skills."
+  },
 ];
