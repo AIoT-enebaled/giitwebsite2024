@@ -37,31 +37,70 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ cours
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const validateForm = (): boolean => {
+    if (!formData.fullName.trim()) {
+      setError('Full name is required');
+      return false;
+    }
+    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setError('Valid email address is required');
+      return false;
+    }
+    if (!formData.phone.trim() || formData.phone.length < 10) {
+      setError('Valid phone number is required (at least 10 digits)');
+      return false;
+    }
+    if (!formData.age.trim()) {
+      setError('Age is required');
+      return false;
+    }
+    const ageNum = parseInt(formData.age, 10);
+    if (isNaN(ageNum) || ageNum < 5 || ageNum > 100) {
+      setError('Please enter a valid age (5-100)');
+      return false;
+    }
+    if (!formData.education.trim()) {
+      setError('Education level is required');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setError('');
     setSuccess(false);
 
+    if (!validateForm()) {
+      setIsSubmitting(false);
+      return;
+    }
+
+    setIsSubmitting(true);
+
     try {
       console.log('Submitting student registration:', formData.fullName);
-      
+
       const result: RegistrationResult = await submitRegistration({
         fullName: formData.fullName,
         email: formData.email,
         phone: formData.phone,
-        address: '',  
-        preferredContact: 'email',  
+        address: '',
+        preferredContact: 'email',
         classType: formData.classType || 'Regular',
-        childName: formData.fullName,  
+        childName: formData.fullName,
         childAge: formData.age,
         selectedCourse: courseTitle || 'Not specified',
-        selectedTime: '',  
-        additionalInfo: `Education: ${formData.education}, Previous Coding Experience: ${formData.previousCoding}`
+        selectedTime: '',
+        additionalInfo: `Education: ${formData.education}, Previous Coding Experience: ${formData.previousCoding}`,
+        classMode: formData.classMode,
+        price: price
       });
 
       if (result.success) {
         setSuccess(true);
+        setError('');
+        console.log('✅ Registration successful - emails sent');
         setFormData({
           fullName: '',
           age: '',
@@ -74,8 +113,9 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ cours
         });
         setTimeout(() => {
           onClose();
-        }, 2000);
+        }, 2500);
       } else {
+        console.error('❌ Registration failed:', result.error);
         setError(result.error || 'Failed to submit registration');
       }
     } catch (err) {
@@ -245,8 +285,8 @@ const StudentRegistrationForm: React.FC<StudentRegistrationFormProps> = ({ cours
       )}
 
       {success && (
-        <div className="text-green-500 text-sm mt-2">
-          Registration successful! Confirmation email has been sent.
+        <div className="text-green-500 text-sm mt-2 p-3 bg-green-900 bg-opacity-20 rounded">
+          ✓ Registration successful! Confirmation email has been sent to {formData.email}. Our admin team will contact you shortly with additional details.
         </div>
       )}
 

@@ -33,7 +33,8 @@ export const courseCategories = {
   PROGRAMMING: 'Programming Languages',
   AI_ML: 'AI & Machine Learning',
   PROBLEM_SOLVING: 'Problem-Solving & Critical Thinking',
-  DESIGN_THINKING: 'Design & Creativity'
+  DESIGN_THINKING: 'Design & Creativity',
+  MBLOCK: 'Mblock & Robotics'
 } as const;
 
 export const courseLevels = {
@@ -597,6 +598,44 @@ export const courseCatalogs: CourseCatalog[] = [
     parentInfo: 'Mobile app development is a rapidly growing field with excellent career prospects.'
   },
 
+  {
+    id: 'story-telling-for-kids',
+    title: 'Story Telling for Kids',
+    category: courseCategories.DESIGN_THINKING,
+    level: courseLevels.BEGINNER,
+    courseType: courseTypes.MINI,
+    description: 'Build confidence, creativity, and communication through engaging storytelling activities for children.',
+    price: { ugx: 400000, usd: 108 },
+    duration: '2 months',
+    ageGroup: 'Ages 6-12',
+    image: 'https://images.pexels.com/photos/256468/pexels-photo-256468.jpeg',
+    objectives: [
+      { title: 'Creative Expression', description: 'Express ideas and emotions clearly through stories' },
+      { title: 'Narrative Structure', description: 'Understand story elements: beginning, middle, climax, and end' },
+      { title: 'Public Speaking', description: 'Develop confident voice projection and presentation skills' },
+      { title: 'Digital Storytelling', description: 'Use simple digital tools to create and share stories' }
+    ],
+    prerequisites: ['Basic reading and writing skills', 'Willingness to share and learn'],
+    curriculum: [
+      'Introduction: What makes a great story?',
+      'Elements of a story: Characters, setting, and plot',
+      'Building characters and creating worlds',
+      'Plot development and sequencing events',
+      'Storyboarding: Planning your story visually',
+      'Voice, expression, and body language in storytelling',
+      'Digital storytelling: Using Scratch and simple tools',
+      'Final showcase: Present your story to the class'
+    ],
+    classPeriods: [
+      'Monday & Wednesday: 10:00 AM - 12:00 PM',
+      'Tuesday & Thursday: 3:00 PM - 5:00 PM',
+      'Saturday: 9:00 AM - 1:00 PM'
+    ],
+    tools: ['Paper & Markers', 'Storyboarding Templates', 'Scratch (for storytelling)', 'Audio Recording Tools'],
+    benefits: ['Builds confidence and communication', 'Boosts creativity and imagination', 'Enhances reading and writing skills'],
+    parentInfo: 'Storytelling helps children develop communication, creativity, empathy, and confidence. This course nurtures essential language and presentation skills in a fun, supportive environment.'
+  },
+
   // Comprehensive Courses (3 months, UGX 1,500,000)
   {
     id: 'python-comprehensive',
@@ -714,33 +753,45 @@ export const courseCatalogs: CourseCatalog[] = [
     category: courseCategories.PROGRAMMING,
     level: courseLevels.ADVANCED,
     courseType: courseTypes.FULL,
-    description: 'Complete Python ecosystem mastery including web development, data science, AI, and enterprise solutions.',
+    description: 'A compact, end-to-end “Python for Everything” track: 200+ hours, 20+ projects, 30+ assignments, 30+ quizzes, covering Python fundamentals to advanced AI, full-stack, automation, and cloud deployment.',
     price: { ugx: 3500000, usd: 948 },
     duration: '6 months',
     ageGroup: 'Ages 16+',
     image: 'https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg',
     objectives: [
-      { title: 'Python Expertise', description: 'Achieve expert-level Python programming skills' },
-      { title: 'Full-Stack Development', description: 'Master full-stack development with Python' },
-      { title: 'Data Science & AI', description: 'Advanced data science and AI implementation' },
-      { title: 'Enterprise Solutions', description: 'Build enterprise-grade applications' }
+      { title: 'Python Mastery', description: 'Build from fundamentals to advanced programming' },
+      { title: 'Full-Stack Development', description: 'Design and ship robust web apps and APIs' },
+      { title: 'Data Science & ML', description: 'Analyze data and build machine learning solutions' },
+      { title: 'Cloud & DevOps', description: 'Containerize and deploy applications to the cloud' }
     ],
     prerequisites: ['Solid programming foundation', 'Mathematical thinking', 'Commitment to intensive study'],
     curriculum: [
-      'Advanced Python programming patterns',
-      'Enterprise web development',
-      'Advanced data science and analytics',
-      'Machine learning and AI integration',
-      'Cloud deployment and DevOps',
-      'Software architecture and design patterns',
-      'Capstone project: Enterprise application'
+      'Introduction to Python: setup, syntax, variables, data types, and basic I/O',
+      'Control structures: conditionals and loops',
+      'Functions and modular programming',
+      'Data structures: lists, tuples, sets, dictionaries',
+      'File handling: reading and writing files',
+      'Object-Oriented Programming (OOP): classes, inheritance, polymorphism, encapsulation',
+      'Modules and packages: standard library, creating packages, requests and JSON',
+      'Working with data: CSV, JSON, Excel; introduction to Pandas',
+      'Web scraping: Beautiful Soup and requests; browser automation with Selenium',
+      'Web development: Flask/Django for web apps; REST APIs and integration',
+      'Database management: SQL basics; ORM with SQLAlchemy/Django ORM; connecting to databases',
+      'Data science & machine learning: NumPy, Pandas, Matplotlib/Seaborn; ML with scikit-learn',
+      'ML workflow: data cleaning, feature engineering, model building and evaluation',
+      'Automation and scripting: OS modules, task schedulers/cron, email and file automations',
+      'Advanced ML & AI: deep learning with TensorFlow/PyTorch; NLP with spaCy/BERT; time-series forecasting',
+      'Advanced web development: full-stack with React/Next.js and Flask/Django',
+      'Cloud & DevOps: Docker, AWS/GCP/Azure, Kubernetes',
+      'API integration and deployment with Docker',
+      'Capstone project: Deploy a data-driven web app to the cloud with CI/CD'
     ],
     classPeriods: [
       'Monday-Friday: 9:00 AM - 1:00 PM',
       'Evening sessions: 6:00 PM - 8:00 PM',
       'Saturday: 9:00 AM - 5:00 PM'
     ],
-    tools: ['Python Ecosystem', 'Django/Flask', 'Data Science Stack', 'AI/ML Tools', 'Cloud Platforms'],
+    tools: ['Python', 'NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'scikit-learn', 'TensorFlow', 'Keras', 'PyTorch', 'NLTK', 'spaCy', 'Dask', 'Statsmodels', 'Beautiful Soup', 'Selenium', 'Pygame', 'Flask', 'Django', 'FastAPI', 'Dash', 'Hadoop', 'Spark (PySpark)', 'Streamlit', 'Reflex (ReactPy)', 'SQLAlchemy', 'PostgreSQL/MySQL', 'Docker', 'Kubernetes', 'AWS', 'GCP', 'Azure', 'Hugging Face', 'ChatGPT'],
     benefits: ['Expert-level skills', 'Multiple career paths', 'Leadership preparation', 'Entrepreneurial readiness'],
     parentInfo: 'This master program prepares students for senior roles in Python development and data science.'
   },

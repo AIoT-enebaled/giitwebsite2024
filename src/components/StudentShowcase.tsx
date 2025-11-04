@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 import { Star, Trophy, Code, Lightbulb } from 'lucide-react';
 
 const StudentShowcase = () => {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -50,58 +60,43 @@ const StudentShowcase = () => {
       </div>
 
       {showcaseImages.map((student, index) => (
-        <motion.div
+        <div
           key={index}
-          className="absolute inset-0 flex items-center"
+          className="absolute inset-0 flex items-center opacity-0 animate-[fadeIn_0.5s_ease-out_forwards] transition-transform duration-1000"
           style={{
             transform: `translateY(${scrollY * (0.1 + index * 0.05)}px)`,
             zIndex: showcaseImages.length - index,
+            animationDelay: `${index * 0.2}s`
           }}
-          initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
         >
           <div className={`w-full min-h-screen flex items-center ${index % 2 === 0 ? 'justify-start pl-8 md:pl-16' : 'justify-end pr-8 md:pr-16'}`}>
             <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center p-8">
               {/* Content Side */}
               <div className={`space-y-6 ${index % 2 !== 0 ? 'md:order-2' : ''}`}>
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className={`inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r ${student.color} text-white font-semibold`}
+                <div
+                  className={`inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r ${student.color} text-white font-semibold opacity-0 translate-y-8 animate-[fadeInUp_0.6s_ease-out_0.3s_forwards]`}
                 >
                   {student.icon}
                   <span>{student.achievement}</span>
-                </motion.div>
+                </div>
 
-                <motion.h2
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="text-4xl md:text-6xl font-bold text-white"
+                <h2
+                  className="text-4xl md:text-6xl font-bold text-white opacity-0 translate-y-8 animate-[fadeInUp_0.6s_ease-out_0.5s_forwards]"
                 >
                   Meet{' '}
                   <span className={`bg-gradient-to-r ${student.color} bg-clip-text text-transparent`}>
                     {student.name}
                   </span>
-                </motion.h2>
+                </h2>
 
-                <motion.p
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="text-xl text-gray-300 leading-relaxed max-w-lg"
+                <p
+                  className="text-xl text-gray-300 leading-relaxed max-w-lg opacity-0 translate-y-8 animate-[fadeInUp_0.6s_ease-out_0.7s_forwards]"
                 >
                   {student.description}
-                </motion.p>
+                </p>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex items-center gap-4"
+                <div
+                  className="flex items-center gap-4 opacity-0 translate-y-8 animate-[fadeInUp_0.6s_ease-out_0.9s_forwards]"
                 >
                   <div className="flex items-center gap-1">
                     {[...Array(5)].map((_, i) => (
@@ -109,15 +104,12 @@ const StudentShowcase = () => {
                     ))}
                   </div>
                   <span className="text-gray-400">Excellence in Technology</span>
-                </motion.div>
+                </div>
               </div>
 
               {/* Image Side */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3 }}
-                className={`relative ${index % 2 !== 0 ? 'md:order-1' : ''}`}
+              <div
+                className={`relative opacity-0 scale-90 animate-[fadeInScale_0.6s_ease-out_0.4s_forwards] ${index % 2 !== 0 ? 'md:order-1' : ''}`}
               >
                 <div className="relative group">
                   {/* Main Image */}
@@ -131,23 +123,21 @@ const StudentShowcase = () => {
                   </div>
 
                   {/* Floating Elements */}
-                  <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                    className={`absolute -top-4 -right-4 bg-gradient-to-r ${student.color} p-4 rounded-2xl shadow-lg`}
+                  <div
+                    className={`absolute -top-4 -right-4 bg-gradient-to-r ${student.color} p-4 rounded-2xl shadow-lg animate-float`}
                   >
                     {student.icon}
                     <div className="text-white font-bold text-sm">GiiT Star</div>
-                  </motion.div>
+                  </div>
 
                   {/* Decorative Elements */}
                   <div className={`absolute -bottom-4 -left-4 w-20 h-20 bg-gradient-to-r ${student.color} rounded-full opacity-20 blur-xl`} />
                   <div className={`absolute -top-8 left-1/2 w-16 h-16 bg-gradient-to-r ${student.color} rounded-full opacity-30 blur-lg`} />
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       ))}
 
       {/* Bottom Gradient */}

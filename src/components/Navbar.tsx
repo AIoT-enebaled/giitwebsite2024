@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, GraduationCap } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import FloatingLogo from './FloatingLogo';
 
 const Navbar = () => {
@@ -16,6 +15,7 @@ const Navbar = () => {
     { name: 'Curriculum', path: '/curriculum' },
     { name: 'Accelerator Program', path: '/accelerator' },
     { name: 'Pricing', path: '/pricing' },
+    { name: 'Gallery', path: '/gallery' },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -25,14 +25,14 @@ const Navbar = () => {
       setScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
+    <nav className={`fixed w-full z-50 ${
       scrolled ? 'bg-dark-light/80 backdrop-blur-md' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,19 +51,15 @@ const Navbar = () => {
                 to={link.path}
                 className="relative group"
               >
-                <span className={`text-gray-300 group-hover:text-white transition-colors duration-200 ${
+                <span className={`text-gray-300 ${
                   location.pathname === link.path ? 'text-white' : ''
                 }`}>
                   {link.name}
                 </span>
-                <motion.div
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 origin-left"
-                  initial={{ scaleX: 0 }}
-                  animate={{ 
-                    scaleX: location.pathname === link.path ? 1 : 0 
-                  }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.2 }}
+                <div
+                  className={`absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 ${
+                    location.pathname === link.path ? 'block' : 'hidden'
+                  }`}
                 />
               </Link>
             ))}
@@ -73,62 +69,43 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-400 hover:text-indigo-300 transition-colors duration-300"
+              className="text-gray-400"
             >
-              <motion.div
-                initial={false}
-                animate={{ rotate: isOpen ? 90 : 0 }}
-                transition={{ duration: 0.2 }}
-              >
+              <div>
                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </motion.div>
+              </div>
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Navigation Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden overflow-hidden"
-          >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-[#020817]">
-              {navLinks.map((link) => (
-                <motion.div
-                  key={link.path}
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.2 }}
+      {isOpen && (
+        <div className="md:hidden overflow-hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-[#020817]">
+            {navLinks.map((link, index) => (
+              <div key={link.path}>
+                <Link
+                  to={link.path}
+                  className={`block px-3 py-2 rounded-md text-base font-medium relative group ${
+                    location.pathname === link.path
+                      ? 'text-white bg-gray-900'
+                      : 'text-gray-300'
+                  }`}
+                  onClick={() => setIsOpen(false)}
                 >
-                  <Link
-                    to={link.path}
-                    className={`block px-3 py-2 rounded-md text-base font-medium relative group ${
-                      location.pathname === link.path
-                        ? 'text-white bg-gray-900'
-                        : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                  {link.name}
+                  <div
+                    className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 ${
+                      location.pathname === link.path ? 'w-full' : 'w-0'
                     }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.name}
-                    <motion.div
-                      className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500"
-                      initial={{ width: '0%' }}
-                      animate={{ width: location.pathname === link.path ? '100%' : '0%' }}
-                      whileHover={{ width: '100%' }}
-                      transition={{ duration: 0.2 }}
-                    />
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Download, CheckCircle } from 'lucide-react';
-import { motion } from 'framer-motion';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ParentRegistrationForm from './ParentRegistrationForm';
 import StudentRegistrationForm from './StudentRegistrationForm';
-import TypewriterEffect from './TypewriterEffect';
 
 interface CourseObjective {
   title: string;
@@ -176,33 +174,20 @@ const CourseCatalog: React.FC<CourseCatalogProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.9 }}
-        className="relative bg-dark-light rounded-xl p-4 sm:p-6 md:p-8 max-w-4xl w-full max-h-[85vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800"
+      <div
+        className="relative bg-dark-light rounded-xl p-4 sm:p-6 md:p-8 max-w-4xl w-full max-h-[85vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 opacity-0 scale-90 animate-[fadeInScale_0.3s_ease-out_forwards]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="course-catalog-container">
-          <div className="typewriter-container">
-            <TypewriterEffect 
-              texts={[
-                `Welcome to ${title} Course`,
-                `Discover ${title} Learning`,
-                `Transform Your Skills with ${title}`
-              ]} 
-              speed={100} 
-              delay={2000} 
-              className="typewriter-title"
-            />
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-indigo-400 mb-4">
+              Welcome to {title} Course
+            </h2>
           </div>
           {showRegistrationForm && (
             <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 bg-black/80 backdrop-blur-sm">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                className="relative bg-dark-light rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-700"
+              <div
+                className="relative bg-dark-light rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-700 opacity-0 translate-y-5 animate-[fadeInUp_0.3s_ease-out_forwards]"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="text-center mb-8">
@@ -272,7 +257,7 @@ const CourseCatalog: React.FC<CourseCatalogProps> = ({
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
-              </motion.div>
+              </div>
             </div>
           )}
           <div className="flex flex-wrap justify-end gap-2 p-4">
@@ -436,7 +421,7 @@ const CourseCatalog: React.FC<CourseCatalogProps> = ({
             <div className="pb-4"></div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

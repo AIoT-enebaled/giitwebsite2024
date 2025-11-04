@@ -19,6 +19,8 @@ export default {
         'gradient': 'gradient 8s linear infinite',
         'float': 'float 6s ease-in-out infinite',
         'glow': 'glow 2s ease-in-out infinite',
+        'float-slow': 'float 12s ease-in-out infinite',
+        'pulse-slow': 'pulse 4s ease-in-out infinite',
       },
       keyframes: {
         gradient: {
@@ -32,12 +34,16 @@ export default {
           },
         },
         float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-20px)' },
+          '0%, 100%': {
+            transform: 'translateY(0)',
+          },
+          '50%': {
+            transform: 'translateY(-15px)',
+          },
         },
         glow: {
           '0%, 100%': { opacity: 1 },
-          '50%': { opacity: 0.6 },
+          '50%': { opacity: 0.7 },
         },
       },
       backdropBlur: {

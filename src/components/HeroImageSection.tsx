@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 
 const HeroImageSection = () => {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -32,16 +42,14 @@ const HeroImageSection = () => {
     <section className="relative h-screen overflow-hidden">
       {/* Parallax Background Images */}
       {heroImages.map((image, index) => (
-        <motion.div
+        <div
           key={index}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full opacity-0 animate-[fadeIn_0.5s_ease-out_forwards] transition-transform duration-1000"
           style={{
             transform: `translateY(${scrollY * (0.3 + index * 0.1)}px)`,
             zIndex: heroImages.length - index,
+            animationDelay: `${index * 0.2}s`
           }}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
         >
           <div 
             className="w-full h-full bg-cover bg-center bg-no-repeat"
@@ -61,17 +69,13 @@ const HeroImageSection = () => {
               }}
             />
           </div>
-        </motion.div>
+        </div>
       ))}
 
       {/* Content Overlay */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
         <div className="text-center text-white px-4 max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
+          <div className="opacity-0 translate-y-12 animate-[fadeInUp_0.8s_ease-out_0.5s_forwards]">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-shadow-lg">
               <span className="bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
                 Meet Our Stars
@@ -83,15 +87,10 @@ const HeroImageSection = () => {
             <p className="text-xl md:text-2xl text-gray-200 leading-relaxed mb-8 max-w-2xl mx-auto">
               Exceptional students who are already making their mark in the world of technology
             </p>
-          </motion.div>
+          </div>
 
           {/* Student Achievement Cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-2 gap-6 mt-12"
-          >
+          <div className="grid md:grid-cols-2 gap-6 mt-12 opacity-0 translate-y-8 animate-[fadeInUp_0.8s_ease-out_0.8s_forwards]">
             <div className="bg-black/30 backdrop-blur-md rounded-2xl p-6 border border-white/20">
               <h3 className="text-2xl font-bold text-yellow-400 mb-2">Kayden</h3>
               <p className="text-gray-200 mb-4">
@@ -115,20 +114,16 @@ const HeroImageSection = () => {
                 <span className="bg-teal-600/80 px-3 py-1 rounded-full text-sm">Creative Coder</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-        animate={{ y: [0, 10, 0] }}
-  transition={{ duration: 1, repeat: Infinity }}
-      >
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-float">
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-white/70 rounded-full mt-2" />
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

@@ -10,13 +10,16 @@ import Pricing from './pages/Pricing';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import EmailTemplates from './pages/EmailTemplates';
+import Gallery from './pages/Gallery';
 import Footer from './components/Footer';
 import ChatBot from './components/ChatBot';
+import PerformanceOptimizer from './components/PerformanceOptimizer';
 
 function App() {
   return (
     <HashRouter>
       <div className="flex flex-col min-h-screen bg-[#020817]">
+        <PerformanceOptimizer />
         <Navbar />
         <main className="flex-grow">
           <Routes>
@@ -28,6 +31,7 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/email-templates" element={<EmailTemplates />} />
           </Routes>
         </main>

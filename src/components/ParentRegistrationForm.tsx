@@ -79,8 +79,12 @@ const ParentRegistrationForm: React.FC<ParentRegistrationFormProps> = ({ courseT
     try {
       console.log('Submitting parent registration:', parentData.fullName);
       
+      console.log('🔄 Submitting parent registration for:', parentData.fullName);
+
       // Submit registration for each child
       for (const child of children) {
+        console.log(`📧 Processing registration for child: ${child.fullName}`);
+
         const result = await submitRegistration({
           fullName: parentData.fullName,
           email: parentData.email,
@@ -91,8 +95,10 @@ const ParentRegistrationForm: React.FC<ParentRegistrationFormProps> = ({ courseT
           childName: child.fullName,
           childAge: child.age,
           selectedCourse: courseTitle || 'Not specified',
-          selectedTime: '',  
-          additionalInfo: `Education: ${child.education}, Previous Coding Experience: ${child.previousCoding}`
+          selectedTime: '',
+          additionalInfo: `Education: ${child.education}, Previous Coding Experience: ${child.previousCoding}`,
+          classMode: parentData.classMode,
+          price: price
         });
 
         if (!result.success) {
@@ -101,6 +107,8 @@ const ParentRegistrationForm: React.FC<ParentRegistrationFormProps> = ({ courseT
       }
 
       setSuccess(true);
+      console.log('✅ All registrations completed successfully');
+
       // Reset form
       setParentData({
         fullName: '',
@@ -123,7 +131,7 @@ const ParentRegistrationForm: React.FC<ParentRegistrationFormProps> = ({ courseT
 
       setTimeout(() => {
         onClose?.();
-      }, 2000);
+      }, 2500);
     } catch (err) {
       console.error('Registration error:', err);
       setError(err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.');
@@ -151,9 +159,10 @@ const ParentRegistrationForm: React.FC<ParentRegistrationFormProps> = ({ courseT
       {success ? (
         <div className="text-center p-4">
           <div className="text-green-500 text-xl mb-2">
-            Registration Successful!
+            ✓ Registration Successful!
           </div>
-          <p className="text-gray-400">We'll contact you shortly with next steps.</p>
+          <p className="text-gray-400">Confirmation emails have been sent to {parentData.email}.</p>
+          <p className="text-gray-500 text-sm mt-2">Our admin team will contact you shortly with next steps and class details.</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6 bg-dark-light p-6 rounded-lg">

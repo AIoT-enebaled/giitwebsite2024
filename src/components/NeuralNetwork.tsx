@@ -51,7 +51,7 @@ const NeuralNetwork = () => {
 
     const createNodes = () => {
       nodes = [];
-      const numNodes = 50; // Increase number of nodes
+      const numNodes = 50; // Number of nodes
       const radius = Math.min(canvas.width, canvas.height) * 0.4;
       
       for (let i = 0; i < numNodes; i++) {
@@ -229,6 +229,7 @@ const NeuralNetwork = () => {
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
+      style={{ opacity: 0.6 }}
     />
   );
 };

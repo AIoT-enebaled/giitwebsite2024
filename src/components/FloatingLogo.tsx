@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import TypewriterEffect from './TypewriterEffect';
 
 interface FloatingLogoProps {
@@ -39,113 +38,46 @@ const FloatingLogo: React.FC<FloatingLogoProps> = ({
 
   return (
     <div className={`flex items-center space-x-3 ${className}`}>
-      <motion.div
-        animate={{
-          y: [0, -8, 0],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="relative"
-        whileHover={{
-          scale: 1.1,
-          transition: { duration: 0.3, ease: "easeOut" }
-        }}
-      >
-        <motion.img
+      <div className="relative animate-float hover:scale-110 transition-transform duration-300">
+        <img
           src="https://cdn.builder.io/api/v1/image/assets%2F6f20e37aab06494d82177a5be26befff%2F2ad69148086148c288ff98a1e4c8b79f?format=webp&width=800"
           alt="GiiT Logo"
-          className={`${getSizeClasses()} drop-shadow-lg`}
-          animate={{
-            rotate: [0, 360],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          whileHover={{
-            scale: 1.05,
-            filter: "brightness(1.1)",
-            transition: { duration: 0.3 }
+          className={`${getSizeClasses()} drop-shadow-lg hover:scale-105 hover:brightness-110 transition-all duration-300`}
+          style={{
+            filter: 'drop-shadow(0 0 10px rgba(99, 102, 241, 0.3))'
           }}
         />
 
         {/* Gentle floating particles */}
         {[...Array(3)].map((_, i) => (
-          <motion.div
+          <div
             key={i}
-            className="absolute w-1 h-1 rounded-full bg-indigo-400/60"
+            className="absolute w-1 h-1 rounded-full bg-indigo-400/60 animate-pulse"
             style={{
               top: `${20 + i * 30}%`,
               right: `${10 + i * 15}%`,
-            }}
-            animate={{
-              y: [0, -15, 0],
-              opacity: [0.4, 0.8, 0.4],
-              scale: [0.8, 1.2, 0.8],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              delay: i * 1,
-              ease: "easeInOut"
+              animationDelay: `${i * 1}s`,
             }}
           />
         ))}
 
         {/* Subtle breathing ring */}
-        <motion.div
-          className="absolute border border-indigo-400/30 rounded-full"
+        <div
+          className="absolute border border-indigo-400/30 rounded-full animate-pulse"
           style={{
             width: '120%',
             height: '120%',
             top: '-10%',
             left: '-10%',
           }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
         />
-      </motion.div>
+      </div>
       
       {showText && (
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{
-            opacity: 1,
-            x: 0,
-          }}
-          transition={{
-            duration: 0.8,
-            delay: 0.3,
-            ease: "easeOut"
-          }}
-          className="flex flex-col"
-          whileHover={{
-            scale: 1.02,
-            transition: { duration: 0.3 }
-          }}
-        >
+        <div className="flex flex-col hover:scale-102 transition-transform duration-300">
           {showTypewriter ? (
-            <motion.div
-              className={`font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent ${getTextSize()}`}
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "linear"
-              }}
+            <div
+              className={`font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent ${getTextSize()} animate-gradient`}
               style={{
                 backgroundSize: '200% 200%',
               }}
@@ -156,39 +88,20 @@ const FloatingLogo: React.FC<FloatingLogoProps> = ({
                 delay={3000}
                 className="typewriter-logo"
               />
-            </motion.div>
+            </div>
           ) : (
-            <motion.span
-              className={`font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent ${getTextSize()}`}
-              animate={{
-                opacity: [0.9, 1, 0.9],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+            <span
+              className={`font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent ${getTextSize()} animate-glow`}
             >
               GiiT
-            </motion.span>
+            </span>
           )}
           {size === 'large' && (
-            <motion.span
-              className="text-xs text-gray-400 font-medium tracking-wider"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                delay: 0.8,
-                duration: 0.6
-              }}
-            >
+            <span className="text-xs text-gray-400 font-medium tracking-wider opacity-0 animate-[fadeIn_0.6s_ease_0.8s_forwards]">
               Genius Institute of IT
-            </motion.span>
+            </span>
           )}
-        </motion.div>
+        </div>
       )}
     </div>
   );

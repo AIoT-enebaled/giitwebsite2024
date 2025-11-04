@@ -17,11 +17,13 @@ const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
 }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
     const textToType = texts.length > 0 ? texts[currentTextIndex] : text;
     let i = 0;
     setDisplayText('');
+    setIsTyping(true);
 
     const typingEffect = setInterval(() => {
       if (i < textToType.length) {
@@ -29,6 +31,7 @@ const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
         i++;
       } else {
         clearInterval(typingEffect);
+        setIsTyping(false);
 
         // If multiple texts, cycle to next text after delay
         if (texts.length > 1) {
@@ -46,7 +49,12 @@ const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
     };
   }, [text, texts, speed, delay, currentTextIndex]);
 
-  return <span className={`${className} inline-block whitespace-nowrap`} style={{ minWidth: 'max-content', width: 'max-content' }}>{displayText}</span>;
+  return (
+    <span className={`${className} inline-block whitespace-nowrap`} style={{ minWidth: 'auto', display: 'inline-block', paddingLeft: '0.05em' }}>
+      {displayText}
+      {isTyping && <span className="animate-pulse">|</span>}
+    </span>
+  );
 };
 
 export default TypewriterEffect;

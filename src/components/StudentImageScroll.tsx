@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 interface StudentImageScrollProps {
   direction?: 'left' | 'right';
@@ -29,76 +28,29 @@ const StudentImageScroll: React.FC<StudentImageScrollProps> = ({
 
   return (
     <div className="relative overflow-hidden w-full py-8">
-      <motion.div
-        className="flex gap-6"
-        animate={{
-          x: direction === 'left' ? '-50%' : '0%',
-        }}
-        transition={{
-          duration: speed,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
-        style={{
-          width: '200%',
-        }}
-      >
+      <div className="flex gap-6" style={{ width: '200%', animation: `${direction === 'left' ? 'marqueeLeft' : 'marqueeRight'} ${speed}s linear infinite` }} >
         {duplicatedImages.map((image, index) => (
-          <motion.div
-            key={index}
-            className="flex-shrink-0 relative group"
-            initial={{
-              scale: 0.8,
-              opacity: 0
-            }}
-            animate={{
-              scale: 1,
-              opacity: 1,
-              y: [0, Math.sin(index * 0.3) * 5, 0],
-            }}
-            transition={{
-              duration: 0.6,
-              delay: index * 0.05,
-              y: {
-                duration: 4 + Math.sin(index) * 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }
-            }}
-            whileHover={{
-              scale: 1.05,
-              zIndex: 10,
-              y: -5,
-              transition: {
-                duration: 0.3,
-                ease: "easeOut"
-              }
-            }}
-          >
-            <motion.div
+          <div key={index} className="flex-shrink-0 relative group">
+            <div
               className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-xl border-2 border-indigo-500/20 group-hover:border-indigo-400/50 transition-all duration-300 relative"
             >
-              <motion.img
+              <img
                 src={image}
                 alt={`GiiT Student ${index + 1}`}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                whileHover={{
-                  scale: 1.05,
-                  transition: { duration: 0.3 }
-                }}
               />
 
               {/* Gentle overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </motion.div>
+            </div>
 
             {/* Simple floating badge */}
             <div className="absolute -top-2 -right-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-xs px-2 py-1 rounded-full font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               GiiT Student
             </div>
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
       
       {/* Gradient overlays */}
       <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-[#020817] to-transparent z-10 pointer-events-none" />
